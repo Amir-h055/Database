@@ -36,7 +36,7 @@ INSERT Person VALUES ("7976980 46", "(819)566-0668", "Annabel", "Crouch",
 
 INSERT Person VALUES ("6623218 89", "(418)547-8256", "Nyle", "Sparrow",
   "3937 Soucy", "Jonquière", "QC", "G7X8T1", TRUE, "Nyle.Sparrow@gmail.com",
-  "1936-12-08"); 
+  "2017-12-08"); 
   
 
 INSERT Infection VALUES ("2021-03-16","5418600 12"); 
@@ -82,7 +82,7 @@ INSERT PersonAgeGroup VALUES ("40-49","9826293 18");
 INSERT PersonAgeGroup VALUES ("60-69","2055054 40"); 
 INSERT PersonAgeGroup VALUES ("60-69","7247613 20"); 
 INSERT PersonAgeGroup VALUES ("80+","7976980 46"); 
-INSERT PersonAgeGroup VALUES ("80+","6623218 89");
+INSERT PersonAgeGroup VALUES ("4-10","6623218 89");
 
 INSERT VaccinationDrug VALUES ("Pfizer", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("Moderna", "SAFE", "2020-06-21");
