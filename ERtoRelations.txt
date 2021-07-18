@@ -5,7 +5,7 @@ Relations obtained from E/R diagram
   Person(_medicaidNum_, telephone, address, LastName, firstName, city, province,
     postalCode, citizenship, email);
 
-  Infection(_date_, _medicaidNum_);
+  Infection(_dateInfection_, _medicaidNum_);
 
   AgeGroup(_range_, isCurrent);
 
