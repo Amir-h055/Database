@@ -7,18 +7,16 @@ Relations obtained from E/R diagram
 
   Infection(_dateInfection_, _medicaidNum_);
 
-  AgeGroup(_range_, isCurrent);
+  AgeGroup(_ageRange_, isCurrent);
 
-  PersonAgeGroup(_range_, _medicaidNum_);
+  Vaccination(_medicaidNum_, _doseNumber_, date)
 
-  PersonVaccination(_medicaidNum_, _number_, _date_, _location_);
+  PersonAgeGroup(_ageRange_, _medicaidNum_);
 
-  VaccinationDrug(_name_, status, date);
+  VaccinationDrug(_name_, status, dateLastStatus);
 
-  Vaccination(_number_, _date_, _location_);
+  VaccinationDoneWith(_medicaidNum_, _doseNumber_, _name_);
 
-  VaccinationDoneWith(_name_, _number_, _date_, _location_);
-
-  VaccinationDoneAt(_name_, _address_, _location_, _date_, _address_);
+  VaccinationDoneAt(_medicaidNum_, _doseNumber_, _name_, _address_);
 
   HealthFacility(_name_, _address_, phoneNumber, webAddress, type);
