@@ -9,6 +9,7 @@ CREATE TABLE Person (
   postalCode VARCHAR(6),
   citizenship BOOLEAN,
   email VARCHAR(255),
+  dateOfBirth DATE,
   PRIMARY KEY(medicaidNum)
 );
 

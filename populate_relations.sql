@@ -1,37 +1,42 @@
 INSERT Person VALUES ("5418600 12", "(514)482-4299", "Annabel", "Dodson",
   "6860 Fielding", "Montreal", "QC", "H4V1P2", TRUE,
-  "annabel.dodson@gmail.com");
+  "annabel.dodson@gmail.com", "1996-08-06");
 
 INSERT Person VALUES ("7198638 80", "(514)366-4286", "Zachary", "Rutledge",
   " 902 Tittley", "Montreal", "QC", "H8R3X3", TRUE,
-  "Zachary.Rutledge@gmail.com");
+  "Zachary.Rutledge@gmail.com", "1986-08-12");
 
 INSERT Person VALUES ("5867167 04", "(514)767-5030", "Alister", "Wiggins",
-  "6818 Lamont", "Montreal", "QC", "H4E2T9", TRUE, "Alister.Wiggins@gmail.com"); 
+  "6818 Lamont", "Montreal", "QC", "H4E2T9", TRUE, "Alister.Wiggins@gmail.com",
+  "1987-08-27"); 
 
 INSERT Person VALUES ("9415548 75", "(514)525-4731", "Osman", "Vaughn", 
   " 1720 Bourbonniere", "Montreal", "QC", "H1W3N4", TRUE,
-  "Osman.Vaughn@gmail.com"); 
+  "Osman.Vaughn@gmail.com", "2007-09-08"); 
 
 INSERT Person VALUES ("9052864 70", "(514)768-9102", "Bear", "Melton",
-  "5962 Jogues", "Montreal", "QC", "H4E2W3", TRUE, "Bear.Melton@gmail.com"); 
+  "5962 Jogues", "Montreal", "QC", "H4E2W3", TRUE, "Bear.Melton@gmail.com",
+  "1976-09-13"); 
 
 INSERT Person VALUES ("9826293 18", "(613)733-8502", "Lulu", "Fisher",
-  "927 Rand", "Gatineau", "QC", "J9J1C8", TRUE, "Lulu.Fisher@gmail.com"); 
+  "927 Rand", "Gatineau", "QC", "J9J1C8", TRUE, "Lulu.Fisher@gmail.com",
+  "1976-09-27"); 
 
 INSERT Person VALUES ("2055054 40", "(819)503-3196", "Collette", "Zavala",
   "60 Du Blizzard", "Gatineau", "QC", "J9A0C8", TRUE,
-  "Collette.Zavala@gmail.com"); 
+  "Collette.Zavala@gmail.com", "1956-09-29"); 
 
 INSERT Person VALUES ("7247613 20", "(819)408-0531", "Angela", "Dodson",
   "1175 De L'Esplanade", "Sherbrooke", "QC", "J1H1S9", TRUE,
-  "Angela.Dodson@gmail.com"); 
+  "Angela.Dodson@gmail.com", "1956-10-15"); 
 
 INSERT Person VALUES ("7976980 46", "(819)566-0668", "Annabel", "Crouch",
-  "1812 Dunant", "Sherbrooke", "QC", "J1H6L4", TRUE, "Annabel.Crouch@gmail.com"); 
+  "1812 Dunant", "Sherbrooke", "QC", "J1H6L4", TRUE,
+  "Annabel.Crouch@gmail.com", "1936-10-18"); 
 
 INSERT Person VALUES ("6623218 89", "(418)547-8256", "Nyle", "Sparrow",
-  "3937 Soucy", "Jonquière", "QC", "G7X8T1", TRUE, "Nyle.Sparrow@gmail.com"); 
+  "3937 Soucy", "Jonquière", "QC", "G7X8T1", TRUE, "Nyle.Sparrow@gmail.com",
+  "1936-12-08"); 
   
 
 INSERT Infection VALUES ("2021-03-16","5418600 12"); 
