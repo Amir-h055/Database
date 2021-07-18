@@ -1,0 +1,24 @@
+** _abc_ means underline **
+
+Relations obtained from E/R diagram
+
+  Person(_medicaidNum_, telephone, address, LastName, firstName, city, province,
+    postalCode, citizenship, email);
+
+  Infection(_date_, _medicaidNum_);
+
+  AgeGroup(_range_, isCurrent);
+
+  PersonAgeGroup(_range_, _medicaidNum_);
+
+  PersonVaccination(_medicaidNum_, _number_, _date_, _location_);
+
+  VaccinationDrug(_name_, status, date);
+
+  Vaccination(_number_, _date_, _location_);
+
+  VaccinationDoneWith(_name_, _number_, _date_, _location_);
+
+  VaccinationDoneAt(_name_, _address_, _location_, _date_, _address_);
+
+  HealthFacility(_name_, _address_, phoneNumber, webAddress, type);
