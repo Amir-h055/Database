@@ -62,12 +62,12 @@ INSERT AgeGroup VALUES ("12-17", TRUE);
 INSERT AgeGroup VALUES ("5-11", TRUE);
 INSERT AgeGroup VALUES ("0-4", TRUE);
 
-INSERT Vaccination VALUES ("5418600 12", 1, "2021-04-16"); 
+INSERT Vaccination VALUES ("5418600 12", 1, "2021-01-16"); 
 INSERT Vaccination VALUES ("5418600 12", 2, "2021-05-16"); 
 INSERT Vaccination VALUES ("7198638 80", 1, "2021-04-25"); 
 INSERT Vaccination VALUES ("5867167 04", 1, "2021-05-02"); 
 INSERT Vaccination VALUES ("9415548 75", 1, "2021-05-07"); 
-INSERT Vaccination VALUES ("9052864 70", 1, "2021-05-30"); 
+INSERT Vaccination VALUES ("9052864 70", 1, "2021-01-30"); 
 INSERT Vaccination VALUES ("9826293 18", 1, "2021-06-05"); 
 INSERT Vaccination VALUES ("2055054 40", 1, "2021-06-20"); 
 INSERT Vaccination VALUES ("7247613 20", 1, "2021-06-21"); 
@@ -87,7 +87,7 @@ INSERT PersonAgeGroup VALUES ("80+","6623218 89");
 INSERT VaccinationDrug VALUES ("Pfizer", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("Moderna", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("AstraZeneca", "SAFE", "2020-06-21");
-INSERT VaccinationDrug VALUES ("Johnson & Johnson", "SAFE", "2020-06-21");
+INSERT VaccinationDrug VALUES ("Johnson & Johnson", "SUSPENDED", "2021-06-21");
 
 INSERT VaccinationDoneWith VALUES ("5418600 12", 1, "Pfizer"); 
 INSERT VaccinationDoneWith VALUES ("5418600 12", 2, "Moderna"); 
