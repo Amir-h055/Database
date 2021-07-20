@@ -100,6 +100,7 @@ INSERT VaccinationDoneWith VALUES ("2055054 40", 1, "AstraZeneca");
 INSERT VaccinationDoneWith VALUES ("7247613 20", 1, "Johnson & Johnson"); 
 INSERT VaccinationDoneWith VALUES ("7976980 46", 1, "Johnson & Johnson"); 
 
+
 INSERT VaccinationDoneAt VALUES ("5418600 12", 1, "Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin, Montréal, QC H1V 0B2"); 
 
@@ -129,6 +130,7 @@ INSERT VaccinationDoneAt VALUES ("7247613 20", 1, "CHUS",
 
 INSERT VaccinationDoneAt VALUES ("7976980 46", 1, "CHUS",
   "300 Rue King E, Sherbrooke, QC J1G 1B1"); 
+
 
 INSERT HealthFacility VALUES ("Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin, Montréal, QC H1V 0B2", "(514)252-4141",
