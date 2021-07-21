@@ -88,6 +88,12 @@ INSERT VaccinationDrug VALUES ("Pfizer", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("Moderna", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("AstraZeneca", "SAFE", "2020-06-21");
 INSERT VaccinationDrug VALUES ("Johnson & Johnson", "SUSPENDED", "2021-06-21");
+INSERT VaccinationDrug VALUES ("RBD-Dimer", "SUSPENDED", "2021-01-01");
+INSERT VaccinationDrug VALUES ("Covaxin", "SUSPENDED", "2021-01-01");
+INSERT VaccinationDrug VALUES ("Ad5-nCoV", "SUSPENDED", "2021-01-01");
+INSERT VaccinationDrug VALUES ("CIGB-66", "SUSPENDED", "2021-01-01");
+INSERT VaccinationDrug VALUES ("KoviVac", "SUSPENDED", "2021-01-01");
+INSERT VaccinationDrug VALUES ("EpiVacCorona", "SUSPENDED", "2021-01-01");
 
 INSERT VaccinationDoneWith VALUES ("5418600 12", 1, "Pfizer"); 
 INSERT VaccinationDoneWith VALUES ("5418600 12", 2, "Moderna"); 
@@ -147,3 +153,27 @@ INSERT HealthFacility VALUES ("Hopital de Gatineau",
 INSERT HealthFacility VALUES ("CHUS",
   "300 Rue King E, Sherbrooke, QC J1G 1B1", "(819)346-1110", "www.chus.com",
   "HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital Fleury",
+  "2180, rue Fleury Est Montréal (Québec) H2B 1K3", "(514)384-2000",
+  "www.hopitalFleury.com","HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital Richardson",
+  "5425, Avenue Bessborough Montréal (Québec) H4V 2S7", "(514)484-7878",
+  "www.hopitalRichardson.com","HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital Rivière-des-Prairies",
+  "7070, boulevard Perras Montréal (Québec) H1E 1A4", "(514)323-7260",
+  "www.hopitalRP.com","HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital de Lasalle",
+  "8585, Terrasse Champlain LaSalle (Québec) H8P 1C1", "(514)362-8000",
+  "www.hopitalLasalle.com","HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital de Verdun",
+  "4000, boul. Lasalle Verdun (Québec) H4G 2A3", "(514)362-1C1000",
+  "www.hopitalVerdun.com","HOSPITAL");
+
+INSERT HealthFacility VALUES ("Hôpital de Sainte-Anne",
+  "305, boulevard des Anciens-Combattants Sainte-Anne-de-Bellevue (Québec) H9X 1Y9",
+  "(514)457-3440", "www.hopitalSaintAnne.com","HOSPITAL");
