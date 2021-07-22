@@ -123,14 +123,16 @@ FROM HealthFacility;
 ```
 3. > Get details of all the people who got vaccinated at the Olympic Stadium in Montréal in January 2021 (first-name, last-name, date of birth, email, phone, city, date of vaccination, type of vaccination, group age).
 ```SQL
-   SELECT firstName, lastName, dateOfBirth, email, telephone, city, date,
+SELECT firstName, lastName, dateOfBirth, email, telephone, city, date,
       VaccinationDoneWith.name, ageRange
-   FROM Person, Vaccination, VaccinationDoneAt, VaccinationDoneWith, PersonAgeGroup
-   WHERE Person.medicaidNum = Vaccination.medicaidNumber AND
+FROM Person, Vaccination, VaccinationDoneAt, VaccinationDoneWith, PersonAgeGroup
+WHERE Person.medicaidNum = Vaccination.medicaidNumber AND
       Person.medicaidNum = VaccinationDoneAt.medicaidNum AND
       Person.medicaidNum = VaccinationDoneWith.medicaidNum AND
       Person.medicaidNum = PersonAgeGroup.medicaidNum AND
       Vaccination.doseNumber = VaccinationDoneWith.doseNumber AND
+      Vaccination.doseNumber = VaccinationDoneAt.doseNumber AND
+      VaccinationDoneAt.doseNumber = VaccinationDoneWith.doseNumber AND
       Vaccination.date >= "2021-01-01" AND
       Vaccination.date <= "2021-01-31" AND
       VaccinationDoneAt.name = "Olympic Stadium";
