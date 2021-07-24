@@ -25,7 +25,8 @@ CREATE TABLE Person (
 CREATE TABLE Infection (
   dateInfection DATE,
   medicaidNum VARCHAR(10),
-  PRIMARY KEY(dateInfection, medicaidNum)
+  PRIMARY KEY(dateInfection),
+  FOREIGN KEY (medicaidNum) REFERENCES Person(medicaidNum)
 );
 ```
 #### AgeGroup relation
@@ -42,7 +43,8 @@ CREATE TABLE Vaccination (
   medicaidNumber VARCHAR(10),
   doseNumber INT,
   date DATE,
-  PRIMARY KEY (medicaidNumber, doseNumber)
+  PRIMARY KEY (doseNumber),
+  FOREIGN KEY (medicaidNumber) REFERENCES Person(medicaidNum)
 );
 ```
 #### PersonAgeGroup relation
@@ -50,7 +52,8 @@ CREATE TABLE Vaccination (
 CREATE TABLE PersonAgeGroup (
   ageRange VARCHAR(20),
   medicaidNum VARCHAR(10),
-  PRIMARY KEY(ageRange, medicaidNum)
+  FOREIGN KEY (medicaidNum) REFERENCES Person(medicaidNum),
+  FOREIGN KEY (ageRange) REFERENCES AgeGroup(ageRange)
 );  
 ```
 #### VaccinationDrug relation
@@ -68,7 +71,9 @@ CREATE TABLE VaccinationDoneWith (
   medicaidNum VARCHAR(10),
   doseNumber INT,
   name VARCHAR(100),
-  PRIMARY KEY (medicaidNum, doseNumber, name)
+  FOREIGN KEY (medicaidNum) REFERENCES Person(medicaidNum),
+  FOREIGN KEY (name) REFERENCES VaccinationDrug(name),
+  FOREIGN KEY (doseNumber) REFERENCES Vaccination(doseNumber)
 );
 ```
 #### VaccinationDoneAt relation
@@ -78,7 +83,9 @@ CREATE TABLE VaccinationDoneAt (
   doseNumber INT,
   name VARCHAR(100),
   address VARCHAR(100),
-  PRIMARY KEY(medicaidNum, doseNumber, name, address)
+  FOREIGN KEY (medicaidNum) REFERENCES Person(medicaidNum),
+  FOREIGN KEY (doseNumber) REFERENCES Vaccination(doseNumber),
+  FOREIGN KEY (name,address) REFERENCES HealthFacility(name,address)
 );
 ```
 #### HealthFacility relation
