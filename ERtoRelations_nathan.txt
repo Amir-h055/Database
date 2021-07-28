@@ -1,0 +1,32 @@
+** _abc_ means underline **
+
+Relations obtained from E/R diagram
+
+  Person(passportNumOrSSN, telephone, address, LastName, firstName, city, province,
+    postalCode, citizenship, email, dateOfBirth);
+  Infection(_dateInfection_, _medicaidNum_, type);
+  AgeGroup(_ageRange_);
+  CurrentAgeGroup(_ageRange_, _province_)
+  Vaccination(_passportNumOrSSN_, _doseNumber_, date)
+  PersonAgeGroup(_ageRange_, _passportNumOrSSN_);
+  VaccinationDrug(_name_);
+  DrugHistory(_name_, _date_, status)
+  VaccinationDoneWith(_passportNumOrSSN_, _doseNumber_, _name_);
+  VaccinationDoneAt(_passportNumOrSSN_, _doseNumber_, _name_, _address_);
+  VaccinationDoneBy(_passportNumOrSSN_, _doseNumber_, _EID_)
+  HealthFacility(_name_, _address_,telephone, webAddress, type, city, province,
+    postalCode);
+  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
+    address, city, postalCode, province, citizenship, email)
+  Manager(_EID_)
+  Manages(_EID_, _name_, _address_)
+  JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
+  VaccineStored(_nameHSO_, _address_, _nameDrug_, count)
+  vaccineShipment(_nameHSO_, _address_, _nameDrug_, _date_, count)
+  VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_,
+    _date_, count)
+
+  Answer to 4.
+
+  Answer to 5.
+  
