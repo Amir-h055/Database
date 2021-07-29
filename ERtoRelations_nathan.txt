@@ -2,9 +2,9 @@
 
 Relations obtained from E/R diagram
 
-  Person(passportNumOrSSN, telephone, address, LastName, firstName, city, province,
+  Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName, city, province,
     postalCode, citizenship, email, dateOfBirth);
-  Infection(_dateInfection_, _medicaidNum_, type);
+  Infection(_dateInfection_, _passportNumOrSSN_, type);
   AgeGroup(_ageRange_);
   CurrentAgeGroup(_ageRange_, _province_)
   Vaccination(_passportNumOrSSN_, _doseNumber_, date)
@@ -26,6 +26,138 @@ Relations obtained from E/R diagram
   VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_,
     _date_, count)
 
+  We need to put this design in BCNF, so let's look at each relation one by one
+  and make it BCNF. We would like to point out that functional depencies are
+  somewhat arbitrary, meaning that we can define what they are since they were
+  not defined in the handout of the project.
+  
+  ---
+
+  Let's first discard all of the 1 or 2 attributes relations since it is proven
+  that such relation are in BCNF
+
+  AgeGroup, CurrentAgeGroup, PersonAgeGroup, VaccinationDrug, Manager are all
+  good. Let's look at the others
+
+  ---
+
+  Person(_passportNumOrSSN_,medicare, telephone, address, LastName, firstName, city, province,
+    postalCode, citizenship, email, dateOfBirth);
+  
+  We assumed that 2 people with the same name could live at the same place. Which
+  means the complete address and complete name is not enough to uniquely determine
+  a person; complete address and complete name is not enough to uniquely
+  determine a telephone (like with 411) 
+
+  List of functional depencies:
+    passportNumOrSSN -> all other attributes
+    medicare -> all other attributes
+    address, city, province -> postalCode
+  
+  We thus decompose our initial relation as such:
+  
+  Person(_passportNumOrSSN_,medicare, telephone, address, LastName, firstName,
+    city, province, citizenship, email, dateOfBirth)
+  PostalCode(address, city, province, postalCode)
+  
+  Now all non-trivial FD are superkey
+
+  ---
+
+  Infection(_dateInfection_, _passportNumOrSSN_, type)
+
+  List of major FD:
+  date, passportNumOrSSN -> type
+  
+  This relation is BCNF
+
+  ---
+
+  Vaccination(_passportNumOrSSN_, _doseNumber_, date)
+
+  List of major FD:
+  passportNumOrSSN, doseNumber -> date
+
+  This relation is BCNF
+
+  ---
+
+  DrugHistory(_name_, _date_, status)
+
+  List of major FD:
+  name, date -> status
+
+  This relation is BCNF
+
+  --- 
+
+  VaccinationDoneWith(_passportNumOrSSN_, _doseNumber_, _name_);
+
+  List of major FD:
+  passportNumOrSSN, doseNumber -> name 
+
+  This relation if BCNF
+  
+  VaccinationDoneBy and VaccinationDoneAt are pretty similar and are both in\
+  BCNF
+  
+  --- 
+
+  HealthFacility(_name_, _address_,telephone, webAddress, type, city, province,
+    postalCode);
+  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
+    address, city, postalCode, province, citizenship, email)
+
+  Those two relations are similar to Person, the badly behaving FD is the one
+  with the postal code, this means that both of them needs their postal code
+  removed.
+
+  HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);
+  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
+    address, city, province, citizenship, email)
+  
+  ---
+
+  All those:
+
+  Manages(_EID_, _name_, _address_)
+  JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
+  VaccineStored(_nameHSO_, _address_, _nameDrug_, count)
+  vaccineShipment(_nameHSO_, _address_, _nameDrug_, _date_, count)
+  VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_,
+    _date_, count)
+
+  Are similar to previous tables that are mostly made up of key and all FD
+  have superkey on their right side thus they are all in BCNF.
+
+  --- 
+
+  The final set of relation is thus: 
+
+  Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName,
+    city, province, citizenship, email, dateOfBirth);
+  Infection(_dateInfection_, _passportNumOrSSN_, type);
+  AgeGroup(_ageRange_);
+  CurrentAgeGroup(_ageRange_, _province_)
+  Vaccination(_passportNumOrSSN_, _doseNumber_, date)
+  PersonAgeGroup(_ageRange_, _passportNumOrSSN_);
+  VaccinationDrug(_name_);
+  DrugHistory(_name_, _date_, status)
+  VaccinationDoneWith(_passportNumOrSSN_, _doseNumber_, _name_);
+  VaccinationDoneAt(_passportNumOrSSN_, _doseNumber_, _name_, _address_);
+  VaccinationDoneBy(_passportNumOrSSN_, _doseNumber_, _EID_)
+  HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);
+  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
+    address, city, province, citizenship, email)
+  Manager(_EID_)
+  Manages(_EID_, _name_, _address_)
+  JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
+  VaccineStored(_nameHSO_, _address_, _nameDrug_, count)
+  vaccineShipment(_nameHSO_, _address_, _nameDrug_, _date_, count)
+  VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_,
+    _date_, count)
+  PostalCode(address, city, province, postalCode)
+ 
   Answer to 4.
 
   Answer to 5.
