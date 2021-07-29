@@ -158,7 +158,7 @@ Relations obtained from E/R diagram
     _date_, count)
   PostalCode(address, city, province, postalCode)
  
-  Answer to 4.
+  Answer to 4. Yes it is, look at point 3.
 
-  Answer to 5.
+  Answer to 5. Not required since the DB is in BCNF
   
