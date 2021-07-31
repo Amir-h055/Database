@@ -1,8 +1,6 @@
 CREATE DATABASE PROJECT;
 
-USE PROJECT;
-
-CREATE TABLE PROJECT.Person (
+CREATE TABLE Person (
   passportNumOrSSN VARCHAR(10),
   medicaidNum  VARCHAR(10),
   telephone VARCHAR(13),
@@ -17,7 +15,7 @@ CREATE TABLE PROJECT.Person (
   PRIMARY KEY(passportNumOrSSN)
 );
 
-CREATE TABLE PROJECT.Infection (
+CREATE TABLE Infection (
   dateInfection DATE,
   passportNumOrSSN VARCHAR(10),
   type VARCHAR(100),
@@ -25,12 +23,12 @@ CREATE TABLE PROJECT.Infection (
   FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
 );
 
-CREATE TABLE PROJECT.AgeGroup (
+CREATE TABLE AgeGroup (
   ageRange VARCHAR(20),
   PRIMARY KEY (ageRange)
 );
 
-CREATE TABLE PROJECT.Vaccination (
+CREATE TABLE Vaccination (
   passportNumOrSSN VARCHAR(10),
   doseNumber INT,
   date DATE,
@@ -38,7 +36,7 @@ CREATE TABLE PROJECT.Vaccination (
   FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
 );
 
-CREATE TABLE PROJECT.PersonAgeGroup (
+CREATE TABLE PersonAgeGroup (
   ageRange VARCHAR(20),
   passportNumOrSSN VARCHAR(10),
   PRIMARY KEY (ageRange, passportNumOrSSN),
@@ -46,12 +44,12 @@ CREATE TABLE PROJECT.PersonAgeGroup (
   FOREIGN KEY (ageRange) REFERENCES AgeGroup(ageRange)
 );  
 
-CREATE TABLE PROJECT.VaccinationDrug (
+CREATE TABLE VaccinationDrug (
   name VARCHAR(100),
   PRIMARY KEY (name)
 );
 
-CREATE TABLE PROJECT.HealthFacility (
+CREATE TABLE HealthFacility (
   name VARCHAR(100),
   address VARCHAR(255),
   city VARCHAR(255),
@@ -63,7 +61,7 @@ CREATE TABLE PROJECT.HealthFacility (
   PRIMARY KEY (name, address)
 );
 
-CREATE TABLE PROJECT.VaccinationDoneWith (
+CREATE TABLE VaccinationDoneWith (
   passportNumOrSSN VARCHAR(10),
   doseNumber INT,
   name VARCHAR(100),
@@ -73,7 +71,7 @@ CREATE TABLE PROJECT.VaccinationDoneWith (
   FOREIGN KEY (doseNumber) REFERENCES Vaccination(doseNumber)
 );
 
-CREATE TABLE PROJECT.VaccinationDoneAt (
+CREATE TABLE VaccinationDoneAt (
   passportNumOrSSN VARCHAR(10),
   doseNumber INT,
   name VARCHAR(100),
@@ -84,14 +82,14 @@ CREATE TABLE PROJECT.VaccinationDoneAt (
   FOREIGN KEY (name,address) REFERENCES HealthFacility(name,address)
 );
 
-CREATE TABLE PROJECT.CurrentAgeGroup {
+CREATE TABLE CurrentAgeGroup {
   ageRange VARCHAR(20),
   province VARCHAR(3),
   PRIMARY KEY (ageRange),
   FOREIGN KEY (ageRange) REFERENCES AgeGroup(ageRange)
 }
 
-CREATE TABLE PROJECT.DrugHistory {
+CREATE TABLE DrugHistory {
   name VARCHAR(100),
   date DATE,
   status VARCHAR(100),
@@ -99,7 +97,7 @@ CREATE TABLE PROJECT.DrugHistory {
   FOREIGN KEY (name) REFERENCES VaccinationDrug(name)
 }
 
-CREATE TABLE PROJECT.VaccinationDoneBy {
+CREATE TABLE VaccinationDoneBy {
   passportNumOrSSN VARCHAR(10),
   doseNumber INT,
   EID VARCHAR(10),
@@ -109,7 +107,7 @@ CREATE TABLE PROJECT.VaccinationDoneBy {
   FOREIGN KEY (EID) Employee(EID)
 }
 
-CREATE TABLE PROJECT.Employee {
+CREATE TABLE Employee {
   EID VARCHAR(10),
   SSN VARCHAR(10),
   firstName VARCHAR(100),
@@ -125,13 +123,13 @@ CREATE TABLE PROJECT.Employee {
   PRIMARY KEY (EID)
 }
 
-CREATE TABLE PROJECT.Manager {
+CREATE TABLE Manager {
   EID VARCHAR(10),
   PRIMARY KEY (EID),
   FOREIGN KEY (EID) Employee(EID)
 }
 
-CREATE TABLE PROJECT.Manages {
+CREATE TABLE Manages {
   EID VARCHAR(10),
   name VARCHAR(100),
   address VARCHAR(100),
@@ -140,7 +138,7 @@ CREATE TABLE PROJECT.Manages {
   FOREIGN KEY (name, address) REFERENCES HealthFacility(name, address)
 }
 
-CREATE TABLE Project.JobHistory {
+CREATE TABLE JobHistory {
   EID VARCHAR(10), 
   name VARCHAR(100),
   address VARCHAR(100), 
@@ -151,7 +149,7 @@ CREATE TABLE Project.JobHistory {
   FOREIGN KEY (name, address) REFERENCES HealthFacility(name, address)
 }
 
-CREATE TABLE Project.VaccineStored {
+CREATE TABLE VaccineStored {
   nameHSO VARCHAR(100), 
   address VARCHAR(100), 
   nameDrug VARCHAR(100), 
