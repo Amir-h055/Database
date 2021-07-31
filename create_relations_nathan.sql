@@ -54,9 +54,8 @@ CREATE TABLE HealthFacility (
   address VARCHAR(255),
   city VARCHAR(255),
   province VARCHAR(3),
-  phoneNumber VARCHAR(13),
-  webAddress VARCHAR(100),
   telephone VARCHAR(13),
+  webAddress VARCHAR(100),
   type VARCHAR(8),
   PRIMARY KEY (name, address)
 );
@@ -110,9 +109,9 @@ CREATE TABLE VaccinationDoneBy {
 CREATE TABLE Employee {
   EID VARCHAR(10),
   SSN VARCHAR(10),
+  medicare VARCHAR(100),
   firstName VARCHAR(100),
   lastName VARCHAR(100), 
-  medicare VARCHAR(100),
   dateOfBirth DATE,
   telephone VARCHAR(13),
   address VARCHAR(100), 
