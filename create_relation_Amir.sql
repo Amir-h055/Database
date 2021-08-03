@@ -138,7 +138,7 @@ CREATE TABLE PROJECT.VaccineStored (
   count INT,
   PRIMARY KEY (nameHSO, address, nameDrug),
   FOREIGN KEY (nameHSO, address) REFERENCES HealthFacility(name, address),
-  FOREIGN KEY (nameDrug) REFERENCES Vaccination(name)
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
 );
 
 CREATE TABLE PROJECT.VaccineShipment (
@@ -149,7 +149,7 @@ CREATE TABLE PROJECT.VaccineShipment (
   count INT,
   PRIMARY KEY (nameHSO, address, nameDrug, date),
   FOREIGN KEY (nameHSO, address) REFERENCES HealthFacility(name, address),
-  FOREIGN KEY (nameDrug) REFERENCES Vaccination(name)
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
 );
 
 CREATE TABLE PROJECT.VaccineTransfer (
@@ -163,7 +163,7 @@ CREATE TABLE PROJECT.VaccineTransfer (
   PRIMARY KEY (nameHSOFrom,nameHSOTo, addressFrom, addressTo, nameDrug, date),
   FOREIGN KEY (nameHSOFrom, addressFrom) REFERENCES HealthFacility(name, address),
   FOREIGN KEY (nameHSOTo, addressTo) REFERENCES HealthFacility(name, address),
-  FOREIGN KEY (nameDrug) REFERENCES Vaccination(name)
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
 );
 
 CREATE TABLE PROJECT.PostalCode (
