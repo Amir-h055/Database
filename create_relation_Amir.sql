@@ -1,10 +1,19 @@
 CREATE DATABASE PROJECT;
 use PROJECT;
 
+
 CREATE TABLE PROJECT.AgeGroup (
 ageGroupID int,
   ageRange VARCHAR(20),
   PRIMARY KEY (ageGroupID)
+);
+
+CREATE TABLE PROJECT.proviceCurrentAgeGroup (
+  provinceID int,
+  ageGroupID int,
+  provinceID int,
+  PRIMARY KEY (provinceID),
+  FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID)
 );
 
 
@@ -17,13 +26,14 @@ CREATE TABLE PROJECT.Person (
   address VARCHAR(255),
   city VARCHAR(255),
   ageGroupID int,
-  province VARCHAR(3),
-    ###
-  citizenship BOOLEAN,
+  provinceID int,
+  citizenship BOOLEAN,##
   email VARCHAR(255),
   dateOfBirth DATE,
   PRIMARY KEY(passportNumOrSSN),
-    FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID)
+      FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID),
+  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
+
 
 );
 
@@ -48,21 +58,15 @@ CREATE TABLE PROJECT.HealthFacility (
   name VARCHAR(50),
   address VARCHAR(100),
   city VARCHAR(255),
-  province VARCHAR(3),
+  provinceID int,
   telephone VARCHAR(13),
   webAddress VARCHAR(100),
   type VARCHAR(8),
-  PRIMARY KEY (name, address)
+  PRIMARY KEY (name, address),
+  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
 );
 
 
-
-CREATE TABLE PROJECT.CurrentAgeGroup (
-  ageGroupID int,
-  province VARCHAR(3),
-  PRIMARY KEY (province),
-  FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID)
-);
 
 CREATE TABLE PROJECT.DrugHistory (
   Dname VARCHAR(20),
@@ -85,10 +89,11 @@ CREATE TABLE PROJECT.Employee (
   telephone VARCHAR(13),
   address VARCHAR(100), 
   city VARCHAR(100),
-  province VARCHAR(3),
+  provinceID int,
   citizenship BOOLEAN, 
   email VARCHAR(100),
-  PRIMARY KEY (EID)
+  PRIMARY KEY (EID),
+  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
 );
 
 
@@ -169,7 +174,8 @@ CREATE TABLE PROJECT.VaccineTransfer (
 CREATE TABLE PROJECT.PostalCode (
   address VARCHAR(100), 
   city VARCHAR(100),
-  province VARCHAR(3),
+  provinceID int,
   postalCode VARCHAR(6),
-  PRIMARY KEY (address, city, province)
+  PRIMARY KEY (address, city, province),
+  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
 );
