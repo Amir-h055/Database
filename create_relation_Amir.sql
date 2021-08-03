@@ -4,14 +4,13 @@ use PROJECT;
 
 CREATE TABLE PROJECT.AgeGroup (
 ageGroupID int,
-  ageRange VARCHAR(20),
+ ageRange VARCHAR(20),
   PRIMARY KEY (ageGroupID)
 );
 
 CREATE TABLE PROJECT.proviceCurrentAgeGroup (
   provinceID int,
   ageGroupID int,
-  provinceID int,
   PRIMARY KEY (provinceID),
   FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID)
 );
@@ -84,7 +83,8 @@ CREATE TABLE PROJECT.Employee (
   SSN VARCHAR(10),
   medicare VARCHAR(100),
   firstName VARCHAR(100),
-  lastName VARCHAR(100), 
+  lastName VARCHAR(100),
+  postalCode VARCHAR(10),  
   dateOfBirth DATE,
   telephone VARCHAR(13),
   address VARCHAR(100), 
@@ -102,7 +102,7 @@ CREATE TABLE PROJECT.Vaccination (
   doseNumber INT,
   date DATE,
   EID VARCHAR(10),
-  name VARCHAR(50),
+  name VARCHAR(20),
   Hname VARCHAR(50),
   address VARCHAR(100),
   PRIMARY KEY (passportNumOrSSN, doseNumber),
@@ -176,6 +176,6 @@ CREATE TABLE PROJECT.PostalCode (
   city VARCHAR(100),
   provinceID int,
   postalCode VARCHAR(6),
-  PRIMARY KEY (address, city, province),
+  PRIMARY KEY (address, city, provinceID),
   FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
 );
