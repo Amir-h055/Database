@@ -8,8 +8,8 @@ ageGroupID int,
   PRIMARY KEY (ageGroupID)
 );
 
-CREATE TABLE PROJECT.proviceCurrentAgeGroup (
-  provinceID int,
+CREATE TABLE PROJECT.ProvinceCurrentAgeGroup (
+  provinceID VARCHAR(2),
   ageGroupID int,
   PRIMARY KEY (provinceID),
   FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID)
@@ -25,13 +25,13 @@ CREATE TABLE PROJECT.Person (
   address VARCHAR(255),
   city VARCHAR(255),
   ageGroupID int,
-  provinceID int,
+  provinceID VARCHAR(2),
   citizenship BOOLEAN,##
   email VARCHAR(255),
   dateOfBirth DATE,
   PRIMARY KEY(passportNumOrSSN),
       FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID),
-  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
+  FOREIGN KEY (provinceID) REFERENCES ProvinceCurrentAgeGroup(provinceID)
 
 
 );
@@ -57,12 +57,12 @@ CREATE TABLE PROJECT.HealthFacility (
   name VARCHAR(50),
   address VARCHAR(100),
   city VARCHAR(255),
-  provinceID int,
+  provinceID VARCHAR(2),
   telephone VARCHAR(13),
   webAddress VARCHAR(100),
   type VARCHAR(8),
   PRIMARY KEY (name, address),
-  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
+  FOREIGN KEY (provinceID) REFERENCES ProvinceCurrentAgeGroup(provinceID)
 );
 
 
@@ -89,11 +89,11 @@ CREATE TABLE PROJECT.Employee (
   telephone VARCHAR(13),
   address VARCHAR(100), 
   city VARCHAR(100),
-  provinceID int,
+  provinceID VARCHAR(2),
   citizenship BOOLEAN, 
   email VARCHAR(100),
   PRIMARY KEY (EID),
-  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
+  FOREIGN KEY (provinceID) REFERENCES ProvinceCurrentAgeGroup(provinceID)
 );
 
 
@@ -174,8 +174,8 @@ CREATE TABLE PROJECT.VaccineTransfer (
 CREATE TABLE PROJECT.PostalCode (
   address VARCHAR(100), 
   city VARCHAR(100),
-  provinceID int,
+  provinceID VARCHAR(2),
   postalCode VARCHAR(6),
   PRIMARY KEY (address, city, provinceID),
-  FOREIGN KEY (provinceID) REFERENCES proviceCurrentAgeGroup(provinceID)
+  FOREIGN KEY (provinceID) REFERENCES ProvinceCurrentAgeGroup(provinceID)
 );
