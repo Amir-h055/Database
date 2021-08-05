@@ -143,3 +143,91 @@ Results
 |5418600012 |Annabel |Dodson |1996-08-06 |annabel.dodson@gmail.com|(514)482-4299|Montreal|2021-01-16: AstraZeneca,2021-05-16: Pfizer|2 |ALPHA,LAMBDA|
 
 ## Query 18
+
+Qeury
+
+```sql
+SELECT
+    h.name,
+    h.address,
+    h.type,
+    h.telephone,
+    COUNT(DISTINCT j.EID) AS employeeCount,
+    COALESCE(vs.totalShipments, 0) AS totalShipments,
+    COALESCE(vs.totalDosesShipped, 0) AS totalDosesShipped,
+    COALESCE(vtFrom.totalTransfersFrom, 0) AS totalTransfersFrom,
+    COALESCE(vtFrom.totalDosesFrom, 0) AS totalDosesFrom,
+    COALESCE(vtTo.totalTransfersTo, 0) AS totalTransfersTo,
+    COALESCE(vtTo.totalDosesTo, 0) AS totalDosesTo,
+    v.totalVaccinesByType,
+    COALESCE(vac.totalPeopleVaccinated, 0) as totalPeopleVaccinated,
+    COALESCE(vac.totalDosesGiven, 0) as totalDosesGiven
+FROM
+    HealthFacility h
+        LEFT JOIN
+    JobHistory j ON j.address = h.address
+        AND j.name = h.name
+        LEFT JOIN
+    (SELECT
+        nameHSO AS name,
+            address,
+            COUNT(DISTINCT nameHSO, address, nameDrug, date) AS totalShipments,
+            SUM(COUNT) AS totalDosesShipped
+    FROM
+        VaccineShipment
+    GROUP BY nameHSO , address) vs ON vs.name = h.name
+        AND vs.address = h.address
+        LEFT JOIN
+    (SELECT
+        nameHSOFrom,
+            addressFrom,
+            COUNT(DISTINCT nameHSOFrom, nameHSOTo, addressFrom, addressTo, nameDrug, date) AS totalTransfersFrom,
+            SUM(count) AS totalDosesFrom
+    FROM
+        VaccineTransfer
+    GROUP BY nameHSOFROM , addressFROM) vtFrom ON vtFrom.nameHSOFrom = h.name
+        AND vtFrom.addressFrom = h.address
+        LEFT JOIN
+    (SELECT
+        nameHSOTo,
+            addressTo,
+            COUNT(DISTINCT nameHSOFrom, nameHSOTo, addressFrom, addressTo, nameDrug, date) AS totalTransfersTo,
+            SUM(COUNT) AS totalDosesTo
+    FROM
+        VaccineTransfer
+    GROUP BY nameHSOTo , addressTo) vtTo ON vtTo.nameHSOTo = h.name
+        AND vtTo.addressTo = h.address
+        LEFT JOIN
+    (SELECT
+        nameHSO AS name,
+            address,
+            GROUP_CONCAT(nameDrug, ': ', count) totalVaccinesByType
+    FROM
+        VaccineStored
+    GROUP BY nameHSO , address) v ON v.name = h.name
+        AND v.address = h.address
+	LEFT JOIN
+    (SELECT
+    Hname AS name,
+    address,
+    COUNT(DISTINCT passportNumOrSSN) AS totalPeopleVaccinated,
+    COUNT(DISTINCT passportNumOrSSN, doseNumber) AS totalDosesGiven
+FROM
+    Vaccination
+GROUP BY Hname , address) vac
+ON vac.name = h.name
+AND vac.address = h.address
+WHERE
+    h.city = 'Montreal'
+        AND j.endDate IS NULL
+GROUP BY h.name , h.address;
+```
+
+Results
+|name |address |type |telephone |employeeCount|totalShipments|totalDosesShipped|totalTransfersFrom|totalDosesFrom|totalTransfersTo|totalDosesTo|totalVaccinesByType |totalPeopleVaccinated|totalDosesGiven|
+|------------------------------|----------------------------------------|--------|-------------|-------------|--------------|-----------------|------------------|--------------|----------------|------------|--------------------------|---------------------|---------------|
+|H√¥pital Fleury |2180, rue Fleury Est |HOSPITAL|(514)384-2000|1 |0 |0 |0 |0 |0 |0 |Pfizer: 2000 |1 |1 |
+|H√¥pital Richardson |5425, Avenue Bessborough |HOSPITAL|(514)484-7878|2 |3 |600 |1 |100 |1 |100 |Pfizer: 2000 |2 |2 |
+|H√¥pital Rivi√®re-des-Prairies|7070, boulevard Perras |HOSPITAL|(514)323-7260|1 |1 |100 |0 |0 |1 |100 |Pfizer: 2000 |0 |0 |
+|Jewish General Hospital |3755 Chemin de la C√¥te-Sainte-Catherine|HOSPITAL|www.gjw.com |1 |0 |0 |0 |0 |0 |0 |Pfizer: 2000 |3 |3 |
+|Olympic Stadium |4545 Avenue Pierre-De Coubertin |SPECIAL |(514)252-4141|1 |0 |0 |4 |400 |1 |350 |Moderna: 1500,Pfizer: 2000|3 |3 |
