@@ -37,10 +37,10 @@
                     <a href="index.php">Home</a>
                 </li>
                 <li class="<?php echo $currentPage == 'Age Group' ? 'active': ''?>">
-                    <a href="ageGroup.php">Age Group</a>
+                    <a href="ageGroup.php">Age Groups</a>
                 </li>
-                <li>
-                    <a href="#">Province Current Group</a>
+                <li class="<?php echo $currentPage == 'Provinces' ? 'active': ''?>">
+                    <a href="provinces.php">Provinces</a>
                 </li>
                 <li>
                     <a href="#">Person</a>
