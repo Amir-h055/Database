@@ -84,7 +84,6 @@ CREATE TABLE PROJECT.Employee (
   medicare VARCHAR(100),
   firstName VARCHAR(100),
   lastName VARCHAR(100),
-  postalCode VARCHAR(10),  
   dateOfBirth DATE,
   telephone VARCHAR(13),
   address VARCHAR(100), 

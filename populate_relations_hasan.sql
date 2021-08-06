@@ -118,34 +118,34 @@ INSERT DrugHistory VALUES ("KoviVac", "2021-01-01", "SUSPENDED");
 INSERT DrugHistory VALUES ("EpiVacCorona", "2021-01-01", "SUSPENDED");
 
 INSERT Employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
-  "Jernigan", "H2P 1Z7", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
+  "Jernigan", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
   "Quebec", "QC", TRUE, "eliJer@gmail.com");
 INSERT Employee VALUES ("4091939153","3559893762", "8331149 83", "William",
-  "Blackman", "G0C 1E0", "1991-07-01", "(418)299-4800", "3619 avenue de Port-Royal",
+  "Blackman", "1991-07-01", "(418)299-4800", "3619 avenue de Port-Royal",
   "Bonaventure", "QC", TRUE, "wilBlack@gmail.com");
 INSERT Employee VALUES ("6296074483","8133950202", "2597807 10", "Carol",
-  "Williams", "H4V 2Z6", "1984-03-01", "(514)481-2566", "6767 ch de la Côte-Saint-Luc",
+  "Williams", "1984-03-01", "(514)481-2566", "6767 ch de la Côte-Saint-Luc",
   "Côte Saint-Luc", "QC", TRUE, "carWill@gmail.com");
 INSERT Employee VALUES ("1988238722","5594746088", "2967560 35", "Gary",
-  "Smith", "H4B 1R9", "1967-06-12", "(514)484-4049", "3472 Av Westmore", "Montreal", "QC",
+  "Smith", "1967-06-12", "(514)484-4049", "3472 Av Westmore", "Montreal", "QC",
   TRUE, "garySmi@gmail.com");
 INSERT Employee VALUES ("9654156685","3050347011", "7495078 77", "Ted",
-  "Johnson", "H4C 3B1","1998-09-23", "(514)485-1864", "621 Côte Murray", "Westmount",
+  "Johnson","1998-09-23", "(514)485-1864", "621 Côte Murray", "Westmount",
   "QC", TRUE, "tedJohn@gmail.com");
 INSERT Employee VALUES ("0426670356","6901680262", "1457287 34", "Ronald",
-  "Smith", "H1A 1Z1","1995-06-14", "(514)642-6526", "16226 Rue Bureau",
+  "Smith","1995-06-14", "(514)642-6526", "16226 Rue Bureau",
   "Pointe-Aux-Trembles", "QC", TRUE, "ronSmi@gmail.com");
 INSERT Employee VALUES ("2589272564","2826175309", "0568018 19", "Adam",
-  "Smith", "H3W 2C8", "1995-08-12", "(514)483-4346", "4840 Bonavista", "Montreal", "QC",
+  "Smith", "1995-08-12", "(514)483-4346", "4840 Bonavista", "Montreal", "QC",
   TRUE, "adaSmi@gmail.com");
 INSERT Employee VALUES ("4278243142","0883386538", "5489390 84", "Wayne",
-  "Johnson","H4A 3A3" ,"1984-07-16", "(514)486-4899", "999 Old Orchard", "Montreal", "QC",
+  "Johnson","1984-07-16", "(514)486-4899", "999 Old Orchard", "Montreal", "QC",
   TRUE, "wayJon@gmail.com");
 INSERT Employee VALUES ("2221453161","3909862653", "5433470 85", "Sylvain",
-  "Williams","H4H 2S4" ,"1978-11-14", "(514)767-3102", "1477 Rue Fayolle", "Verdun", "QC",
+  "Williams","1978-11-14", "(514)767-3102", "1477 Rue Fayolle", "Verdun", "QC",
   TRUE, "sylWill@gmail.com");
 INSERT Employee VALUES ("7034521288","5025223450", "6335938 64", "Michel",
-  "Johnson","J4& 0J1" ,"1996-09-13", "(514)597-0058", "850 Av Lachine", "Montreal", "QC",
+  "Johnson","1996-09-13", "(514)597-0058", "850 Av Lachine", "Montreal", "QC",
   TRUE, "micJohn@gmail.com");
 
 INSERT Vaccination VALUES ("5418600012", 1, "2021-01-16", "6296074483", "AstraZeneca", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
