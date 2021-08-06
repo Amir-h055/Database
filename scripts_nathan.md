@@ -13,7 +13,7 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
   
 -- Also add the various infections  
-INSERT INTO Infection VALUES (dateInfection, passportNumOrSSN, type);
+INSERT INTO Infection VALUES (dateInfection, passportNumOrSSN, variantID);
 ```
 
 #### Delete a Person
@@ -49,3 +49,42 @@ WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
     Person.city = PostalCode.city AND Person.province = PostalCode.province;
 ```
 
+## Query 5
+
+#### Create a variant type
+
+```sql
+INSERT INTO VariantType VALUES (id, "name");
+```
+
+#### Delete a variant type
+
+```sql
+DELETE FROM VarianType WHERE variantTypeID = x;
+```
+
+#### Edit a variant type
+
+```sql
+UPDATE VariantType
+SET column_name = value
+WHERE variantTypeID = x;
+```
+
+#### Display a variant type
+
+```sql
+SELECT *
+FROM VariantType
+WHERE variantTypeID = x;
+```
+
+## Query 9
+
+#### Receive a shipment of vaccines and add it to the inventory in a specific location
+## Query 13
+
+#### Get details of all the people who live in the city of Montréal and who got vaccinated at least two doses of different types of vaccines.
+## Query 17
+
+#### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22nd 2021

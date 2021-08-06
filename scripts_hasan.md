@@ -4,14 +4,21 @@
 
 ```sql
 INSERT Employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
-  "Jernigan", "H2P 1Z7", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
+  "Jernigan", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
   "Quebec", "QC", TRUE, "eliJer@gmail.com");
+  
+-- Check if the postal code tuple exist with
+SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" AND postalCode = "a";
+
+-- If the query does no return anything, then insert the postal code
+INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 ```
 
 ##### Delete a Public Health Worker
 
 ```sql
 DELETE FROM Employee WHERE EID = '5418600012';
+-- No need to delete any postal code
 ```
 
 ##### Edit a Public Health Worker
@@ -20,6 +27,9 @@ DELETE FROM Employee WHERE EID = '5418600012';
 UPDATE Employee
 SET email = "newemail@email.com", citizenship = FALSE
 WHERE EID = "2314904771";
+
+-- To edit a postalCode, if there is a change in address
+UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 ```
 
 ##### Display a Public Health Worker
@@ -27,7 +37,10 @@ WHERE EID = "2314904771";
 Query
 
 ```sql
-SELECT * FROM Employee WHERE EID = "0426670356";
+SELECT *, PostalCode.postalCode  
+FROM Employee, PostalCode
+WHERE EID = "0426670356" AND Employee.address = PostalCode.address AND
+Employee.city = PostalCode.city AND Employee.province = PostalCode.province;
 ```
 
 Results
