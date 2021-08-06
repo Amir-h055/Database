@@ -1,4 +1,4 @@
-## Query 1
+### Query 1
 
 ##### Create a Person
 
@@ -49,7 +49,7 @@ WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
     Person.city = PostalCode.city AND Person.province = PostalCode.province;
 ```
 
-## Query 5
+### Query 5
 
 #### Create a variant type
 
@@ -79,7 +79,7 @@ FROM VariantType
 WHERE variantTypeID = x;
 ```
 
-## Query 9
+### Query 9
 
 #### Receive a shipment of vaccines and add it to the inventory in a specific location
 

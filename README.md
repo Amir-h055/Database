@@ -1,14 +1,5 @@
 ## TEAM Project README
 
-Todo
+Todo 13 (nathan), 17 (nathan),13,16,17,20
 
-For each member:
-- [ ] Complete Stan email
-
-For the team:
-- [x] Make the E/R diagram
-- [x] Convert the E/R diagram to relations
-- [x] SQL script to create the relations
-- [x] SQL script to populate the DB
-- [x] Make the SQL scripts for the transactions/queries (see project handout)
-- [x] Make the report (due date July 23)
+DONE 1,2,3,4,5,6,7,8,9,10,11,12,14,15,18,19
