@@ -39,12 +39,17 @@ CREATE TABLE PROJECT.Person (
 CREATE TABLE PROJECT.Infection (
   dateInfection DATE,
   passportNumOrSSN VARCHAR(10),
-  type VARCHAR(100),
+  variantTypeID INT,
   PRIMARY KEY(passportNumOrSSN, dateInfection),
-  FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
+  FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN),
+  FOREIGN KEY (variantTypeID) REFERENCES (variantTypeID)
 );
 
-
+CREATE TABLE PROJECT.VariantType (
+  variantTypeID INT,
+  name VARCHAR(100),
+  PRIMARY KEY (variantTypeID)
+)
 
 ########################################################
 
