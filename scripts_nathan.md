@@ -82,6 +82,35 @@ WHERE variantTypeID = x;
 ## Query 9
 
 #### Receive a shipment of vaccines and add it to the inventory in a specific location
+
+Add a vaccine shipment to the DB
+
+```SQL
+INSERT INTO VaccineShipment VALUES("nameHSO", "address", "nameDrug", date, count);
+```
+
+Then add the shipment to the hospital inventory
+
+First check if there is such vaccine at the hospital
+
+```sql
+SELECT *
+FROM VaccineStored
+WHERE nameDrug = "name";
+```
+
+If the query is empty, do this
+
+```sql
+INSERT INTO VaccineStored VALUES ("nameHSO", "address", "nameDrug", count);
+```
+
+Else increase the old value
+
+```sql
+UPDATE VaccineStored SET count = count + shipmentCount WHERE nameDrug = "nameDrug";
+```
+
 ## Query 13
 
 #### Get details of all the people who live in the city of Montréal and who got vaccinated at least two doses of different types of vaccines.
