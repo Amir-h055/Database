@@ -241,3 +241,35 @@ INSERT VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Verdun",
 INSERT VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Sainte-Anne",
   "4545 Avenue Pierre-De Coubertin", "305, boulevard des Anciens-Combattants",
   "Pfizer", "2021-01-20", 100);
+
+
+INSERT PostalCode VALUES ("6860 Fielding", "Montreal", "QC", "H4V1P2");
+INSERT PostalCode VALUES ("902 Tittley", "Montreal","QC","H8R3X3");
+INSERT PostalCode VALUES ("6818 Lamont", "Montreal","QC","H7L4X8");
+INSERT PostalCode VALUES ("1720 Bourbonniere", "Montreal","QC","H1W3N1");
+INSERT PostalCode VALUES ("5962 Jogues", "Montreal","QC","J8Y4E3");
+INSERT PostalCode VALUES ("927 Rand", "Gatineau","QC","K1V6X4");
+INSERT PostalCode VALUES ("60 Du Blizzard", "Gatineau","QC","J9A0C8");
+INSERT PostalCode VALUES ("1175 De L'Esplanade", "Sherbrooke","QC","J1H1S9");
+INSERT PostalCode VALUES ("1812 Dunant", "Sherbrooke","QC","J1H1Y9");
+INSERT PostalCode VALUES ("3937 Soucy", "Jonquière","QC","G7X8T1");
+INSERT PostalCode VALUES ("4884 Boulevard Cremazie","Quebec", "QC","H2M0B0");
+INSERT PostalCode VALUES ("3619 avenue de Port-Royal","Bonaventure", "QC","J9J1C8");
+INSERT PostalCode VALUES ("6767 ch de la Côte-Saint-Luc","Côte Saint-Luc", "QC","H4V2Z6");
+INSERT PostalCode VALUES ("3472 Av Westmore", "Montreal","QC","H4V4Z6");
+INSERT PostalCode VALUES ("621 Côte Murray","Westmount","QC","H4V2Y6");
+INSERT PostalCode VALUES ("16226 Rue Bureau","Pointe-Aux-Trembles", "QC","H1A1Z1");
+INSERT PostalCode VALUES ("4840 Bonavista", "Montreal", "QC","G0C1E0");
+INSERT PostalCode VALUES ("999 Old Orchard", "Montreal", "QC","G0C1E8");
+INSERT PostalCode VALUES ("1477 Rue Fayolle", "Verdun", "QC","G3F1E0");
+INSERT PostalCode VALUES ("850 Av Lachine", "Montreal", "QC","G6C1Y0");
+INSERT PostalCode VALUES ("4545 Avenue Pierre-De Coubertin", "Montreal", "QC","G7Q2V0");
+INSERT PostalCode VALUES ("3755 Chemin de la Côte-Sainte-Catherine", "Montreal", "QC","G0S5R0");
+INSERT PostalCode VALUES ("909 Boulevard la Vérendrye O", "Gatineau", "QC","G5S2V0");
+INSERT PostalCode VALUES ("300 Rue King E", "Sherbrooke", "QC","G0S2V4");
+INSERT PostalCode VALUES ("2180, rue Fleury Est","Montreal", "QC","G0S2V0");
+INSERT PostalCode VALUES ("5425, Avenue Bessborough","Montreal", "QC","M4G3H9");
+INSERT PostalCode VALUES ("7070, boulevard Perras", "Montreal", "QC","H1E1A4");
+INSERT PostalCode VALUES ("8585, Terrasse Champlain","LaSalle", "QC","H3N2L1");
+INSERT PostalCode VALUES ("4000, boul. Lasalle","Verdun", "QC","H4G1J8");
+INSERT PostalCode VALUES ("305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", "QC","H9X1Y9");

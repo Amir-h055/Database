@@ -26,14 +26,12 @@ CREATE TABLE PROJECT.Person (
   city VARCHAR(255),
   ageGroupID int,
   provinceID VARCHAR(2),
-  citizenship BOOLEAN,##
+  citizenship BOOLEAN,
   email VARCHAR(255),
   dateOfBirth DATE,
   PRIMARY KEY(passportNumOrSSN),
-      FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID),
+  FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID),
   FOREIGN KEY (provinceID) REFERENCES ProvinceCurrentAgeGroup(provinceID)
-
-
 );
 
 CREATE TABLE PROJECT.Infection (

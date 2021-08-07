@@ -42,8 +42,8 @@
                 <li class="<?php echo $currentPage == 'Provinces' ? 'active': ''?>">
                     <a href="provinces.php">Provinces</a>
                 </li>
-                <li>
-                    <a href="#">Person</a>
+                <li class="<?php echo $currentPage == 'Person' ? 'active': ''?>">
+                    <a href="person.php">Person</a>
                 </li>
                 <li>
                     <a href="#">Infections</a>
