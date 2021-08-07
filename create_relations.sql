@@ -3,8 +3,8 @@ use PROJECT;
 
 
 CREATE TABLE PROJECT.AgeGroup (
-ageGroupID int,
- ageRange VARCHAR(20),
+  ageGroupID int,
+  ageRange VARCHAR(20),
   PRIMARY KEY (ageGroupID)
 );
 

@@ -52,8 +52,17 @@
                     <a href="#">Vaccine Types</a>
                 </li>
                 <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operations</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
+                    <a href="#">Variant Types</a>
+                </li>
+                <li>
+                    <a href="#">Public Health Workers</a>
+                </li>
+                <li>
+                    <a href="#">Public Health Facilities</a>
+                </li>
+                <li>
+                    <a href="#pageSubmenuOp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operations</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenuOp">
                         <li>
                             <a href="#">Receive a Shipment</a>
                         </li>
@@ -62,6 +71,40 @@
                         </li>
                         <li>
                             <a href="#">Perform Vaccination</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenuDetails" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Details</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenuDetails">
+                        <li>
+                            <a href="#">One dose - Age Group 1 to 3</a>
+                        </li>
+                        <li>
+                            <a href="#">Two different doses - Montreal</a>
+                        </li>
+                        <li>
+                            <a href="#">Two different variants - Vaccinated</a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="#pageSubmenuReports" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenuReports">
+                        <li>
+                            <a href="#">Inventory per province</a>
+                        </li>
+                        <li>
+                            <a href="#">Vaccination per province (01-01-2021/22-07-2021)</a>
+                        </li>
+                        <li>
+                            <a href="#">Vaccination per cities (QC, 01-01-2021/22-07-2021)</a>
+                        </li>
+                        <li>
+                            <a href="#">Health Workers per Facilities</a>
+                        </li>
+                        <li>
+                            <a href="#">Health Workers QC (&lt; 2 doses)</a>
                         </li>
                     </ul>
                 </li>
