@@ -1,0 +1,105 @@
+#1...
+INSERT INTO `person` (`passportNumOrSSN`, `medicaidNum`, `telephone`, `firstName`, `lastName`, `address`, `city`, `ageGroupID`, `provinceID`, `citizenship`, `email`, `dateOfBirth`) 
+VALUES ('p1', 'per1med', 'per1Tel', 'person1', 'person1l', 'person1addr', 'person1city', '7', '2', '1', 'person1@email.ca', '2000-01-01');
+
+
+
+#3
+INSERT INTO `healthfacility` (`name`,`address`,`city`,`provinceID`,`telephone`,`webAddress`,`type`)
+VALUES ('Hname','HAddress','Hcity', 1, '0123486789', 'www.hname.ca', 'Hospital');
+
+
+DELETE FROM `healthfacility`
+WHERE `name`='Hname'
+AND`address`='HAddress';
+
+UPDATE `healthfacility`
+set `telephone`='123456789'
+WHERE `name`='Hname'
+AND`address`='HAddress';
+
+
+SELECT * FROM `healthfacility` 
+WHERE `name`='Hname'
+AND`address`='HAddress';
+
+
+#4
+INSERT INTO `vaccinationdrug` (`name`) VALUES ('VACCINE');
+
+DELETE FROM `vaccinationdrug`
+WHERE `vaccinationdrug`.`name` = 'VACCINE';
+
+UPDATE `vaccinationdrug`
+SET `name` = 'EDITVACCINE' 
+WHERE `vaccinationdrug`.`name` = 'VACCINE';
+
+SELECT * FROM `vaccinationdrug`;
+
+
+
+#7
+INSERT INTO `provicecurrentagegroup` (`provinceID`, `province`, `ageGroupID`) VALUES ('5', 'MB', '0');
+
+UPDATE provicecurrentagegroup
+set `ageGroupID`=1
+where `provinceID`=5;
+
+
+DELETE FROM `provicecurrentagegroup`
+WHERE provinceID=5;
+
+
+SELECT * FROM `provicecurrentagegroup` 
+WHERE `provinceID`=1;
+
+SELECT * FROM `provicecurrentagegroup` 
+WHERE `province`='ON';
+
+
+#8
+UPDATE `provicecurrentagegroup`
+SET `ageGroupID`=8,
+where `province`='ON';
+
+#11..?
+INSERT INTO `vaccination` (`passportNumOrSSN`, `doseNumber`, `date`, `EID`, `name`, `Hname`, `address`)
+VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
+
+#12
+SELECT Person.*,Vaccination.date,Vaccination.name,Infection.type
+FROM Person join Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
+left join Infection on Person.passportNumOrSSN=Infection.passportNumOrSSN
+WHERE`ageGroupID`BETWEEN 1 AND 3
+AND Person.passportNumOrSSN in
+(
+SELECT passportNumOrSSN
+FROM Vaccination 
+GROUP BY Vaccination.passportNumOrSSN
+Having COUNT(Vaccination.passportNumOrSSN)=1
+);
+
+#15
+select provicecurrentagegroup.province,VaccineStored.nameDrug,SUM(VaccineStored.count) as total
+
+from proviceCurrentAgeGroup,HealthFacility,VaccineStored
+
+where proviceCurrentAgeGroup.provinceID = HealthFacility.provinceID
+AND healthfacility.name = VaccineStored.nameHSO
+AND HealthFacility.address = VaccineStored.address
+group by province, vaccinestored.nameDrug
+order by province asc, total desc
+
+
+#19
+SELECT employee.* , postalcode.postalcode
+FROM healthfacility,`employee` ,jobhistory,postalcode
+WHERE 
+healthfacility.name = 'Hname'
+AND healthfacility.address = 'HAddress'
+AND employee.address = postalcode.address
+AND employee.city= postalcode.city
+AND employee.provinceID = postalcode.provinceID
+AND healthfacility.name = jobhistory.name
+AND healthfacility.address = jobhistory.address
+AND jobhistory.EID = employee.EID
