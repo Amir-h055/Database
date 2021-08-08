@@ -1,30 +1,30 @@
 -- This file will populate the MySQL database created with the relations defined in file create_relation_Amir.sql
 use PROJECT;
 
-INSERT AgeGroup VALUES (1, "80+");
-INSERT AgeGroup VALUES (2, "70-79");
-INSERT AgeGroup VALUES (3, "60-69");
-INSERT AgeGroup VALUES (4, "50-59");
-INSERT AgeGroup VALUES (5, "40-49");
-INSERT AgeGroup VALUES (6, "30-39");
-INSERT AgeGroup VALUES (7, "18-29");
-INSERT AgeGroup VALUES (8, "12-17");
-INSERT AgeGroup VALUES (9, "5-11");
-INSERT AgeGroup VALUES (10, "0-4");
+INSERT INTO agegroup VALUES (1, "80+");
+INSERT INTO agegroup VALUES (2, "70-79");
+INSERT INTO agegroup VALUES (3, "60-69");
+INSERT INTO agegroup VALUES (4, "50-59");
+INSERT INTO agegroup VALUES (5, "40-49");
+INSERT INTO agegroup VALUES (6, "30-39");
+INSERT INTO agegroup VALUES (7, "18-29");
+INSERT INTO agegroup VALUES (8, "12-17");
+INSERT INTO agegroup VALUES (9, "5-11");
+INSERT INTO agegroup VALUES (10, "0-4");
 
-INSERT ProvinceCurrentAgeGroup VALUES (1, "NL", 4);
-INSERT ProvinceCurrentAgeGroup VALUES (2, "PE", 5);
-INSERT ProvinceCurrentAgeGroup VALUES (3, "NS", 6);
-INSERT ProvinceCurrentAgeGroup VALUES (4, "NB", 3);
-INSERT ProvinceCurrentAgeGroup VALUES (5, "QC", 8);
-INSERT ProvinceCurrentAgeGroup VALUES (6, "ON", 1);
-INSERT ProvinceCurrentAgeGroup VALUES (7, "MB", 2);
-INSERT ProvinceCurrentAgeGroup VALUES (7, "SK", 9);
-INSERT ProvinceCurrentAgeGroup VALUES (9, "AB", 4);
-INSERT ProvinceCurrentAgeGroup VALUES (10, "BC", 6);
-INSERT ProvinceCurrentAgeGroup VALUES (11, "YT", 7);
-INSERT ProvinceCurrentAgeGroup VALUES (12, "NT", 8);
-INSERT ProvinceCurrentAgeGroup VALUES (13, "NU", 4);
+INSERT INTO provicecurrentagegroup VALUES ('1', "NL", '4');
+INSERT INTO provicecurrentagegroup VALUES ('2', "PE", '5');
+INSERT INTO provicecurrentagegroup VALUES ('3', "NS", '6');
+INSERT INTO provicecurrentagegroup VALUES ('4', "NB", '3');
+INSERT INTO provicecurrentagegroup VALUES ('5', "QC", '8');
+INSERT INTO provicecurrentagegroup VALUES ('6', "ON", '1');
+INSERT INTO provicecurrentagegroup VALUES ('7', "MB", '2');
+INSERT INTO provicecurrentagegroup VALUES ('8', "SK", '9');
+INSERT INTO provicecurrentagegroup VALUES ('9', "AB", '4');
+INSERT INTO provicecurrentagegroup VALUES ('10', "BC", '6');
+INSERT INTO provicecurrentagegroup VALUES ('11', "YT", '7');
+INSERT INTO provicecurrentagegroup VALUES ('12', "NT", '8');
+INSERT INTO provicecurrentagegroup VALUES ('13', "NU", '4');
 
 INSERT Person VALUES ("5418600012", "1936638 14", "(514)482-4299", "Annabel", "Dodson",
   "6860 Fielding", "Montreal", 7, 5, TRUE,
