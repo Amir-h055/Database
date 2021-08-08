@@ -298,6 +298,77 @@ Results
 | --------- | ---------- | ---------- | --------- | -------- | ---------- | ----------- | ------------- | ---------------- | ------------------- | ---------- | ----------- | ---------------- |
 | 426670356 | 6901680262 | 1457287 34 | Ronald    | Smith    | H1A 1Z1    | 1995-06-14  | (514)642-6526 | 16226 Rue Bureau | Pointe-Aux-Trembles | QC         | 1           | ronSmi@gmail.com |
 
+### Query 3
+#### Create a Health Facility
+
+```SQL
+-- Insert the health facility
+INSERT INTO HealthFacility VALUES ('Hname','HAddress','Hcity', 1, '0123486789', 'www.hname.ca', 'Hospital');
+
+-- Check if the postal code tuple exist with
+SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" AND postalCode = "a";
+
+-- If the query does no return anything, then insert the postal code
+INSERT INTO PostalCode VALUES (address, city, province, postalCode);
+```
+
+#### Delete a Health Facility
+
+```SQL
+DELETE FROM HealthFacility
+WHERE name ='Hname' AND address ='HAddress';
+-- No need to delete any postal code
+```
+
+#### Edit a Health Facility
+
+```SQL
+UPDATE HealthFacility
+SET telephone = '123456789'
+WHERE name ='Hname' AND address ='HAddress';
+
+-- To edit a postalCode, if there is a change in address
+UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
+```
+
+#### Display a Health Facility
+
+```sql
+SELECT *, PostalCode.postalCode 
+FROM HealthFacility as HF, PostalCode as PC
+WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.province = PC.province; ;
+```
+
+### Query 4
+
+#### Create a Vaccination Type
+
+```SQl
+INSERT INTO VaccinationDrug VALUES ('VACCINE');
+```
+
+#### Delete a Vaccination Type
+
+```SQL
+DELETE FROM VaccinationDrug
+WHERE name = 'VACCINE';
+```
+
+#### Edit a  Vaccination Type
+
+```SQL
+UPDATE VaccinationDrug
+SET name = 'EDITVACCINE' 
+WHERE name = 'VACCINE';
+```
+
+#### Display a Vaccination Type
+
+```SQl
+SELECT * FROM VaccinationDrug
+WHERE name = 'name';
+```
+
 ### Query 5
 
 #### Create a variant type
@@ -309,7 +380,7 @@ INSERT INTO VariantType VALUES (id, "name");
 #### Delete a variant type
 
 ```sql
-DELETE FROM VarianType WHERE variantTypeID = x;
+DELETE FROM VariantType WHERE variantTypeID = x;
 ```
 
 #### Edit a variant type
@@ -364,6 +435,28 @@ Results
 | ageGroupID | ageRange |
 | ---------- | -------- |
 | 2          | 70-79    |
+
+### Query 7
+
+#### Add a province
+
+```SQL
+INSERT INTO Province VALUES(id, "name", ageGroupID);
+```
+
+#### Delete a province
+
+```SQL
+DELETE FROM Province WHERE provinceID = id;
+```
+
+#### Edit a province
+
+```SQL
+UPDATE Province
+SET attribute = value
+WHERE provinceID = id;
+```
 
 ### Query 9
 

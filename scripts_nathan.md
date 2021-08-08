@@ -7,7 +7,7 @@
 INSERT INTO Person VALUES (passportNumOrSSN, medicaidNum, telephone, firstName, lastName, address, city, province, citizenship, email, dateOfBirth);
 
 -- Check if the postal code tuple exist with
-SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" AND postalCode = "a";
+SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z";
 
 -- If the query does no return anything, then insert the postal code
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
