@@ -8,6 +8,11 @@ CREATE TABLE PROJECT.AgeGroup (
   PRIMARY KEY (ageGroupID)
 );
 
+CREATE TABLE PROJECT.VaccinationDrug (
+  name VARCHAR(20),
+  PRIMARY KEY (name)
+);
+
 CREATE TABLE Project.Province (
   provinceID INT,
   name VARCHAR(100),
@@ -16,6 +21,11 @@ CREATE TABLE Project.Province (
   FOREIGN KEY (currentAgeGroupID) REFERENCES AgeGroup(ageGroupID)
 );
 
+CREATE TABLE PROJECT.VariantType (
+  variantTypeID INT,
+  name VARCHAR(100),
+  PRIMARY KEY (variantTypeID)
+);
 
 CREATE TABLE PROJECT.Person (
   passportNumOrSSN VARCHAR(10),
@@ -43,10 +53,6 @@ CREATE TABLE PROJECT.Infection (
   FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
 );
 
-CREATE TABLE PROJECT.VaccinationDrug (
-  name VARCHAR(20),
-  PRIMARY KEY (name)
-);
 
 CREATE TABLE PROJECT.HealthFacility (
   name VARCHAR(50),
@@ -170,8 +176,3 @@ CREATE TABLE PROJECT.PostalCode (
   FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
 );
 
-CREATE TABLE PROJECT.VariantType (
-  variantTypeID INT,
-  name VARCHAR(100),
-  PRIMARY KEY (variantTypeID)
-);

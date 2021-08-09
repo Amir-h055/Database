@@ -91,10 +91,10 @@ INSERT INTO Infection VALUES ("2021-07-22","6623218089", 0);
 INSERT INTO HealthFacility VALUES ("Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin", "Montreal", 5, "(514)252-4141",
   "www.so.com", "SPECIAL"); 
-INSERT INTO healthfacility VALUES ("Jewish General Hospital",
+INSERT INTO HealthFacility VALUES ("Jewish General Hospital",
   "3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,  "(514)340-8222",
    "www.gjw.com", "HOSPITAL"); 
-INSERT INTO healthfacility VALUES ("Hopital de Gatineau",
+INSERT INTO HealthFacility VALUES ("Hopital de Gatineau",
   "909 Boulevard la Vérendrye O", "Gatineau", 5, "(819)966-6100",
   "www.hg.com", "HOSPITAL"); 
 INSERT INTO HealthFacility VALUES ("CHUS", "300 Rue King E", "Sherbrooke", 5, 
@@ -114,165 +114,165 @@ INSERT INTO HealthFacility VALUES ("Hôpital de Sainte-Anne",
   "305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,
   "(514)457-3440", "www.hopitalSaintAnne.com","HOSPITAL");
 
-INSERT INTO drughistory VALUES ("Pfizer", "2020-06-21", "SAFE");
-INSERT INTO drughistory VALUES ("Moderna", "2020-06-21", "SAFE");
-INSERT INTO drughistory VALUES ("AstraZeneca", "2020-06-21", "SAFE");
-INSERT INTO drughistory VALUES ("Johnson & Johnson", "2021-06-21", "SUSPENDED");
-INSERT INTO drughistory VALUES ("RBD-Dimer", "2021-01-01", "SUSPENDED");
-INSERT INTO drughistory VALUES ("Covaxin", "2021-01-01", "SUSPENDED");
-INSERT INTO drughistory VALUES ("Ad5-nCoV", "2021-01-01", "SUSPENDED");
-INSERT INTO drughistory VALUES ("CIGB-66", "2021-01-01", "SUSPENDED");
-INSERT INTO drughistory VALUES ("KoviVac", "2021-01-01", "SUSPENDED");
-INSERT INTO drughistory VALUES ("EpiVacCorona", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("Pfizer", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("Moderna", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("AstraZeneca", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("Johnson & Johnson", "2021-06-21", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("RBD-Dimer", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("Covaxin", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("Ad5-nCoV", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("CIGB-66", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("KoviVac", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("EpiVacCorona", "2021-01-01", "SUSPENDED");
 
-INSERT INTO employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
+INSERT INTO Employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
   "Jernigan", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
   "Quebec", 5, TRUE, "eliJer@gmail.com");
-INSERT INTO employee VALUES ("4091939153","3559893762", "8331149 83", "William",
+INSERT INTO Employee VALUES ("4091939153","3559893762", "8331149 83", "William",
   "Blackman", "1991-07-01", "(418)299-4800", "3619 avenue de Port-Royal",
   "Bonaventure", 5, TRUE, "wilBlack@gmail.com");
-INSERT INTO employee VALUES ("6296074483","8133950202", "2597807 10", "Carol",
+INSERT INTO Employee VALUES ("6296074483","8133950202", "2597807 10", "Carol",
   "Williams", "1984-03-01", "(514)481-2566", "6767 ch de la Côte-Saint-Luc",
   "Côte Saint-Luc", 5, TRUE, "carWill@gmail.com");
-INSERT INTO employee VALUES ("1988238722","5594746088", "2967560 35", "Gary",
+INSERT INTO Employee VALUES ("1988238722","5594746088", "2967560 35", "Gary",
   "Smith", "1967-06-12", "(514)484-4049", "3472 Av Westmore", "Montreal", 5,
   TRUE, "garySmi@gmail.com");
-INSERT INTO employee VALUES ("9654156685","3050347011", "7495078 77", "Ted",
+INSERT INTO Employee VALUES ("9654156685","3050347011", "7495078 77", "Ted",
   "Johnson","1998-09-23", "(514)485-1864", "621 Côte Murray", "Westmount",
   5, TRUE, "tedJohn@gmail.com");
-INSERT INTO employee VALUES ("0426670356","6901680262", "1457287 34", "Ronald",
+INSERT INTO Employee VALUES ("0426670356","6901680262", "1457287 34", "Ronald",
   "Smith","1995-06-14", "(514)642-6526", "16226 Rue Bureau",
   "Pointe-Aux-Trembles", 5, TRUE, "ronSmi@gmail.com");
-INSERT INTO employee VALUES ("2589272564","2826175309", "0568018 19", "Adam",
+INSERT INTO Employee VALUES ("2589272564","2826175309", "0568018 19", "Adam",
   "Smith", "1995-08-12", "(514)483-4346", "4840 Bonavista", "Montreal", 5,
   TRUE, "adaSmi@gmail.com");
-INSERT INTO employee VALUES ("4278243142","0883386538", "5489390 84", "Wayne",
+INSERT INTO Employee VALUES ("4278243142","0883386538", "5489390 84", "Wayne",
   "Johnson","1984-07-16", "(514)486-4899", "999 Old Orchard", "Montreal", 5,
   TRUE, "wayJon@gmail.com");
-INSERT INTO employee VALUES ("2221453161","3909862653", "5433470 85", "Sylvain",
+INSERT INTO Employee VALUES ("2221453161","3909862653", "5433470 85", "Sylvain",
   "Williams","1978-11-14", "(514)767-3102", "1477 Rue Fayolle", "Verdun", 5,
   TRUE, "sylWill@gmail.com");
-INSERT INTO employee VALUES ("7034521288","5025223450", "6335938 64", "Michel",
+INSERT INTO Employee VALUES ("7034521288","5025223450", "6335938 64", "Michel",
   "Johnson","1996-09-13", "(514)597-0058", "850 Av Lachine", "Montreal", 5,
   TRUE, "micJohn@gmail.com");
 
-INSERT INTO vaccination VALUES ("5418600012", 1, "2021-01-16", "6296074483", "AstraZeneca", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
-INSERT INTO vaccination VALUES ("5418600012", 2, "2021-05-16", "2589272564", "Pfizer", "Hôpital Fleury", "2180, rue Fleury Est"); 
-INSERT INTO vaccination VALUES ("7198638080", 1, "2021-04-25", "4278243142", "Pfizer", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
-INSERT INTO vaccination VALUES ("5867167004", 1, "2021-05-02", "2221453161", "AstraZeneca", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
-INSERT INTO vaccination VALUES ("9415548075", 1, "2021-05-07", "7034521288", "Pfizer", "Hôpital Richardson", "5425, Avenue Bessborough"); 
-INSERT INTO vaccination VALUES ("9052864070", 1, "2021-01-30", "7034521288", "KoviVac", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
-INSERT INTO vaccination VALUES ("9826293018", 1, "2021-06-05", "6296074483", "KoviVac", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
-INSERT INTO vaccination VALUES ("2055054040", 1, "2021-06-20", "6296074483", "Moderna", "Hôpital Richardson", "5425, Avenue Bessborough"); 
-INSERT INTO vaccination VALUES ("7247613020", 1, "2021-06-21", "6296074483", "AstraZeneca", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants"); 
-INSERT INTO vaccination VALUES ("7976980046", 1, "2021-07-18", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("5418600012", 1, "2021-01-16", "6296074483", "AstraZeneca", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("5418600012", 2, "2021-05-16", "2589272564", "Pfizer", "Hôpital Fleury", "2180, rue Fleury Est"); 
+INSERT INTO Vaccination VALUES ("7198638080", 1, "2021-04-25", "4278243142", "Pfizer", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("5867167004", 1, "2021-05-02", "2221453161", "AstraZeneca", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("9415548075", 1, "2021-05-07", "7034521288", "Pfizer", "Hôpital Richardson", "5425, Avenue Bessborough"); 
+INSERT INTO Vaccination VALUES ("9052864070", 1, "2021-01-30", "7034521288", "KoviVac", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("9826293018", 1, "2021-06-05", "6296074483", "KoviVac", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("2055054040", 1, "2021-06-20", "6296074483", "Moderna", "Hôpital Richardson", "5425, Avenue Bessborough"); 
+INSERT INTO Vaccination VALUES ("7247613020", 1, "2021-06-21", "6296074483", "AstraZeneca", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants"); 
+INSERT INTO Vaccination VALUES ("7976980046", 1, "2021-07-18", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
 
-INSERT INTO managers VALUES ("2314904771", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("4091939153", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("6296074483", "Hopital de Gatineau", "909 Boulevard la Vérendrye O", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("1988238722", "CHUS", "300 Rue King E", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("0426670356", "Hôpital Richardson", "5425, Avenue Bessborough", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("2589272564", "Hôpital Rivière-des-Prairies", "7070, boulevard Perras", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("4278243142", "Hôpital de Lasalle", "8585, Terrasse Champlain", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("2221453161", "Hôpital de Verdun", "4000, boul. Lasalle", "2018-04-16", NULL);
-INSERT INTO managers VALUES ("7034521288", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("2314904771", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("4091939153", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("6296074483", "Hopital de Gatineau", "909 Boulevard la Vérendrye O", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("1988238722", "CHUS", "300 Rue King E", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("0426670356", "Hôpital Richardson", "5425, Avenue Bessborough", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("2589272564", "Hôpital Rivière-des-Prairies", "7070, boulevard Perras", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("4278243142", "Hôpital de Lasalle", "8585, Terrasse Champlain", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("2221453161", "Hôpital de Verdun", "4000, boul. Lasalle", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("7034521288", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants", "2018-04-16", NULL);
 
-INSERT INTO jobhistory VALUES ("2314904771", "Olympic Stadium",
+INSERT INTO JobHistory VALUES ("2314904771", "Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin", "2019-01-01", NULL); 
-INSERT INTO jobhistory VALUES ("4091939153", "Jewish General Hospital",
+INSERT INTO JobHistory VALUES ("4091939153", "Jewish General Hospital",
   "3755 Chemin de la Côte-Sainte-Catherine", "2019-01-01", NULL); 
-INSERT INTO jobhistory VALUES ("6296074483", "Hopital de Gatineau",
+INSERT INTO JobHistory VALUES ("6296074483", "Hopital de Gatineau",
   "909 Boulevard la Vérendrye O", "2019-01-01", NULL); 
-INSERT INTO jobhistory VALUES ("1988238722", "CHUS", "300 Rue King E", "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est",
+INSERT INTO JobHistory VALUES ("1988238722", "CHUS", "300 Rue King E", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est",
   "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("0426670356", "Hôpital Richardson",
+INSERT INTO JobHistory VALUES ("0426670356", "Hôpital Richardson",
   "5425, Avenue Bessborough", "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("2589272564", "Hôpital Rivière-des-Prairies", 
+INSERT INTO JobHistory VALUES ("2589272564", "Hôpital Rivière-des-Prairies", 
   "7070, boulevard Perras", "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("4278243142", "Hôpital de Lasalle",
+INSERT INTO JobHistory VALUES ("4278243142", "Hôpital de Lasalle",
   "8585, Terrasse Champlain", "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("2221453161", "Hôpital de Verdun", 
+INSERT INTO JobHistory VALUES ("2221453161", "Hôpital de Verdun", 
   "4000, boul. Lasalle", "2019-01-01", NULL);
-INSERT INTO jobhistory VALUES ("7034521288", "Hôpital de Sainte-Anne",
+INSERT INTO JobHistory VALUES ("7034521288", "Hôpital de Sainte-Anne",
   "305, boulevard des Anciens-Combattants", "2019-01-01", NULL);
 
-INSERT INTO vaccinestored VALUES ("Olympic Stadium",
+INSERT INTO VaccineStored VALUES ("Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin", "Pfizer", 2000); 
-INSERT INTO vaccinestored VALUES ("Jewish General Hospital",
+INSERT INTO VaccineStored VALUES ("Jewish General Hospital",
   "3755 Chemin de la Côte-Sainte-Catherine", "Pfizer", 2000); 
-INSERT INTO vaccinestored VALUES ("Hopital de Gatineau",
+INSERT INTO VaccineStored VALUES ("Hopital de Gatineau",
   "909 Boulevard la Vérendrye O", "Pfizer", 2000); 
-INSERT INTO vaccinestored VALUES ("CHUS", "300 Rue King E", "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
+INSERT INTO VaccineStored VALUES ("CHUS", "300 Rue King E", "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
   "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital Richardson",
+INSERT INTO VaccineStored VALUES ("Hôpital Richardson",
   "5425, Avenue Bessborough", "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital Rivière-des-Prairies", 
+INSERT INTO VaccineStored VALUES ("Hôpital Rivière-des-Prairies", 
   "7070, boulevard Perras", "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+INSERT INTO VaccineStored VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
   "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+INSERT INTO VaccineStored VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
   "Pfizer", 2000);
-INSERT INTO vaccinestored VALUES ("Hôpital de Sainte-Anne",
+INSERT INTO VaccineStored VALUES ("Hôpital de Sainte-Anne",
   "305, boulevard des Anciens-Combattants", "Pfizer", 2000);
 
-INSERT INTO vaccineshipment VALUES ("Hôpital Richardson",
+INSERT INTO VaccineShipment VALUES ("Hôpital Richardson",
   "5425, Avenue Bessborough", "Pfizer", "2021-01-23", 100);
-INSERT INTO vaccineshipment VALUES ("Hôpital Rivière-des-Prairies", 
+INSERT INTO VaccineShipment VALUES ("Hôpital Rivière-des-Prairies", 
   "7070, boulevard Perras", "Pfizer", "2021-01-23", 100);
-INSERT INTO vaccineshipment VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+INSERT INTO VaccineShipment VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
   "Pfizer", "2021-01-23", 100);
-INSERT INTO vaccineshipment VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+INSERT INTO VaccineShipment VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
   "Pfizer", "2021-01-23", 100);
-INSERT INTO vaccineshipment VALUES ("Hôpital de Sainte-Anne",
+INSERT INTO VaccineShipment VALUES ("Hôpital de Sainte-Anne",
   "305, boulevard des Anciens-Combattants", "Pfizer", "2021-01-23", 100);
 
-INSERT INTO vaccinetransfer VALUES ("Olympic Stadium", "Hôpital Richardson", 
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital Richardson", 
   "4545 Avenue Pierre-De Coubertin", "5425, Avenue Bessborough", "Pfizer",
   "2021-01-20", 100);
-INSERT INTO vaccinetransfer VALUES ("Olympic Stadium", "Hôpital Rivière-des-Prairies", 
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital Rivière-des-Prairies", 
   "4545 Avenue Pierre-De Coubertin", "7070, boulevard Perras", "Pfizer",
   "2021-01-20", 100);
-INSERT INTO vaccinetransfer VALUES ("Olympic Stadium", "Hôpital de Lasalle",
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Lasalle",
   "4545 Avenue Pierre-De Coubertin", "8585, Terrasse Champlain", "Pfizer",
   "2021-01-20", 100);
-INSERT INTO vaccinetransfer VALUES ("Olympic Stadium", "Hôpital de Verdun",
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Verdun",
   "4545 Avenue Pierre-De Coubertin", "4000, boul. Lasalle", "Pfizer",
   "2021-01-20", 100);
-INSERT INTO vaccinetransfer VALUES ("Olympic Stadium", "Hôpital de Sainte-Anne",
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Sainte-Anne",
   "4545 Avenue Pierre-De Coubertin", "305, boulevard des Anciens-Combattants",
   "Pfizer", "2021-01-20", 100);
 
 
-INSERT INTO postalcode VALUES ("6860 Fielding", "Montreal", 5, "H4V1P2");
-INSERT INTO postalcode VALUES ("902 Tittley", "Montreal",5,"H8R3X3");
-INSERT INTO postalcode VALUES ("6818 Lamont", "Montreal",5,"H7L4X8");
-INSERT INTO postalcode VALUES ("1720 Bourbonniere", "Montreal",5,"H1W3N1");
-INSERT INTO postalcode VALUES ("5962 Jogues", "Montreal",5,"J8Y4E3");
-INSERT INTO postalcode VALUES ("927 Rand", "Gatineau",5,"K1V6X4");
-INSERT INTO postalcode VALUES ("60 Du Blizzard", "Gatineau",5,"J9A0C8");
-INSERT INTO postalcode VALUES ("1175 De L'Esplanade", "Sherbrooke",5,"J1H1S9");
-INSERT INTO postalcode VALUES ("1812 Dunant", "Sherbrooke",5,"J1H1Y9");
-INSERT INTO postalcode VALUES ("3937 Soucy", "Jonquière",5,"G7X8T1");
-INSERT INTO postalcode VALUES ("4884 Boulevard Cremazie","Quebec", 5,"H2M0B0");
-INSERT INTO postalcode VALUES ("3619 avenue de Port-Royal","Bonaventure", 5,"J9J1C8");
-INSERT INTO postalcode VALUES ("6767 ch de la Côte-Saint-Luc","Côte Saint-Luc", 5,"H4V2Z6");
-INSERT INTO postalcode VALUES ("3472 Av Westmore", "Montreal",5,"H4V4Z6");
-INSERT INTO postalcode VALUES ("621 Côte Murray","Westmount",5,"H4V2Y6");
-INSERT INTO postalcode VALUES ("16226 Rue Bureau","Pointe-Aux-Trembles", 5,"H1A1Z1");
-INSERT INTO postalcode VALUES ("4840 Bonavista", "Montreal", 5,"G0C1E0");
-INSERT INTO postalcode VALUES ("999 Old Orchard", "Montreal", 5,"G0C1E8");
-INSERT INTO postalcode VALUES ("1477 Rue Fayolle", "Verdun", 5,"G3F1E0");
-INSERT INTO postalcode VALUES ("850 Av Lachine", "Montreal", 5,"G6C1Y0");
-INSERT INTO postalcode VALUES ("4545 Avenue Pierre-De Coubertin", "Montreal", 5,"G7Q2V0");
-INSERT INTO postalcode VALUES ("3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,"G0S5R0");
-INSERT INTO postalcode VALUES ("909 Boulevard la Vérendrye O", "Gatineau", 5,"G5S2V0");
-INSERT INTO postalcode VALUES ("300 Rue King E", "Sherbrooke", 5,"G0S2V4");
-INSERT INTO postalcode VALUES ("2180, rue Fleury Est","Montreal", 5,"G0S2V0");
-INSERT INTO postalcode VALUES ("5425, Avenue Bessborough","Montreal", 5,"M4G3H9");
-INSERT INTO postalcode VALUES ("7070, boulevard Perras", "Montreal", 5,"H1E1A4");
-INSERT INTO postalcode VALUES ("8585, Terrasse Champlain","LaSalle", 5,"H3N2L1");
-INSERT INTO postalcode VALUES ("4000, boul. Lasalle","Verdun", 5,"H4G1J8");
-INSERT INTO postalcode VALUES ("305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,"H9X1Y9");
+INSERT INTO PostalCode VALUES ("6860 Fielding", "Montreal", 5, "H4V1P2");
+INSERT INTO PostalCode VALUES ("902 Tittley", "Montreal",5,"H8R3X3");
+INSERT INTO PostalCode VALUES ("6818 Lamont", "Montreal",5,"H7L4X8");
+INSERT INTO PostalCode VALUES ("1720 Bourbonniere", "Montreal",5,"H1W3N1");
+INSERT INTO PostalCode VALUES ("5962 Jogues", "Montreal",5,"J8Y4E3");
+INSERT INTO PostalCode VALUES ("927 Rand", "Gatineau",5,"K1V6X4");
+INSERT INTO PostalCode VALUES ("60 Du Blizzard", "Gatineau",5,"J9A0C8");
+INSERT INTO PostalCode VALUES ("1175 De L'Esplanade", "Sherbrooke",5,"J1H1S9");
+INSERT INTO PostalCode VALUES ("1812 Dunant", "Sherbrooke",5,"J1H1Y9");
+INSERT INTO PostalCode VALUES ("3937 Soucy", "Jonquière",5,"G7X8T1");
+INSERT INTO PostalCode VALUES ("4884 Boulevard Cremazie","Quebec", 5,"H2M0B0");
+INSERT INTO PostalCode VALUES ("3619 avenue de Port-Royal","Bonaventure", 5,"J9J1C8");
+INSERT INTO PostalCode VALUES ("6767 ch de la Côte-Saint-Luc","Côte Saint-Luc", 5,"H4V2Z6");
+INSERT INTO PostalCode VALUES ("3472 Av Westmore", "Montreal",5,"H4V4Z6");
+INSERT INTO PostalCode VALUES ("621 Côte Murray","Westmount",5,"H4V2Y6");
+INSERT INTO PostalCode VALUES ("16226 Rue Bureau","Pointe-Aux-Trembles", 5,"H1A1Z1");
+INSERT INTO PostalCode VALUES ("4840 Bonavista", "Montreal", 5,"G0C1E0");
+INSERT INTO PostalCode VALUES ("999 Old Orchard", "Montreal", 5,"G0C1E8");
+INSERT INTO PostalCode VALUES ("1477 Rue Fayolle", "Verdun", 5,"G3F1E0");
+INSERT INTO PostalCode VALUES ("850 Av Lachine", "Montreal", 5,"G6C1Y0");
+INSERT INTO PostalCode VALUES ("4545 Avenue Pierre-De Coubertin", "Montreal", 5,"G7Q2V0");
+INSERT INTO PostalCode VALUES ("3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,"G0S5R0");
+INSERT INTO PostalCode VALUES ("909 Boulevard la Vérendrye O", "Gatineau", 5,"G5S2V0");
+INSERT INTO PostalCode VALUES ("300 Rue King E", "Sherbrooke", 5,"G0S2V4");
+INSERT INTO PostalCode VALUES ("2180, rue Fleury Est","Montreal", 5,"G0S2V0");
+INSERT INTO PostalCode VALUES ("5425, Avenue Bessborough","Montreal", 5,"M4G3H9");
+INSERT INTO PostalCode VALUES ("7070, boulevard Perras", "Montreal", 5,"H1E1A4");
+INSERT INTO PostalCode VALUES ("8585, Terrasse Champlain","LaSalle", 5,"H3N2L1");
+INSERT INTO PostalCode VALUES ("4000, boul. Lasalle","Verdun", 5,"H4G1J8");
+INSERT INTO PostalCode VALUES ("305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,"H9X1Y9");
