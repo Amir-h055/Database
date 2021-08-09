@@ -1,114 +1,116 @@
 -- This file will populate the MySQL database created with the relations defined in file create_relation_Amir.sql
 use PROJECT;
 
-INSERT  INTO agegroup VALUES (0, "0-0");
-INSERT  INTO agegroup VALUES (1, "80+");
-INSERT  INTO agegroup VALUES (2, "70-79");
-INSERT  INTO agegroup VALUES (3, "60-69");
-INSERT  INTO agegroup VALUES (4, "50-59");
-INSERT  INTO agegroup VALUES (5, "40-49");
-INSERT  INTO agegroup VALUES (6, "30-39");
-INSERT  INTO agegroup VALUES (7, "18-29");
-INSERT  INTO agegroup VALUES (8, "12-17");
-INSERT  INTO agegroup VALUES (9, "5-11");
-INSERT  INTO agegroup VALUES (10, "0-4");
+INSERT  INTO AgeGroup VALUES (0, "0-0");
+INSERT  INTO AgeGroup VALUES (1, "80+");
+INSERT  INTO AgeGroup VALUES (2, "70-79");
+INSERT  INTO AgeGroup VALUES (3, "60-69");
+INSERT  INTO AgeGroup VALUES (4, "50-59");
+INSERT  INTO AgeGroup VALUES (5, "40-49");
+INSERT  INTO AgeGroup VALUES (6, "30-39");
+INSERT  INTO AgeGroup VALUES (7, "18-29");
+INSERT  INTO AgeGroup VALUES (8, "12-17");
+INSERT  INTO AgeGroup VALUES (9, "5-11");
+INSERT  INTO AgeGroup VALUES (10, "0-4");
 
-INSERT  INTO province VALUES ('1', "NL", '4');
-INSERT  INTO province VALUES ('2', "PE", '5');
-INSERT  INTO province VALUES ('3', "NS", '6');
-INSERT  INTO province VALUES ('4', "NB", '3');
-INSERT  INTO province VALUES ('5', "QC", '8');
-INSERT  INTO province VALUES ('6', "ON", '1');
-INSERT  INTO province VALUES ('7', "MB", '2');
-INSERT  INTO province VALUES ('8', "SK", '9');
-INSERT  INTO province VALUES ('9', "AB", '4');
-INSERT  INTO province VALUES ('10', "BC", '6');
-INSERT  INTO province VALUES ('11', "YT", '7');
-INSERT  INTO province VALUES ('12', "NT", '8');
-INSERT  INTO province VALUES ('13', "NU", '4');
+INSERT INTO VaccinationDrug VALUES ("Pfizer");
+INSERT INTO VaccinationDrug VALUES ("Moderna");
+INSERT INTO VaccinationDrug VALUES ("AstraZeneca");
+INSERT INTO VaccinationDrug VALUES ("Johnson & Johnson");
+INSERT INTO VaccinationDrug VALUES ("RBD-Dimer");
+INSERT INTO VaccinationDrug VALUES ("Covaxin");
+INSERT INTO VaccinationDrug VALUES ("Ad5-nCoV");
+INSERT INTO VaccinationDrug VALUES ("CIGB-66");
+INSERT INTO VaccinationDrug VALUES ("KoviVac");
+INSERT INTO VaccinationDrug VALUES ("EpiVacCorona");
 
-INSERT INTO person VALUES ("5418600012", "1936638 14", "(514)482-4299", "Annabel", "Dodson",
+INSERT  INTO Province VALUES ('1', "NL", '4');
+INSERT  INTO Province VALUES ('2', "PE", '5');
+INSERT  INTO Province VALUES ('3', "NS", '6');
+INSERT  INTO Province VALUES ('4', "NB", '3');
+INSERT  INTO Province VALUES ('5', "QC", '8');
+INSERT  INTO Province VALUES ('6', "ON", '1');
+INSERT  INTO Province VALUES ('7', "MB", '2');
+INSERT  INTO Province VALUES ('8', "SK", '9');
+INSERT  INTO Province VALUES ('9', "AB", '4');
+INSERT  INTO Province VALUES ('10', "BC", '6');
+INSERT  INTO Province VALUES ('11', "YT", '7');
+INSERT  INTO Province VALUES ('12', "NT", '8');
+INSERT  INTO Province VALUES ('13', "NU", '4');
+
+INSERT INTO VariantType VALUES(1, "ALPHA");
+INSERT INTO VariantType VALUES(2, "LAMBDA");
+INSERT INTO VariantType VALUES(3, "DELTA");
+INSERT INTO VariantType VALUES(0, "UMKNOWN");
+
+INSERT INTO Person VALUES ("5418600012", "1936638 14", "(514)482-4299", "Annabel", "Dodson",
   "6860 Fielding", "Montreal", 7, 5, TRUE,
   "annabel.dodson@gmail.com", "1996-08-06");
-INSERT INTO person VALUES ("7198638080", "1362899 55","(514)366-4286", "Zachary", "Rutledge",
+INSERT INTO Person VALUES ("7198638080", "1362899 55","(514)366-4286", "Zachary", "Rutledge",
   "902 Tittley", "Montreal", 6, 5, TRUE,
   "Zachary.Rutledge@gmail.com", "1986-08-12");
-INSERT INTO person VALUES ("5867167004", "0243401 87", "(514)767-5030", "Alister", "Wiggins",
+INSERT INTO Person VALUES ("5867167004", "0243401 87", "(514)767-5030", "Alister", "Wiggins",
   "6818 Lamont", "Montreal", 6, 5, TRUE, "Alister.Wiggins@gmail.com",
   "1987-08-27"); 
-INSERT INTO person VALUES ("9415548075", "2054252 15", "(514)525-4731", "Osman", "Vaughn", 
+INSERT INTO Person VALUES ("9415548075", "2054252 15", "(514)525-4731", "Osman", "Vaughn", 
   "1720 Bourbonniere", "Montreal", 8, 5, TRUE,
   "Osman.Vaughn@gmail.com", "2007-09-08"); 
-INSERT INTO person VALUES ("9052864070", "1643994 57", "(514)768-9102", "Bear", "Melton",
+INSERT INTO Person VALUES ("9052864070", "1643994 57", "(514)768-9102", "Bear", "Melton",
   "5962 Jogues", "Montreal", 5, 5, TRUE, "Bear.Melton@gmail.com",
   "1976-09-13"); 
-INSERT INTO person VALUES ("9826293018", "4105748 51", "(613)733-8502", "Lulu", "Fisher",
+INSERT INTO Person VALUES ("9826293018", "4105748 51", "(613)733-8502", "Lulu", "Fisher",
   "927 Rand", "Gatineau", 5, 5, TRUE, "Lulu.Fisher@gmail.com",
   "1976-09-27"); 
-INSERT INTO person VALUES ("2055054040", "4990628 77", "(819)503-3196", "Collette", "Zavala",
+INSERT INTO Person VALUES ("2055054040", "4990628 77", "(819)503-3196", "Collette", "Zavala",
   "60 Du Blizzard", "Gatineau", 3, 5, TRUE,
   "Collette.Zavala@gmail.com", "1956-09-29"); 
-INSERT INTO person VALUES ("7247613020", "3234394 08", "(819)408-0531", "Angela", "Dodson",
+INSERT INTO Person VALUES ("7247613020", "3234394 08", "(819)408-0531", "Angela", "Dodson",
   "1175 De L'Esplanade", "Sherbrooke", 3, 5, TRUE,
   "Angela.Dodson@gmail.com", "1956-10-15"); 
-INSERT INTO person VALUES ("7976980046", "9109123 89", "(819)566-0668", "Annabel", "Crouch",
+INSERT INTO Person VALUES ("7976980046", "9109123 89", "(819)566-0668", "Annabel", "Crouch",
   "1812 Dunant", "Sherbrooke", 1, 5, TRUE,
   "Annabel.Crouch@gmail.com", "1936-10-18"); 
-INSERT INTO person VALUES ("6623218089", "0451174 26", "(418)547-8256", "Nyle", "Sparrow",
+INSERT INTO Person VALUES ("6623218089", "0451174 26", "(418)547-8256", "Nyle", "Sparrow",
   "3937 Soucy", "Jonquière", 1, 5, TRUE, "Nyle.Sparrow@gmail.com",
   "1936-12-08"); 
 
-INSERT INTO varianttype VALUES(1, "ALPHA");
-INSERT INTO varianttype VALUES(2, "LAMBDA");
-INSERT INTO varianttype VALUES(3, "DELTA");
-INSERT INTO varianttype VALUES(0, "UMKNOWN");
 
-INSERT INTO infection VALUES ("2021-03-16","5418600012", 1);
-INSERT INTO infection VALUES ("2021-04-18","5418600012", 2); 
-INSERT INTO infection VALUES ("2021-03-25","7198638080", 3); 
-INSERT INTO infection VALUES ("2021-04-02","5867167004", 1); 
-INSERT INTO infection VALUES ("2021-04-07","9415548075", 3); 
-INSERT INTO infection VALUES ("2021-04-30","9052864070", 1); 
-INSERT INTO infection VALUES ("2021-05-05","9826293018", 1); 
-INSERT INTO infection VALUES ("2021-05-20","2055054040", 3); 
-INSERT INTO infection VALUES ("2021-05-21","7247613020", 3); 
-INSERT INTO infection VALUES ("2021-06-18","7976980046", 1); 
-INSERT INTO infection VALUES ("2021-07-22","6623218089", 0); 
+INSERT INTO Infection VALUES ("2021-03-16","5418600012", 1);
+INSERT INTO Infection VALUES ("2021-04-18","5418600012", 2); 
+INSERT INTO Infection VALUES ("2021-03-25","7198638080", 3); 
+INSERT INTO Infection VALUES ("2021-04-02","5867167004", 1); 
+INSERT INTO Infection VALUES ("2021-04-07","9415548075", 3); 
+INSERT INTO Infection VALUES ("2021-04-30","9052864070", 1); 
+INSERT INTO Infection VALUES ("2021-05-05","9826293018", 1); 
+INSERT INTO Infection VALUES ("2021-05-20","2055054040", 3); 
+INSERT INTO Infection VALUES ("2021-05-21","7247613020", 3); 
+INSERT INTO Infection VALUES ("2021-06-18","7976980046", 1); 
+INSERT INTO Infection VALUES ("2021-07-22","6623218089", 0); 
 
-INSERT INTO vaccinationdrug VALUES ("Pfizer");
-INSERT INTO vaccinationdrug VALUES ("Moderna");
-INSERT INTO vaccinationdrug VALUES ("AstraZeneca");
-INSERT INTO vaccinationdrug VALUES ("Johnson & Johnson");
-INSERT INTO vaccinationdrug VALUES ("RBD-Dimer");
-INSERT INTO vaccinationdrug VALUES ("Covaxin");
-INSERT INTO vaccinationdrug VALUES ("Ad5-nCoV");
-INSERT INTO vaccinationdrug VALUES ("CIGB-66");
-INSERT INTO vaccinationdrug VALUES ("KoviVac");
-INSERT INTO vaccinationdrug VALUES ("EpiVacCorona");
 
-INSERT INTO healthfacility VALUES ("Olympic Stadium",
+INSERT INTO HealthFacility VALUES ("Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin", "Montreal", 5, "(514)252-4141",
   "www.so.com", "SPECIAL"); 
-INSERT INTO healthfacility VALUES ("Jewish General Hospital",
+INSERT INTO HealthFacility VALUES ("Jewish General Hospital",
   "3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5, "www.gjw.com",
   "(514)340-8222", "HOSPITAL"); 
-INSERT INTO healthfacility VALUES ("Hopital de Gatineau",
+INSERT INTO HealthFacility VALUES ("Hopital de Gatineau",
   "909 Boulevard la Vérendrye O", "Gatineau", 5, "(819)966-6100",
   "www.hg.com", "HOSPITAL"); 
-INSERT INTO healthfacility VALUES ("CHUS", "300 Rue King E", "Sherbrooke", 5, 
+INSERT INTO HealthFacility VALUES ("CHUS", "300 Rue King E", "Sherbrooke", 5, 
   "www.chus.com", "(819)346-1110", "HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
+INSERT INTO HealthFacility VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
   "Montreal", 5, "(514)384-2000", "www.hopitalFleury.com","HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital Richardson", "5425, Avenue Bessborough",
+INSERT INTO HealthFacility VALUES ("Hôpital Richardson", "5425, Avenue Bessborough",
   "Montreal", 5,"(514)484-7878", "www.hopitalRichardson.com","HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital Rivière-des-Prairies",
+INSERT INTO HealthFacility VALUES ("Hôpital Rivière-des-Prairies",
   "7070, boulevard Perras", "Montreal", 5, "(514)323-7260",
   "www.hopitalRP.com","HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+INSERT INTO HealthFacility VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
   "LaSalle", 5, "(514)362-8000", "www.hopitalLasalle.com","HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+INSERT INTO HealthFacility VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
   "Verdun", 5, "(514)362-1100", "www.hopitalVerdun.com","HOSPITAL");
-INSERT INTO healthfacility VALUES ("Hôpital de Sainte-Anne",
+INSERT INTO HealthFacility VALUES ("Hôpital de Sainte-Anne",
   "305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,
   "(514)457-3440", "www.hopitalSaintAnne.com","HOSPITAL");
 
