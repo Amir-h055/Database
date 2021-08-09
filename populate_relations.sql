@@ -90,8 +90,8 @@ INSERT INTO healthfacility VALUES ("Olympic Stadium",
   "4545 Avenue Pierre-De Coubertin", "Montreal", 5, "(514)252-4141",
   "www.so.com", "SPECIAL"); 
 INSERT INTO healthfacility VALUES ("Jewish General Hospital",
-  "3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5, "www.gjw.com",
-  "(514)340-8222", "HOSPITAL"); 
+  "3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,  "(514)340-8222",
+   "www.gjw.com", "HOSPITAL"); 
 INSERT INTO healthfacility VALUES ("Hopital de Gatineau",
   "909 Boulevard la Vérendrye O", "Gatineau", 5, "(819)966-6100",
   "www.hg.com", "HOSPITAL"); 
