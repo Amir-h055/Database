@@ -39,38 +39,40 @@ SELECT * FROM `vaccinationdrug`;
 
 
 #7
-INSERT INTO `provicecurrentagegroup` (`provinceID`, `province`, `ageGroupID`) VALUES ('5', 'MB', '0');
-
+INSERT INTO `province` (`provinceID`, `name`, `currentAgeGroupID`) VALUES ('14', 'HH', '0');
 UPDATE provicecurrentagegroup
 set `ageGroupID`=1
 where `provinceID`=5;
 
 
-DELETE FROM `provicecurrentagegroup`
-WHERE provinceID=5;
+DELETE FROM `province` 
+WHERE `province`.`provinceID` = 14;
 
 
-SELECT * FROM `provicecurrentagegroup` 
-WHERE `provinceID`=1;
+UPDATE `province` 
+SET `name`="VV",`currentAgeGroupID`=1
+WHERE `province`.`provinceID` = 14 
 
-SELECT * FROM `provicecurrentagegroup` 
-WHERE `province`='ON';
+
+SELECT * FROM `province` 
+WHERE `name`='ON';
 
 
 #8
-UPDATE `provicecurrentagegroup`
-SET `ageGroupID`=8,
-where `province`='ON';
+UPDATE `province`
+SET `currentAgeGroupID`='4'
+where `provinceID`='14';
 
 #11..?
 INSERT INTO `vaccination` (`passportNumOrSSN`, `doseNumber`, `date`, `EID`, `name`, `Hname`, `address`)
-VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
+VALUES ('6623218089', '1', '2021-07-07', '2314904771', 'Pfizer', 'Olympic Stadium', '4545 Avenue Pierre-De Coubertin');
 
 #12
-SELECT Person.*,Vaccination.date,Vaccination.name,Infection.type
-FROM Person join Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
+SELECT Person.*,Vaccination.date,Vaccination.name,Infection.variantTypeID,varianttype.name
+FROM varianttype, Person join Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
 left join Infection on Person.passportNumOrSSN=Infection.passportNumOrSSN
 WHERE`ageGroupID`BETWEEN 1 AND 3
+AND infection.variantTypeID = varianttype.variantTypeID
 AND Person.passportNumOrSSN in
 (
 SELECT passportNumOrSSN
@@ -80,23 +82,23 @@ Having COUNT(Vaccination.passportNumOrSSN)=1
 );
 
 #15
-select provicecurrentagegroup.province,VaccineStored.nameDrug,SUM(VaccineStored.count) as total
+select province.name,VaccineStored.nameDrug,SUM(VaccineStored.count) as total
 
-from proviceCurrentAgeGroup,HealthFacility,VaccineStored
+from province,HealthFacility,VaccineStored
 
-where proviceCurrentAgeGroup.provinceID = HealthFacility.provinceID
+where province.provinceID = HealthFacility.provinceID
 AND healthfacility.name = VaccineStored.nameHSO
 AND HealthFacility.address = VaccineStored.address
-group by province, vaccinestored.nameDrug
-order by province asc, total desc
+group by province.name, vaccinestored.nameDrug
+order by province.name asc, total desc
 
 
 #19
 SELECT employee.* , postalcode.postalcode
 FROM healthfacility,`employee` ,jobhistory,postalcode
 WHERE 
-healthfacility.name = 'Hname'
-AND healthfacility.address = 'HAddress'
+healthfacility.name = 'Hôpital Richardson'
+AND healthfacility.address = '5425, Avenue Bessborough'
 AND employee.address = postalcode.address
 AND employee.city= postalcode.city
 AND employee.provinceID = postalcode.provinceID
