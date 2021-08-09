@@ -1,6 +1,7 @@
 -- This file will populate the MySQL database created with the relations defined in file create_relation_Amir.sql
 use PROJECT;
 
+INSERT  INTO agegroup VALUES (0, "0-0");
 INSERT  INTO agegroup VALUES (1, "80+");
 INSERT  INTO agegroup VALUES (2, "70-79");
 INSERT  INTO agegroup VALUES (3, "60-69");
