@@ -458,6 +458,16 @@ SET attribute = value
 WHERE provinceID = id;
 ```
 
+### Query 8
+
+#### Set a new Group Age for a Province
+
+```SQL
+UPDATE Province
+SET currentAgeGroupID = ageID
+WHERE provinceID = id;
+```
+
 ### Query 9
 
 #### Receive a shipment of vaccines and add it to the inventory in a specific location
@@ -520,6 +530,31 @@ The query above will only decrement the number of doses if adequate amount is av
   "2021-01-20", 500);
 ```
 
+### Query 11
+
+#### Perform a vaccine to a person
+
+```SQL
+INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
+```
+
+### Query 12
+
+#### Get details of all the people who got vaccinated only one dose and are of group ages 1 to 3
+
+```SQL
+SELECT Person.*,Vaccination.date,Vaccination.name,Infection.type
+FROM Person JOIN Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
+LEFT JOIN Infection ON Person.passportNumOrSSN=Infection.passportNumOrSSN
+WHERE ageGroupID BETWEEN 1 AND 3
+AND Person.passportNumOrSSN in (
+	SELECT passportNumOrSSN
+	FROM Vaccination 
+	GROUP BY Vaccination.passportNumOrSSN
+	HAVING COUNT(Vaccination.passportNumOrSSN)=1
+);
+```
+
 ### Query 14
 
 Query
@@ -559,6 +594,22 @@ Results
 | passportNumOrSSN | firstName | lastName | dateOfBirth | email                    | telephone     | city     | vaccinations                               | numberVariantInfections | variants     |
 | ---------------- | --------- | -------- | ----------- | ------------------------ | ------------- | -------- | ------------------------------------------ | ----------------------- | ------------ |
 | 5418600012       | Annabel   | Dodson   | 1996-08-06  | annabel.dodson@gmail.com | (514)482-4299 | Montreal | 2021-01-16: AstraZeneca,2021-05-16: Pfizer | 2                       | ALPHA,LAMBDA |
+
+### Query 15
+
+#### Give a report of the inventory of vaccines in each province. The report should include for each province and for each type of vaccine, the total number of
+vaccines available in the province. The report should be displayed in ascending
+order by province then by descending order of number of vaccines in the
+inventory
+```SQL
+SELECT Province.name,VaccineStored.nameDrug,SUM(VaccineStored.count) AS total
+FROM Province,HealthFacility,VaccineStored
+WHERE Province.provinceID = HealthFacility.provinceID
+AND HealthFacility.name = VaccineStored.nameHSO
+AND HealthFacility.address = VaccineStored.address
+group by Province, VaccineStored.nameDrug
+order by Province asc, total desc;
+```
 
 ### Query 18
 
@@ -649,3 +700,21 @@ Results
 | H√¥pital Rivi√®re-des-Prairies | 7070, boulevard Perras                   | HOSPITAL | (514)323-7260 | 1             | 1              | 100               | 0                  | 0              | 1                | 100          | Pfizer: 2000               | 0                     | 0               |
 | Jewish General Hospital        | 3755 Chemin de la C√¥te-Sainte-Catherine | HOSPITAL | www.gjw.com   | 1             | 0              | 0                 | 0                  | 0              | 0                | 0            | Pfizer: 2000               | 3                     | 3               |
 | Olympic Stadium                | 4545 Avenue Pierre-De Coubertin          | SPECIAL  | (514)252-4141 | 1             | 0              | 0                 | 4                  | 400            | 1                | 350          | Moderna: 1500,Pfizer: 2000 | 3                     | 3               |
+
+### Query 19
+
+#### Give a list of all public health workers in a specific facility
+
+```SQL
+SELECT Employee.* , PostalCode.postalCode
+FROM HealthFacility,Employee,JobHistory,PostalCode
+WHERE HealthFacility.name = 'Hname'AND 
+	HealthFacility.address = 'HAddress'AND 
+	Employee.address = PostalCode.address AND 
+	Employee.city= Postalcode.city AND 
+	Employee.provinceID = PostalCode.provinceID AND
+    HealthFacility.name = JobHistory.name AND
+    HealthFacility.address = JobHistory.address AND 
+    JobHistory.EID = Employee.EID
+```
+
