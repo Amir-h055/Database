@@ -597,8 +597,8 @@ SELECT
     p.telephone,
     p.city,
     GROUP_CONCAT(DISTINCT v.date, ': ', v.name) AS vaccinations,
-    COUNT(DISTINCT (i.type)) AS numberVariantInfections,
-    GROUP_CONCAT(DISTINCT i.type) AS variants
+    COUNT(DISTINCT (i.variantTypeID)) AS numberVariantInfections,
+    GROUP_CONCAT(DISTINCT i.variantTypeID) AS variants
 FROM
     Person p
         LEFT JOIN
@@ -615,7 +615,7 @@ WHERE
         FROM
             Infection
         GROUP BY passportNumOrSSN
-        HAVING COUNT(DISTINCT (type)) >= 2);
+        HAVING COUNT(DISTINCT (variantTypeID)) >= 2);
 ```
 
 Results
