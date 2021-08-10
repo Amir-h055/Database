@@ -555,6 +555,28 @@ AND Person.passportNumOrSSN in (
 );
 ```
 
+### Query 13
+
+#### Get details of all the people who live in the city of Montréal and who got vaccinated at least two doses of different types of vaccines.
+
+```SQL
+SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, Vaccination.name,
+	CASE WHEN EXISTS(
+		SELECT  *
+		FROM Infection
+		WHERE Person.passportNumOrSSN = Infection.passportNumOrSSN
+	) THEN 'Yes' ELSE 'No' END as WasInfected
+FROM Person,
+		(
+			SELECT Person.passportNumOrSSN as p, COUNT(DISTINCT(Vaccination.name)) as c 
+			FROM Vaccination, Person
+			WHERE Person.passportNumOrSSN = Vaccination.passportNumOrSSN
+			GROUP BY Person.passportNumOrSSN
+		) as DV, Vaccination
+WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 AND 
+	Vaccination.passportNumOrSSN = Person.passportNumOrSSN;
+```
+
 ### Query 14
 
 Query
