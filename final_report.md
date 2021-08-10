@@ -635,8 +635,8 @@ FROM Province,HealthFacility,VaccineStored
 WHERE Province.provinceID = HealthFacility.provinceID
 AND HealthFacility.name = VaccineStored.nameHSO
 AND HealthFacility.address = VaccineStored.address
-group by Province, VaccineStored.nameDrug
-order by Province asc, total desc;
+group by Province.name, VaccineStored.nameDrug
+order by Province.name asc, total desc;
 ```
 
 ### Query 16
@@ -656,12 +656,10 @@ GROUP BY v.name;
 #### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22 nd 2021
 
 ```SQL
-SELECT city, Count(HealthFacility.city)
-FROM Vaccination, HealthFacility
-WHERE Vaccination.Hname  = HealthFacility.name AND
-	Vaccination.address  = HealthFacility.address AND 
-	date > "2021-01-01" AND date < "2021-07-22"
-GROUP BY city;
+SELECT hf.city, SUM(vs.count) 
+FROM HealthFacility hf, VaccineShipment vs 
+WHERE hf.name = vs.nameHSO AND hf.address  = vs.address
+GROUP BY hf.city
 ```
 
 ### Query 18
@@ -759,16 +757,16 @@ Results
 #### Give a list of all public health workers in a specific facility
 
 ```SQL
-SELECT Employee.* , PostalCode.postalCode
+SELECT HealthFacility.name, Employee.* , PostalCode.postalCode
 FROM HealthFacility,Employee,JobHistory,PostalCode
-WHERE HealthFacility.name = 'Hname'AND 
-	HealthFacility.address = 'HAddress'AND 
+WHERE 
 	Employee.address = PostalCode.address AND 
-	Employee.city= Postalcode.city AND 
+	Employee.city= PostalCode.city AND 
 	Employee.provinceID = PostalCode.provinceID AND
     HealthFacility.name = JobHistory.name AND
     HealthFacility.address = JobHistory.address AND 
     JobHistory.EID = Employee.EID
+  ORDER BY name
 ```
 
 ### Query 20
@@ -790,4 +788,3 @@ FROM Employee e,
  ) as FV, JobHistory
 WHERE e.SSN NOT IN (FV.ssn) AND e.EID = JobHistory.EID;
 ```
-
