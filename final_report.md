@@ -639,6 +639,18 @@ group by Province, VaccineStored.nameDrug
 order by Province asc, total desc;
 ```
 
+### Query 16
+
+#### Give a report of the population’s vaccination by province between January 1 st 2021 and July 22 nd 2021
+```SQL
+SELECT p.name , v.name, COUNT(DISTINCT(v.passportNumOrSSN))
+FROM Vaccination v, HealthFacility hf, Province p
+WHERE v.Hname  = hf.name AND v.address = hf.address AND
+	hf.provinceID = p.provinceID AND
+	date > "2021-01-01" AND date < "2021-07-22"
+GROUP BY v.name;
+```
+
 ### Query 17
 
 #### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22 nd 2021
