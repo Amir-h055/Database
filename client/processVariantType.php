@@ -35,7 +35,6 @@ if (isset($_GET['delete'])) {
 
 if (isset($_GET['edit'])) {
     $variantTypeID = $_GET['edit'];
-
     $update = true;
     $result = $mysqli->query("SELECT * from VariantType WHERE variantTypeID=$variantTypeID") or
         die($mysqli->error);
@@ -48,12 +47,11 @@ if (isset($_GET['edit'])) {
 
 if (isset($_POST['update'])) {
     $variantTypeID = $_POST['variantTypeID'];
-
+    $name = $_POST['name'];
+    echo $name;
     # update the person
-    $mysqli->query('UPDATE VariantType SET  name = "'. $name.'" AND variantTypeID = '. $variantTypeID .'
-        WHERE variantTypeID='.$variantTypeID) or
+    $mysqli->query("UPDATE VariantType SET variantTypeID=$variantTypeID, name='$name' WHERE variantTypeID=$variantTypeID;") or
         die($mysqli->error);
-    
     $_SESSION['message'] = "Variant Type record has been updated";
     $_SESSION['msg_type'] = "warning";
     header("location: variantType.php");

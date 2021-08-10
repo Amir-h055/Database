@@ -20,7 +20,7 @@
                         <form action="processVariantType.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
-                                    <input type="text" name="variantTypeID" class="form-control" value="<?php echo $variantTypeID; ?>" placeholder="Variant Type ID">
+                                    <input type="number" name="variantTypeID" class="form-control" value="<?php echo $variantTypeID; ?>" placeholder="Variant Type ID">
                                 </div>
                                 <div class="col-auto form-group">
                                     <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Name">
