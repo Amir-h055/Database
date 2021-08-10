@@ -51,8 +51,8 @@
                 <li class="<?php echo $currentPage == 'Vaccine Types' ? 'active': ''?>">
                     <a href="vaccineType.php">Vaccine Types</a>
                 </li>
-                <li>
-                    <a href="#">Variant Types</a>
+                <li class="<?php echo $currentPage == 'Variant Types' ? 'active': ''?>">
+                    <a href="variantType.php">Variant Types</a>
                 </li>
                 <li>
                     <a href="#">Public Health Workers</a>

@@ -17,7 +17,7 @@
             <div class="container">
                 <div class="container mt-2 mb-4 p-2 shadow bg-white">
                     <div class="row justify-content-center">
-                        <form action="processAgeGroup.php" method="POST">
+                        <form action="processVaccineType.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
                                     <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Name">
