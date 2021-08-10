@@ -20,7 +20,10 @@
                         <form action="processProvinces.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
-                                    <input type="text" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province">
+                                    <input type="text" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province ID">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Province Name">
                                 </div>
                                 <div class="col-auto form-group">
                                     <select class="form-control" name="ageGroupID" placeholder="Choose Age Group" value="<?php echo $ageGroupID; ?>">
@@ -47,13 +50,14 @@
             </div>
             <?php
             $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
-            $result = $mysqli->query("SELECT * FROM ProvinceCurrentAgeGroup p, AgeGroup a WHERE p.ageGroupID = a.ageGroupID") or die($mysqli->error);
+            $result = $mysqli->query("SELECT * FROM Province") or die($mysqli->error);
             ?>
             <div class="row justify-content-center">
                 <table class="table table-sm">
                     <thead>
                         <tr>
-                            <th>Province</th>
+                            <th>Province ID</th>
+                            <th>Province Name</th>
                             <th>Age Range</th>
                             <th colspan=2>Actions</th>
                         </tr>
@@ -62,7 +66,8 @@
                     while ($row = $result->fetch_assoc()) : ?>
                         <tr>
                             <td><?php echo $row['provinceID']; ?></td>
-                            <td><?php echo $row['ageRange']; ?></td>
+                            <td><?php echo $row['name']; ?></td>
+                            <td><?php echo $row['currentAgeGroupID']; ?></td>
                             <td>
                                 <a href="provinces.php?edit=<?php echo $row['provinceID']; ?>" class="btn btn-info"> Edit </a>
                                 <a href="processProvinces.php?delete=<?php echo $row['provinceID']; ?>" class="btn btn-danger"> Delete </a>
