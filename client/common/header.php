@@ -45,11 +45,11 @@
                 <li class="<?php echo $currentPage == 'Person' ? 'active': ''?>">
                     <a href="person.php">Person</a>
                 </li>
-                <li>
-                    <a href="#">Infections</a>
+                <li class="<?php echo $currentPage == 'Infections' ? 'active': ''?>">
+                    <a href="infections.php">Infections</a>
                 </li>
-                <li>
-                    <a href="#">Vaccine Types</a>
+                <li class="<?php echo $currentPage == 'Vaccine Types' ? 'active': ''?>">
+                    <a href="vaccineType.php">Vaccine Types</a>
                 </li>
                 <li>
                     <a href="#">Variant Types</a>
