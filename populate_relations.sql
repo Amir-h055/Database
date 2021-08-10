@@ -74,6 +74,15 @@ INSERT INTO Person VALUES ("6623218089", "0451174 26", "(418)547-8256", "Nyle", 
   "3937 Soucy", "Jonquière", 1, 5, TRUE, "Nyle.Sparrow@gmail.com",
   "1936-12-08"); 
 
+INSERT INTO Person VALUES ("4030141599", "6202715 46","(418)640-9486", "Elizabeth",
+  "Jernigan",   "4884 Boulevard Cremazie",
+  "Quebec",5, 5, TRUE, "eliJer@gmail.com","1996-04-18",);
+INSERT INTO Person VALUES ("3559893762", "8331149 83","(418)299-4800", "William",
+  "Blackman",  "3619 avenue de Port-Royal",
+  "Bonaventure",5, 5, TRUE, "wilBlack@gmail.com", "1991-07-01");
+INSERT INTO Person VALUES ("8133950202", "2597807 10", "Carol","(514)481-2566",
+  "Williams",  "6767 ch de la Côte-Saint-Luc",
+  "Côte Saint-Luc",5, 5, TRUE, "carWill@gmail.com", "1984-03-01");
 
 INSERT INTO Infection VALUES ("2021-03-16","5418600012", 1);
 INSERT INTO Infection VALUES ("2021-04-18","5418600012", 2); 
@@ -166,6 +175,11 @@ INSERT INTO Vaccination VALUES ("9826293018", 1, "2021-06-05", "6296074483", "Ko
 INSERT INTO Vaccination VALUES ("2055054040", 1, "2021-06-20", "6296074483", "Moderna", "Hôpital Richardson", "5425, Avenue Bessborough"); 
 INSERT INTO Vaccination VALUES ("7247613020", 1, "2021-06-21", "6296074483", "AstraZeneca", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants"); 
 INSERT INTO Vaccination VALUES ("7976980046", 1, "2021-07-18", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+
+INSERT INTO Vaccination VALUES ("4030141599", 1, "2021-07-17", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("3559893762", 1, "2021-07-19", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("3559893762", 2, "2021-07-20", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+
 
 INSERT INTO Managers VALUES ("2314904771", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin", "2018-04-16", NULL);
 INSERT INTO Managers VALUES ("4091939153", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine", "2018-04-16", NULL);

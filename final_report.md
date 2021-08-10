@@ -771,3 +771,23 @@ WHERE HealthFacility.name = 'Hname'AND
     JobHistory.EID = Employee.EID
 ```
 
+### Query 20
+
+#### Give a list of all public health workers in Québec who never been vaccinated or who have been vaccinated only one dose for Covid-19
+
+```SQL
+SELECT e.EID, firstName,lastName, dateOfBirth, e.telephone, e.city , e.email, JobHistory.name 
+FROM Employee e,
+ (
+ 	SELECT DISTINCT(EV.ssn) as ssn
+	FROM (
+		SELECT e.SSN as ssn, COUNT(e.SSN) as c
+		FROM Employee e, Vaccination v
+		WHERE e.SSN  = v.passportNumOrSSN
+		GROUP BY(e.SSN)
+	) AS EV
+	WHERE EV.c > 1
+ ) as FV, JobHistory
+WHERE e.SSN NOT IN (FV.ssn) AND e.EID = JobHistory.EID;
+```
+
