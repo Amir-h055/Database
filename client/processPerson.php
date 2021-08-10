@@ -37,9 +37,9 @@ if (isset($_POST['save'])) {
     $postalCode = $_POST['postalCode'];
     
     # Insert the person
-    $mysqli->query("INSERT INTO Person VALUES('$passportNumOrSSN',
+    $mysqli->query("INSERT INTO Person (passportNumOrSSN, medicaidNum, telephone, firstName, lastName, address, city, provinceID, citizenship, email, dateOfBirth) VALUES('$passportNumOrSSN',
         '$medicaidNum', '$telephone', '$firstName', '$lastName', '$address',
-        '$city', '$provinceID', '$citizenship', '$email', '$dateOfBirth')") or
+        '$city', $provinceID, '$citizenship', '$email', '$dateOfBirth')") or
         die($mysqli->error);
 
     # Check if the postal code already exist
@@ -117,30 +117,20 @@ if (isset($_POST['update'])) {
     $postalCode = $_POST['postalCode'];
 
     # update the person
-    $mysqli->query('UPDATE Person SET passportNumOrSSN = '. $passportNumOrSSN.',
-        medicaidNum="'. $medicaidNum. '",telephone="' . $telephone.'",
-        firstName="'.$firstName.'", lastName="'.$lastName.'",
-        address="'.$address.'",city="'.$city.'",
-        ageGroupID='.$ageGroupID.',provinceID='.$provinceID.',
-        citizenship='.$citizenship.',email="'.$email.'",
-        dateOfBirth='.$dateOfBirth.' WHERE passportNumOrSSN='.$passportNumOrSSN) or
+    $mysqli->query("UPDATE Person SET passportNumOrSSN = '$passportNumOrSSN', medicaidNum = '$medicaidNum', telephone = '$telephone', firstName='$firstName', lastName='$lastName', address='$address', city='$city', ageGroupID=$ageGroupID, provinceID=$provinceID, citizenship=$citizenship, email='$email', dateOfBirth='$dateOfBirth' WHERE passportNumOrSSN='$passportNumOrSSN';") or
         die($mysqli->error);
     # Check if address exist
-    $result = $mysqli->query('SELECT * from PostalCode WHERE address="'.$address.
-    ' AND city="'.$city.'" AND provinceID ='.$provinceID) or
+    $result = $mysqli->query("SELECT * FROM PostalCode WHERE address = '$address' AND city='$city' AND provinceID = $provinceID; ") or
         die($mysqli->error);
     if ($result->num_rows == 1) {
         #update the postal code
-        $mysqli->query('UPDATE PostalCode SET postalCode = $postalCode WHERE 
-        address="'.$address.'" AND city="'.$city.'" AND provinceID ='. $provinceID) or
-        die($mysqli->error);
+        $mysqli->query("UPDATE PostalCode SET postalCode = '$postalCode' WHERE address = '$address' AND city='$city' AND provinceID = $provinceID;") or
+            die($mysqli->error);
     } else {
         # If new address not exist, Insert the new postal code tuple
-        $mysqli->query('INSERT INTO PostalCode VALUES ("'.$address.'", "'.$city.'",
-            '.$provinceID.', '.$postalCode.')') or die($mysqli->error);
+        $mysqli->query("INSERT INTO PostalCode (address, city, provinceID, postalCode) VALUES ('$address', '$city', $provinceID, '$postalCode');") or 
+            die($mysqli->error);
     }
-
-    
     $_SESSION['message'] = "Person record has been updated";
     $_SESSION['msg_type'] = "warning";
     header("location: person.php");

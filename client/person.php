@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $currentPage = 'Person';
     include('common/header.php');
 ?>
@@ -17,7 +18,7 @@
             <div class="container">
                 <div class="container mt-2 mb-4 p-2 shadow bg-white">
                     <div class="row justify-content-center">
-                        <form action="processAgeGroup.php" method="POST">
+                        <form action="processPerson.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
                                     <input type="text" name="passportNumOrSSN" class="form-control" value="<?php echo $passportNumOrSSN; ?>" placeholder="Passport Num or SSN">
@@ -34,6 +35,8 @@
                                 <div class="col-auto form-group">
                                     <input type="text" name="lastName" class="form-control" value="<?php echo $lastName; ?>" placeholder="Last Name">
                                 </div>
+                            </div>
+                            <div class="form-row justify-center">
                                 <div class="col-auto form-group">
                                     <input type="text" name="address" class="form-control" value="<?php echo $address; ?>" placeholder="Address">
                                 </div>
@@ -44,13 +47,31 @@
                                     <input type="text" name="postalCode" class="form-control" value="<?php echo $postalCode; ?>" placeholder="Postal Code">
                                 </div>
                                 <div class="col-auto form-group">
-                                    <input type="text" name="ageGroupID" class="form-control" value="<?php echo $ageGroupID; ?>" placeholder="Age Group ID">
+                                    <select class="form-control" name="ageGroupID" placeholder="Choose Age Group" value="<?php echo $ageGroupID; ?>">
+                                        <option value="" <?php echo $ageGroupID == '' ? 'selected': '' ?> disabled>Age Group ID</option>
+                                        <?php
+                                        $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
+                                        $result = $mysqli->query("SELECT * FROM AgeGroup") or die($mysqli->error);
+                                        while ($row = $result->fetch_assoc()): ?>
+                                            <option <?php echo $row['ageGroupID'] == $ageGroupID ? 'selected': '' ?> value=<?php echo $row['ageGroupID']; ?>><?php echo $row['ageRange']; ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
                                 </div>
                                 <div class="col-auto form-group">
-                                    <input type="text" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province ID">
+                                    <select class="form-control" name="provinceID" placeholder="Choose your Province" value="<?php echo $provinceID; ?>">
+                                        <option value="" <?php echo $provinceID == '' ? 'selected': '' ?> disabled>Province</option>
+                                        <?php
+                                        $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
+                                        $result = $mysqli->query("SELECT * FROM Province") or die($mysqli->error);
+                                        while ($row = $result->fetch_assoc()): ?>
+                                            <option <?php echo $row['provinceID'] == $provinceID ? 'selected': '' ?> value=<?php echo $row['provinceID']; ?>><?php echo $row['name']; ?></option>
+                                        <?php endwhile; ?>
+                                    </select>
                                 </div>
+                            </div>
+                            <div class="form-row justify-center">
                                 <div class="col-auto form-group">
-                                    <input type="text" name="citizenship" class="form-control" value="<?php echo $citizenship; ?>" placeholder="Citizenship">
+                                    <input type="number" name="citizenship" class="form-control" value="<?php echo $citizenship; ?>" placeholder="Citizenship">
                                 </div>
                                 <div class="col-auto form-group">
                                     <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Email">
@@ -67,6 +88,7 @@
                                         <button type="submit" name="save" class="btn btn-primary">Save</button>
                                     <?php endif; ?>
                                 </div>
+                            </div>
                         </form>
                     </div>
                 </div>
