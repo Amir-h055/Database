@@ -543,7 +543,13 @@ INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hna
 #### Get details of all the people who got vaccinated only one dose and are of group ages 1 to 3
 
 ```SQL
-SELECT Person.*,Vaccination.date,Vaccination.name,Infection.type
+SELECT Person.firstName, Person.lastName, Person.dateOfBirth, Person.email, 
+Person.telephone, Person.city,Vaccination.date,Vaccination.name,
+CASE WHEN EXISTS(
+		SELECT  *
+		FROM Infection
+		WHERE Person.passportNumOrSSN = Infection.passportNumOrSSN
+	) THEN 'Yes' ELSE 'No' END as WasInfected
 FROM Person JOIN Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
 LEFT JOIN Infection ON Person.passportNumOrSSN=Infection.passportNumOrSSN
 WHERE ageGroupID BETWEEN 1 AND 3
@@ -591,8 +597,8 @@ SELECT
     p.telephone,
     p.city,
     GROUP_CONCAT(DISTINCT v.date, ': ', v.name) AS vaccinations,
-    COUNT(DISTINCT (i.type)) AS numberVariantInfections,
-    GROUP_CONCAT(DISTINCT i.type) AS variants
+    COUNT(DISTINCT (i.variantTypeID)) AS numberVariantInfections,
+    GROUP_CONCAT(DISTINCT i.variantTypeID) AS variants
 FROM
     Person p
         LEFT JOIN
@@ -609,7 +615,7 @@ WHERE
         FROM
             Infection
         GROUP BY passportNumOrSSN
-        HAVING COUNT(DISTINCT (type)) >= 2);
+        HAVING COUNT(DISTINCT (variantTypeID)) >= 2);
 ```
 
 Results
@@ -629,8 +635,20 @@ FROM Province,HealthFacility,VaccineStored
 WHERE Province.provinceID = HealthFacility.provinceID
 AND HealthFacility.name = VaccineStored.nameHSO
 AND HealthFacility.address = VaccineStored.address
-group by Province, VaccineStored.nameDrug
-order by Province asc, total desc;
+group by Province.name, VaccineStored.nameDrug
+order by Province.name asc, total desc;
+```
+
+### Query 16
+
+#### Give a report of the population’s vaccination by province between January 1 st 2021 and July 22 nd 2021
+```SQL
+SELECT p.name , v.name, COUNT(DISTINCT(v.passportNumOrSSN))
+FROM Vaccination v, HealthFacility hf, Province p
+WHERE v.Hname  = hf.name AND v.address = hf.address AND
+	hf.provinceID = p.provinceID AND
+	date > "2021-01-01" AND date < "2021-07-22"
+GROUP BY v.name;
 ```
 
 ### Query 17
@@ -638,12 +656,10 @@ order by Province asc, total desc;
 #### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22 nd 2021
 
 ```SQL
-SELECT city, Count(HealthFacility.city)
-FROM Vaccination, HealthFacility
-WHERE Vaccination.Hname  = HealthFacility.name AND
-	Vaccination.address  = HealthFacility.address AND 
-	date > "2021-01-01" AND date < "2021-07-22"
-GROUP BY city;
+SELECT hf.city, SUM(vs.count) 
+FROM HealthFacility hf, VaccineShipment vs 
+WHERE hf.name = vs.nameHSO AND hf.address  = vs.address
+GROUP BY hf.city
 ```
 
 ### Query 18
@@ -741,15 +757,34 @@ Results
 #### Give a list of all public health workers in a specific facility
 
 ```SQL
-SELECT Employee.* , PostalCode.postalCode
+SELECT HealthFacility.name, Employee.* , PostalCode.postalCode
 FROM HealthFacility,Employee,JobHistory,PostalCode
-WHERE HealthFacility.name = 'Hname'AND 
-	HealthFacility.address = 'HAddress'AND 
+WHERE 
 	Employee.address = PostalCode.address AND 
-	Employee.city= Postalcode.city AND 
+	Employee.city= PostalCode.city AND 
 	Employee.provinceID = PostalCode.provinceID AND
     HealthFacility.name = JobHistory.name AND
     HealthFacility.address = JobHistory.address AND 
     JobHistory.EID = Employee.EID
+  ORDER BY name
 ```
 
+### Query 20
+
+#### Give a list of all public health workers in Québec who never been vaccinated or who have been vaccinated only one dose for Covid-19
+
+```SQL
+SELECT e.EID, firstName,lastName, dateOfBirth, e.telephone, e.city , e.email, JobHistory.name 
+FROM Employee e,
+ (
+ 	SELECT DISTINCT(EV.ssn) as ssn
+	FROM (
+		SELECT e.SSN as ssn, COUNT(e.SSN) as c
+		FROM Employee e, Vaccination v
+		WHERE e.SSN  = v.passportNumOrSSN
+		GROUP BY(e.SSN)
+	) AS EV
+	WHERE EV.c > 1
+ ) as FV, JobHistory
+WHERE e.SSN NOT IN (FV.ssn) AND e.EID = JobHistory.EID;
+```

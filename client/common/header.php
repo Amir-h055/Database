@@ -77,34 +77,37 @@
                 <li>
                     <a href="#pageSubmenuDetails" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Details</a>
                     <ul class="collapse list-unstyled" id="pageSubmenuDetails">
-                        <li>
-                            <a href="#">One dose - Age Group 1 to 3</a>
+                        <li class="<?php echo $currentPage == 'Detail 1' ? 'active': ''?>">
+                            <a href="detail1.php">One dose - Age Group 1 to 3</a>
                         </li>
-                        <li>
-                            <a href="#">Two different doses - Montreal</a>
+                        <li class="<?php echo $currentPage == 'Detail 2' ? 'active': ''?>">
+                            <a href="detail2.php"> Two different doses - Montreal</a>
                         </li>
-                        <li>
-                            <a href="#">Two different variants - Vaccinated</a>
+                        <li class="<?php echo $currentPage == 'Detail 3' ? 'active': ''?>">
+                            <a href="detail3.php">Two different variants - Vaccinated</a>
                         </li>
                     </ul>
                 </li>
                 <li>
                     <a href="#pageSubmenuReports" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Reports</a>
                     <ul class="collapse list-unstyled" id="pageSubmenuReports">
-                        <li>
-                            <a href="#">Inventory per province</a>
+                        <li class="<?php echo $currentPage == 'Report 1' ? 'active': ''?>">
+                            <a href="report1.php">Inventory per province</a>
                         </li>
-                        <li>
-                            <a href="#">Vaccination per province (01-01-2021/22-07-2021)</a>
+                        <li class="<?php echo $currentPage == 'Report 2' ? 'active': ''?>">
+                            <a href="report2.php">Vaccination per province (01-01-2021/22-07-2021)</a>
                         </li>
-                        <li>
-                            <a href="#">Vaccination per cities (QC, 01-01-2021/22-07-2021)</a>
+                        <li class="<?php echo $currentPage == 'Report 3' ? 'active': ''?>">
+                            <a href="report3.php">Vaccine received per cities (QC, 01-01-2021/22-07-2021)</a>
                         </li>
-                        <li>
-                            <a href="#">Health Workers per Facilities</a>
+                        <li class="<?php echo $currentPage == 'Report 4' ? 'active': ''?>">
+                            <a href="report4.php">Facilities in Montreal</a>
                         </li>
-                        <li>
-                            <a href="#">Health Workers QC (&lt; 2 doses)</a>
+                        <li class="<?php echo $currentPage == 'Report 5' ? 'active': ''?>">
+                            <a href="report5.php">Health Workers per Facilities</a>
+                        </li>
+                        <li class="<?php echo $currentPage == 'Report 6' ? 'active': ''?>">
+                            <a href="report6.php">Health Workers QC (&lt; 2 doses)</a>
                         </li>
                     </ul>
                 </li>
