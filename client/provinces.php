@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $currentPage = 'Provinces';
     include('common/header.php');
 ?>
@@ -20,7 +21,7 @@
                         <form action="processProvinces.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
-                                    <input type="text" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province ID">
+                                    <input type="number" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province ID">
                                 </div>
                                 <div class="col-auto form-group">
                                     <input type="text" name="name" class="form-control" value="<?php echo $name; ?>" placeholder="Province Name">
@@ -31,7 +32,7 @@
                                         $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
                                         $result = $mysqli->query("SELECT * FROM AgeGroup") or die($mysqli->error);
                                         while ($row = $result->fetch_assoc()): ?>
-                                            <option <?php echo $row['ageGroupID'] == $ageGroupID ? 'selected': '' ?> value=<?php echo $row['ageGroupID']; ?>><?php echo $row['ageRange']; ?></option>
+                                            <option <?php echo $row['ageGroupID'] == $currentAgeGroupID ? 'selected': '' ?> value=<?php echo $row['ageGroupID']; ?>><?php echo $row['ageRange']; ?></option>
                                         <?php endwhile; ?>
                                     </select>
                                 </div>

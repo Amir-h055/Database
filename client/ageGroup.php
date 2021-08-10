@@ -1,10 +1,11 @@
 <?php
+    session_start();    
     $currentPage = 'Age Group';
     include('common/header.php');
 ?>
         <!-- Page Content -->
         <div id="content">
-            <?php require_once 'processAgeGroup.php'; ?>
+            <?php require_once 'processAgeGroup.php'; ?>  
             <?php
             if (isset($_SESSION['message'])) : ?>
                 <div class="alert alert-<?= $_SESSION['msg_type'] ?>">

@@ -10,10 +10,10 @@ $update = false;
 
 if (isset($_POST['save'])) {
     $provinceID = $_POST['provinceID'];
-    $currentAgeGroupID = $_POST['currentAgeGroupID'];
+    $ageGroupID = $_POST['ageGroupID'];
     $name = $_POST['name'];
     
-    $mysqli->query("INSERT INTO Province VALUES('$provinceID',$name, $ageGroupID)") or
+    $mysqli->query("INSERT INTO Province VALUES($provinceID,'$name', $ageGroupID)") or
         die($mysqli->error);
 
     $_SESSION['message'] = "New Province has been saved!";
@@ -45,11 +45,10 @@ if (isset($_GET['edit'])) {
 
 if (isset($_POST['update'])) {
     $provinceID = $_POST['provinceID'];
-    $currentAgeGroupID = $_POST['currentAgeGroupID'];
+    $ageGroupID = $_POST['ageGroupID'];
     $name = $_POST['name'];
-
-    $mysqli->query("UPDATE Province SET provinceID='$provinceID',
-        currentAgeGroupID = $currentAgeGroupID, name=$name WHERE provinceID='$provinceID'") or
+    $mysqli->query("UPDATE Province SET provinceID=$provinceID,
+        currentAgeGroupID = $ageGroupID, name='$name' WHERE provinceID=$provinceID") or
         die($mysqli->error);
     $_SESSION['message'] = "Province record has been updated";
     $_SESSION['msg_type'] = "warning";
