@@ -633,6 +633,19 @@ group by Province, VaccineStored.nameDrug
 order by Province asc, total desc;
 ```
 
+### Query 17
+
+#### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22 nd 2021
+
+```SQL
+SELECT city, Count(HealthFacility.city)
+FROM Vaccination, HealthFacility
+WHERE Vaccination.Hname  = HealthFacility.name AND
+	Vaccination.address  = HealthFacility.address AND 
+	date > "2021-01-01" AND date < "2021-07-22"
+GROUP BY city;
+```
+
 ### Query 18
 
 Qeury
