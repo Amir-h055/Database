@@ -543,7 +543,13 @@ INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hna
 #### Get details of all the people who got vaccinated only one dose and are of group ages 1 to 3
 
 ```SQL
-SELECT Person.*,Vaccination.date,Vaccination.name,Infection.type
+SELECT Person.firstName, Person.lastName, Person.dateOfBirth, Person.email, 
+Person.telephone, Person.city,Vaccination.date,Vaccination.name,
+CASE WHEN EXISTS(
+		SELECT  *
+		FROM Infection
+		WHERE Person.passportNumOrSSN = Infection.passportNumOrSSN
+	) THEN 'Yes' ELSE 'No' END as WasInfected
 FROM Person JOIN Vaccination on Person.passportNumOrSSN=Vaccination.passportNumOrSSN
 LEFT JOIN Infection ON Person.passportNumOrSSN=Infection.passportNumOrSSN
 WHERE ageGroupID BETWEEN 1 AND 3

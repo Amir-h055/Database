@@ -77,14 +77,14 @@
                 <li>
                     <a href="#pageSubmenuDetails" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Details</a>
                     <ul class="collapse list-unstyled" id="pageSubmenuDetails">
-                        <li>
-                            <a href="#">One dose - Age Group 1 to 3</a>
+                        <li class="<?php echo $currentPage == 'Detail 1' ? 'active': ''?>">
+                            <a href="detail1.php">One dose - Age Group 1 to 3</a>
                         </li>
-                        <li>
-                            <a href="#">Two different doses - Montreal</a>
+                        <li class="<?php echo $currentPage == 'Detail 2' ? 'active': ''?>">
+                            <a href="detail2.php"> Two different doses - Montreal</a>
                         </li>
-                        <li>
-                            <a href="#">Two different variants - Vaccinated</a>
+                        <li class="<?php echo $currentPage == 'Detail 3' ? 'active': ''?>">
+                            <a href="detail3.php">Two different variants - Vaccinated</a>
                         </li>
                     </ul>
                 </li>
