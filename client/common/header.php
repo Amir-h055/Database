@@ -54,8 +54,8 @@
                 <li class="<?php echo $currentPage == 'Variant Types' ? 'active': ''?>">
                     <a href="variantType.php">Variant Types</a>
                 </li>
-                <li>
-                    <a href="#">Public Health Workers</a>
+                <li class="<?php echo $currentPage == 'Public Health Worker' ? 'active': ''?>">
+                    <a href="publicHealthWorker.php">Public Health Workers</a>
                 </li>
                 <li>
                     <a href="#">Public Health Facilities</a>
