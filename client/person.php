@@ -20,10 +20,43 @@
                         <form action="processAgeGroup.php" method="POST">
                             <div class="form-row justify-center">
                                 <div class="col-auto form-group">
-                                    <input type="number" name="ageGroupID" class="form-control" value="<?php echo $ageGroupID; ?>" placeholder="Age Group Id">
+                                    <input type="text" name="passportNumOrSSN" class="form-control" value="<?php echo $passportNumOrSSN; ?>" placeholder="Passport Num or SSN">
                                 </div>
                                 <div class="col-auto form-group">
-                                    <input type="text" name="ageRange" class="form-control" value="<?php echo $ageRange; ?>" placeholder="Enter Age Range">
+                                    <input type="text" name="medicaidNum" class="form-control" value="<?php echo $medicaidNum; ?>" placeholder="Medicaid">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="telephone" class="form-control" value="<?php echo $telephone; ?>" placeholder="Telephone">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="firstName" class="form-control" value="<?php echo $firstName; ?>" placeholder="First Name">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="lastName" class="form-control" value="<?php echo $lastName; ?>" placeholder="Last Name">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="address" class="form-control" value="<?php echo $address; ?>" placeholder="Address">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="city" class="form-control" value="<?php echo $city; ?>" placeholder="City">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="postalCode" class="form-control" value="<?php echo $postalCode; ?>" placeholder="Postal Code">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="ageGroupID" class="form-control" value="<?php echo $ageGroupID; ?>" placeholder="Age Group ID">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="provinceID" class="form-control" value="<?php echo $provinceID; ?>" placeholder="Province ID">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="citizenship" class="form-control" value="<?php echo $citizenship; ?>" placeholder="Citizenship">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="email" name="email" class="form-control" value="<?php echo $email; ?>" placeholder="Email">
+                                </div>
+                                <div class="col-auto form-group">
+                                    <input type="text" name="dateOfBirth" class="form-control" value="<?php echo $dateOfBirth; ?>" placeholder="Date Of Birth">
                                 </div>
                                 <div class="col-auto form-group">
                                     <?php
@@ -53,6 +86,7 @@
                             <th>Last Name</th>
                             <th>Address</th>
                             <th>City</th>
+                            <th>PostalCode</th>
                             <th>Age Group ID</th>
                             <th>Province ID</th>
                             <th>Citizenship</th>
@@ -61,9 +95,12 @@
                             <th colspan=2>Actions</th>
                         </tr>
                     </thead>
-                    <?php
-                    while ($row = $result->fetch_assoc()) : ?>
+                    <?php while ($row = $result->fetch_assoc()) : ?>
                         <tr>
+                        <?php
+                            $pc = $mysqli->query('SELECT postalCode FROM PostalCode WHERE address="' . $row['address']. '" AND ' .
+                            'city="' . $row['city'] . '" AND provinceID=' . $row['provinceID']) or die($mysqli->error);
+                        ?>
                             <td><?php echo $row['passportNumOrSSN']; ?></td>
                             <td><?php echo $row['medicaidNum']; ?></td>
                             <td><?php echo $row['telephone']; ?></td>
@@ -71,14 +108,15 @@
                             <td><?php echo $row['lastName']; ?></td>
                             <td><?php echo $row['address']; ?></td>
                             <td><?php echo $row['city']; ?></td>
+                            <td><?php echo $pc->fetch_array()[0];?></td>
                             <td><?php echo $row['ageGroupID']; ?></td>
                             <td><?php echo $row['provinceID']; ?></td>
                             <td><?php echo $row['citizenship']; ?></td>
                             <td><?php echo $row['email']; ?></td>
                             <td><?php echo $row['dateOfBirth']; ?></td>
                             <td>
-                                <a href="ageGroup.php?edit=<?php echo $row['passportNumOrSSN']; ?>" class="btn btn-info"> Edit </a>
-                                <a href="processAgeGroup.php?delete=<?php echo $row['passportNumOrSSN']; ?>" class="btn btn-danger"> Delete </a>
+                                <a href="person.php?edit=<?php echo $row['passportNumOrSSN']; ?>" class="btn btn-info"> Edit </a>
+                                <a href="processPerson.php?delete=<?php echo $row['passportNumOrSSN']; ?>" class="btn btn-danger"> Delete </a>
                             </td>
                         </tr>
                     <?php endwhile; ?>
