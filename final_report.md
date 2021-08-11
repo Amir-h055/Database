@@ -26,8 +26,7 @@ Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName, ci
   VaccinationDoneBy(_passportNumOrSSN_, _doseNumber_, _EID_)
   HealthFacility(_name_, _address_,telephone, webAddress, type, city, province,
     postalCode);
-  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
-    address, city, postalCode, province, citizenship, email)
+  Employee(_EID_, SSN)
   Manager(_EID_)
   Manages(_EID_, _name_, _address_)
   JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
@@ -122,7 +121,7 @@ PostalCode(address, city, province, postalCode)
 ```
 HealthFacility(_name_, _address_,telephone, webAddress, type, city, province, postalCode);
 
-Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone, address, city, postalCode, province, citizenship, email)
+Employee(_EID_, SSN)
 ```
 
  
@@ -132,8 +131,7 @@ Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone, addr
   removed.
 
   `HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);`
- `Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
-    address, city, province, citizenship, email)`
+ `Employee(_EID_, SSN)`
 
 ---
 
@@ -172,8 +170,7 @@ VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_, _date_, 
   VaccinationDoneAt(_passportNumOrSSN_, _doseNumber_, _name_, _address_);
   VaccinationDoneBy(_passportNumOrSSN_, _doseNumber_, _EID_)
   HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);
-  Employee(_EID_, SSN, firstName, lastName, medicare, dateOfBirth, telephone,
-    address, city, province, citizenship, email)
+  Employee(_EID_, SSN)
   Manager(_EID_)
   Manages(_EID_, name, address)
   JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
@@ -253,9 +250,7 @@ WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
 ##### Create a Public Health Worker
 
 ```sql
-INSERT Employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
-  "Jernigan", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
-  "Quebec", "QC", TRUE, "eliJer@gmail.com");
+INSERT INTO Employee VALUES ("2314904771","4030141599"); ##########  SSN should exist in Person
   
 -- Check if the postal code tuple exist with
 SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" AND postalCode = "a";
@@ -274,7 +269,7 @@ DELETE FROM Employee WHERE EID = '5418600012';
 ##### Edit a Public Health Worker
 
 ```sql
-UPDATE Employee
+UPDATE Employee ######################
 SET email = "newemail@email.com", citizenship = FALSE
 WHERE EID = "2314904771";
 
@@ -287,10 +282,15 @@ UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND
 Query
 
 ```sql
-SELECT *, PostalCode.postalCode  
-FROM Employee, PostalCode
-WHERE EID = "0426670356" AND Employee.address = PostalCode.address AND
-Employee.city = PostalCode.city AND Employee.province = PostalCode.province;
+####   recheck the output table on report###################
+SELECT person.*, employee.EID, province.name, PostalCode.postalCode  
+FROM person, Employee, PostalCode, province
+WHERE EID = "0426670356" 
+AND employee.SSN = person.passportNumOrSSN
+AND person.provinceID = province.provinceID
+AND person.address = PostalCode.address
+AND person.city = PostalCode.city 
+AND person.provinceID = PostalCode.provinceID;
 ```
 
 Results
@@ -750,16 +750,18 @@ Results
 #### Give a list of all public health workers in a specific facility
 
 ```SQL
-SELECT HealthFacility.name, Employee.* , PostalCode.postalCode
-FROM HealthFacility,Employee,JobHistory,PostalCode
+SELECT HealthFacility.name, person.*, Employee.EID , PostalCode.postalCode
+FROM HealthFacility,Employee,JobHistory,PostalCode, person
 WHERE 
-	Employee.address = PostalCode.address AND 
-	Employee.city= PostalCode.city AND 
-	Employee.provinceID = PostalCode.provinceID AND
-    HealthFacility.name = JobHistory.name AND
-    HealthFacility.address = JobHistory.address AND 
-    JobHistory.EID = Employee.EID
-  ORDER BY name
+	employee.SSN = person.passportNumOrSSN
+	AND person.address = PostalCode.address  
+	AND person.city= PostalCode.city  
+	AND person.provinceID = PostalCode.provinceID 
+    AND HealthFacility.name = JobHistory.name 
+    AND HealthFacility.address = JobHistory.address  
+    AND JobHistory.EID = Employee.EID
+  ORDER BY healthfacility.name
+  
 ```
 
 ### Query 20
@@ -767,8 +769,8 @@ WHERE
 #### Give a list of all public health workers in Québec who never been vaccinated or who have been vaccinated only one dose for Covid-19
 
 ```SQL
-SELECT e.EID, firstName,lastName, dateOfBirth, e.telephone, e.city , e.email, JobHistory.name 
-FROM Employee e,
+SELECT e.EID, person.firstName, person.lastName, person.dateOfBirth, person.telephone, person.city , person.email, JobHistory.name 
+FROM person,province, Employee e,
  (
  	SELECT DISTINCT(EV.ssn) as ssn
 	FROM (
@@ -776,8 +778,12 @@ FROM Employee e,
 		FROM Employee e, Vaccination v
 		WHERE e.SSN  = v.passportNumOrSSN
 		GROUP BY(e.SSN)
-	) AS EV
+		) AS EV
 	WHERE EV.c > 1
  ) as FV, JobHistory
-WHERE e.SSN NOT IN (FV.ssn) AND e.EID = JobHistory.EID;
+WHERE e.SSN NOT IN (FV.ssn) 
+AND e.EID = JobHistory.EID
+AND person.passportNumOrSSN= e.SSN
+AND province.name = 'QC'
+AND province.provinceID=person.provinceID;
 ```
