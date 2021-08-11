@@ -13,7 +13,7 @@ CREATE TABLE PROJECT.VaccinationDrug (
   PRIMARY KEY (name)
 );
 
-CREATE TABLE Project.Province (
+CREATE TABLE PROJECT.Province (
   provinceID INT,
   name VARCHAR(100),
   currentAgeGroupID INT,
