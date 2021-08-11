@@ -50,6 +50,7 @@ CREATE TABLE PROJECT.Infection (
   passportNumOrSSN VARCHAR(10),
   variantTypeID INT,
   PRIMARY KEY(passportNumOrSSN, dateInfection),
+  FOREIGN KEY (variantTypeID) REFERENCES VariantType(variantTypeID),
   FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
 );
 
