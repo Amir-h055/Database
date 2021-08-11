@@ -1,3 +1,1 @@
-## TEAM Project README
-
-All queries are done
+# TEAM Project README
