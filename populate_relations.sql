@@ -74,15 +74,38 @@ INSERT INTO Person VALUES ("6623218089", "0451174 26", "(418)547-8256", "Nyle", 
   "3937 Soucy", "Jonquière", 1, 5, TRUE, "Nyle.Sparrow@gmail.com",
   "1936-12-08"); 
 
+ 
 INSERT INTO Person VALUES ("4030141599", "6202715 46","(418)640-9486", "Elizabeth",
-  "Jernigan",   "4884 Boulevard Cremazie",
-  "Quebec",5, 5, TRUE, "eliJer@gmail.com","1996-04-18",);
-INSERT INTO Person VALUES ("3559893762", "8331149 83","(418)299-4800", "William",
-  "Blackman",  "3619 avenue de Port-Royal",
-  "Bonaventure",5, 5, TRUE, "wilBlack@gmail.com", "1991-07-01");
-INSERT INTO Person VALUES ("8133950202", "2597807 10", "Carol","(514)481-2566",
-  "Williams",  "6767 ch de la Côte-Saint-Luc",
-  "Côte Saint-Luc",5, 5, TRUE, "carWill@gmail.com", "1984-03-01");
+  "Jernigan", "4884 Boulevard Cremazie",  
+  "Quebec",7, 5, TRUE, "eliJer@gmail.com", "1996-04-18");
+INSERT INTO Person VALUES ("3559893762", "8331149 83", "(418)299-4800", "William",  
+"Blackman", "3619 avenue de Port-Royal",  
+"Bonaventure",6, 5, TRUE, "wilBlack@gmail.com", "1991-07-01");
+INSERT INTO Person VALUES ("8133950202", "2597807 10", "(514)481-2566", "Carol",  
+"Williams", "6767 ch de la Côte-Saint-Luc",  
+"Côte Saint-Luc",6, 5, TRUE, "carWill@gmail.com", "1984-03-01");
+INSERT INTO Person VALUES ("5594746088", "2967560 35", "(514)484-4049", "Gary",  
+"Smith", "3472 Av Westmore", 
+"Montreal",4, 5,  TRUE, "garySmi@gmail.com", "1967-06-12");
+INSERT INTO Person VALUES ("3050347011", "7495078 77", "(514)485-1864", "Ted",  
+"Johnson", "621 Côte Murray", 
+"Westmount",7,  5, TRUE, "tedJohn@gmail.com","1998-09-23");
+INSERT INTO Person VALUES ("6901680262", "1457287 34", "(514)642-6526", "Ronald",  
+"Smith", "16226 Rue Bureau",  
+"Pointe-Aux-Trembles",7, 5, TRUE, "ronSmi@gmail.com","1995-06-14");
+INSERT INTO Person VALUES ("2826175309", "0568018 19", "(514)483-4346", "Adam",  
+"Smith", "4840 Bonavista", 
+"Montreal",7, 5,  TRUE, "adaSmi@gmail.com", "1995-08-12");
+INSERT INTO Person VALUES ("0883386538", "5489390 84", "(514)486-4899", "Wayne",  
+"Johnson", "999 Old Orchard", 
+"Montreal",6, 5,  TRUE, "wayJon@gmail.com","1984-07-16");
+INSERT INTO Person VALUES ("3909862653", "5433470 85", "(514)767-3102", "Sylvain",  
+"Williams", "1477 Rue Fayolle", 
+"Verdun",5, 5,  TRUE, "sylWill@gmail.com","1978-11-14");
+INSERT INTO Person VALUES ("5025223450", "6335938 64", "(514)597-0058", "Michel",  
+"Johnson", "850 Av Lachine", 
+"Montreal",7, 5,  TRUE, "micJohn@gmail.com","1996-09-13");
+
 
 INSERT INTO Infection VALUES ("2021-03-16","5418600012", 1);
 INSERT INTO Infection VALUES ("2021-04-18","5418600012", 2); 
@@ -134,36 +157,16 @@ INSERT INTO DrugHistory VALUES ("CIGB-66", "2021-01-01", "SUSPENDED");
 INSERT INTO DrugHistory VALUES ("KoviVac", "2021-01-01", "SUSPENDED");
 INSERT INTO DrugHistory VALUES ("EpiVacCorona", "2021-01-01", "SUSPENDED");
 
-INSERT INTO Employee VALUES ("2314904771","4030141599", "6202715 46", "Elizabeth",
-  "Jernigan", "1996-04-18", "(418)640-9486", "4884 Boulevard Cremazie",
-  "Quebec", 5, TRUE, "eliJer@gmail.com");
-INSERT INTO Employee VALUES ("4091939153","3559893762", "8331149 83", "William",
-  "Blackman", "1991-07-01", "(418)299-4800", "3619 avenue de Port-Royal",
-  "Bonaventure", 5, TRUE, "wilBlack@gmail.com");
-INSERT INTO Employee VALUES ("6296074483","8133950202", "2597807 10", "Carol",
-  "Williams", "1984-03-01", "(514)481-2566", "6767 ch de la Côte-Saint-Luc",
-  "Côte Saint-Luc", 5, TRUE, "carWill@gmail.com");
-INSERT INTO Employee VALUES ("1988238722","5594746088", "2967560 35", "Gary",
-  "Smith", "1967-06-12", "(514)484-4049", "3472 Av Westmore", "Montreal", 5,
-  TRUE, "garySmi@gmail.com");
-INSERT INTO Employee VALUES ("9654156685","3050347011", "7495078 77", "Ted",
-  "Johnson","1998-09-23", "(514)485-1864", "621 Côte Murray", "Westmount",
-  5, TRUE, "tedJohn@gmail.com");
-INSERT INTO Employee VALUES ("0426670356","6901680262", "1457287 34", "Ronald",
-  "Smith","1995-06-14", "(514)642-6526", "16226 Rue Bureau",
-  "Pointe-Aux-Trembles", 5, TRUE, "ronSmi@gmail.com");
-INSERT INTO Employee VALUES ("2589272564","2826175309", "0568018 19", "Adam",
-  "Smith", "1995-08-12", "(514)483-4346", "4840 Bonavista", "Montreal", 5,
-  TRUE, "adaSmi@gmail.com");
-INSERT INTO Employee VALUES ("4278243142","0883386538", "5489390 84", "Wayne",
-  "Johnson","1984-07-16", "(514)486-4899", "999 Old Orchard", "Montreal", 5,
-  TRUE, "wayJon@gmail.com");
-INSERT INTO Employee VALUES ("2221453161","3909862653", "5433470 85", "Sylvain",
-  "Williams","1978-11-14", "(514)767-3102", "1477 Rue Fayolle", "Verdun", 5,
-  TRUE, "sylWill@gmail.com");
-INSERT INTO Employee VALUES ("7034521288","5025223450", "6335938 64", "Michel",
-  "Johnson","1996-09-13", "(514)597-0058", "850 Av Lachine", "Montreal", 5,
-  TRUE, "micJohn@gmail.com");
+INSERT INTO Employee VALUES ("2314904771","4030141599");
+INSERT INTO Employee VALUES ("4091939153","3559893762");
+INSERT INTO Employee VALUES ("6296074483","8133950202");
+INSERT INTO Employee VALUES ("1988238722","5594746088");
+INSERT INTO Employee VALUES ("9654156685","3050347011");
+INSERT INTO Employee VALUES ("0426670356","6901680262");
+INSERT INTO Employee VALUES ("2589272564","2826175309");
+INSERT INTO Employee VALUES ("4278243142","0883386538");
+INSERT INTO Employee VALUES ("2221453161","3909862653");
+INSERT INTO Employee VALUES ("7034521288","5025223450");
 
 INSERT INTO Vaccination VALUES ("5418600012", 1, "2021-01-16", "6296074483", "AstraZeneca", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
 INSERT INTO Vaccination VALUES ("5418600012", 2, "2021-05-16", "2589272564", "Pfizer", "Hôpital Fleury", "2180, rue Fleury Est"); 
