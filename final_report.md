@@ -643,12 +643,18 @@ order by Province.name asc, total desc;
 
 #### Give a report of the population’s vaccination by province between January 1 st 2021 and July 22 nd 2021
 ```SQL
-SELECT p.name , v.name, COUNT(DISTINCT(v.passportNumOrSSN))
-FROM Vaccination v, HealthFacility hf, Province p
-WHERE v.Hname  = hf.name AND v.address = hf.address AND
-	hf.provinceID = p.provinceID AND
-	date > "2021-01-01" AND date < "2021-07-22"
-GROUP BY v.name;
+SELECT Province.name, Vaccination.name, 
+COUNT(DISTINCT(Vaccination.passportNumOrSSN))
+
+FROM Vaccination, HealthFacility, Province
+
+WHERE Vaccination.Hname = HealthFacility.name 
+AND Vaccination.address = HealthFacility.address 
+AND	HealthFacility.provinceID = Province.provinceID 
+AND date > "2021-01-01" AND date < "2021-07-22"
+
+GROUP BY Province.name, Vaccination.name;
+
 ```
 
 ### Query 17
