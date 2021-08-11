@@ -588,34 +588,16 @@ WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 A
 Query
 
 ```sql
-SELECT
-    p.passportNumOrSSN,
-    p.firstName,
-    p.lastName,
-    p.dateOfBirth,
-    p.email,
-    p.telephone,
-    p.city,
-    GROUP_CONCAT(DISTINCT v.date, ': ', v.name) AS vaccinations,
-    COUNT(DISTINCT (i.variantTypeID)) AS numberVariantInfections,
-    GROUP_CONCAT(DISTINCT i.variantTypeID) AS variants
-FROM
-    Person p
-        LEFT JOIN
-    Vaccination v ON v.passportNumOrSSN = p.passportNumOrSSN
-        LEFT JOIN
-    Infection i ON i.passportNumOrSSN = p.passportNumOrSSN
-WHERE
-    p.passportNumOrSSN IN (SELECT
-            passportNumOrSSN
-        FROM
-            Vaccination)
-        AND p.passportNumOrSSN IN (SELECT
-            passportNumOrSSN
-        FROM
-            Infection
-        GROUP BY passportNumOrSSN
-        HAVING COUNT(DISTINCT (variantTypeID)) >= 2);
+SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, vaccination.name,  count(Person.passportNumOrSSN) AS 'Number of times infected' 
+FROM Person,
+		(
+			SELECT passportNumOrSSN as p, COUNT(DISTINCT infection.variantTypeID) as c
+			FROM Infection
+			GROUP BY passportNumOrSSN
+		) as CI, Vaccination
+WHERE Person.passportNumOrSSN = CI.p
+AND CI.c >= 2 
+AND Person.passportNumOrSSN = Vaccination.passportNumOrSSN;
 ```
 
 Results
