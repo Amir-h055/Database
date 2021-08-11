@@ -57,8 +57,8 @@
                 <li class="<?php echo $currentPage == 'Public Health Worker' ? 'active': ''?>">
                     <a href="publicHealthWorker.php">Public Health Workers</a>
                 </li>
-                <li>
-                    <a href="#">Public Health Facilities</a>
+                <li class="<?php echo $currentPage == 'Public Health Facilities' ? 'active': ''?>">
+                    <a href="publicHealthFacility.php">Public Health Facilities</a>
                 </li>
                 <li>
                     <a href="#pageSubmenuOp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operations</a>

@@ -1,4 +1,5 @@
 <?php
+    session_start();
     $currentPage = 'Variant Type';
     include('common/header.php');
 ?>
