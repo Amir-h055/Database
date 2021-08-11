@@ -80,18 +80,8 @@ CREATE TABLE PROJECT.DrugHistory (
 CREATE TABLE PROJECT.Employee (
   EID VARCHAR(10),
   SSN VARCHAR(10),
-  medicare VARCHAR(100),
-  firstName VARCHAR(100),
-  lastName VARCHAR(100),
-  dateOfBirth DATE,
-  telephone VARCHAR(13),
-  address VARCHAR(100), 
-  city VARCHAR(100),
-  provinceID int,
-  citizenship BOOLEAN, 
-  email VARCHAR(100),
   PRIMARY KEY (EID),
-  FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
+  FOREIGN KEY (SSN) REFERENCES Person(passportNumOrSSN)
 );
 
 
@@ -175,4 +165,3 @@ CREATE TABLE PROJECT.PostalCode (
   PRIMARY KEY (address, city, provinceID),
   FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
 );
-
