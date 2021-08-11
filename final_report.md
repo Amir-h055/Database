@@ -663,10 +663,14 @@ GROUP BY Province.name, Vaccination.name;
 #### Give a report by city in Québec the total number of vaccines received in each city between January 1 st 2021 and July 22 nd 2021
 
 ```SQL
-SELECT hf.city, SUM(vs.count) 
-FROM HealthFacility hf, VaccineShipment vs 
+SELECT hf.city, SUM(vs.count) AS 'Count Recived'
+FROM HealthFacility hf, VaccineShipment vs , province 
 WHERE hf.name = vs.nameHSO AND hf.address  = vs.address
+AND hf.provinceID = province.provinceID
+AND province.name = 'QC'
+AND vs.date BETWEEN '2021-01-01' AND '2021-07-22'
 GROUP BY hf.city
+
 ```
 
 ### Query 18
