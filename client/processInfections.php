@@ -13,28 +13,22 @@ if (isset($_POST['save'])) {
     $passportNumOrSSN= $_POST['passportNumOrSSN'];
     $dateInfection = $_POST['dateInfection'];
     $variantTypeID = $_POST['variantTypeID'];
-    
     # Insert the person
-    $mysqli->query("INSERT INTO Infection VALUES('$dateInfection', '$passportNumOrSSN',
-        $variantTypeID") or
+    $mysqli->query("INSERT INTO Infection (dateInfection, passportNumOrSSN, variantTypeID) VALUES('$dateInfection', '$passportNumOrSSN', $variantTypeID);") or
         die($mysqli->error);
-
     $_SESSION['message'] = "New Infection has been saved!";
     $_SESSION['msg_type'] = "success";
     header("location: infections.php");
 }
 
 if (isset($_GET['delete'])) {
-    $passportNumOrSSN = $_GET['delete'];
-    
-    # Delete a person
-    $mysqli->query("DELETE FROM Person WHERE passportNumOrSSN=$passportNumOrSSN") or
-        die($mysqli->error);
+    $passportNumOrSSN = $_GET['passportNumOrSSN'];
+    $dateInfection = $_GET['dateInfection'];
     # Delete the related infection
-    $mysqli->query("DELETE FROM Infection WHERE passportNumOrSSN=$passportNumOrSSN") or
+    $mysqli->query("DELETE FROM Infection WHERE passportNumOrSSN='$passportNumOrSSN' AND dateInfection='$dateInfection'") or
         die($mysqli->error);
 
-    $_SESSION['message'] = "Person has been Deleted";
+    $_SESSION['message'] = "Infection has been Deleted";
     $_SESSION['msg_type'] = "danger";
     header("location: infections.php");
 }
