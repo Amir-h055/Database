@@ -66,8 +66,8 @@
                         <li class="<?php echo $currentPage == 'Receive Shipment' ? 'active': ''?>">
                             <a href="receiveShipment.php">Receive a Shipment</a>
                         </li>
-                        <li>
-                            <a href="#">Transfer Vaccines</a>
+                        <li class="<?php echo $currentPage == 'Transfer Vaccine' ? 'active': ''?>">
+                            <a href="transferVaccine.php">Transfer Vaccines</a>
                         </li>
                         <li>
                             <a href="#">Perform Vaccination</a>
