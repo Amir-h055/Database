@@ -1,4 +1,5 @@
 # Report - COVID 19 - Final Project
+
 ## 1 - Concept ER Diagram
 
 ![ER diagram](/home/nathan/school/COMP_353/projects/COMP_351_Warmup/ERdiagram.svg)
@@ -9,9 +10,9 @@ All the constraints are shown in the diagram
 
 ## 3 - Convert to a relational DB scheme
 
- Relations obtained from E/R diagram
+Relations obtained from E/R diagram
 
-``` 
+```
 Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName, city, province,
     postalCode, citizenship, email, dateOfBirth);
   Infection(_dateInfection_, _passportNumOrSSN_, type);
@@ -36,38 +37,36 @@ Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName, ci
     _date_, count)
 ```
 
-  We need to put this design in BCNF, so let's look at each relation one by one
-  and make it BCNF. We would like to point out that functional depencies are
-  somewhat arbitrary, meaning that we can define what they are since they were
-  not defined in the handout of the project.
+We need to put this design in BCNF, so let's look at each relation one by one
+and make it BCNF. We would like to point out that functional depencies are
+somewhat arbitrary, meaning that we can define what they are since they were
+not defined in the handout of the project.
 
 ---
 
-  Let's first discard all of the 1 or 2 attributes relations since it is proven
-  that such relation are in BCNF
+Let's first discard all of the 1 or 2 attributes relations since it is proven
+that such relation are in BCNF
 
-  `AgeGroup`, `CurrentAgeGroup`, `PersonAgeGroup`, `VaccinationDrug`, `Manager` are all
-  good. Let's look at the others
+`AgeGroup`, `CurrentAgeGroup`, `PersonAgeGroup`, `VaccinationDrug`, `Manager` are all
+good. Let's look at the others
 
 ---
 
-
-
-``` 
+```
 Person(_passportNumOrSSN_,medicare, telephone, address, LastName, firstName, city, province, postalCode, citizenship, email, dateOfBirth);
 ```
 
-  We assumed that 2 people with the same name could live at the same place. Which
-  means the complete address and complete name is not enough to uniquely determine
-  a person; complete address and complete name is not enough to uniquely
-  determine a telephone (like with 411) 
+We assumed that 2 people with the same name could live at the same place. Which
+means the complete address and complete name is not enough to uniquely determine
+a person; complete address and complete name is not enough to uniquely
+determine a telephone (like with 411)
 
-  List of functional depencies:
-    `passportNumOrSSN` -> all other attributes
-    `medicare` -> all other attributes
-    `address`, `city`, `province` -> `postalCode`
+List of functional depencies:
+`passportNumOrSSN` -> all other attributes
+`medicare` -> all other attributes
+`address`, `city`, `province` -> `postalCode`
 
-  We thus decompose our initial relation as such:
+We thus decompose our initial relation as such:
 
 ```
 Person(_passportNumOrSSN_,medicare, telephone, address, LastName, firstName, city, province, citizenship, email, dateOfBirth);
@@ -75,46 +74,46 @@ Person(_passportNumOrSSN_,medicare, telephone, address, LastName, firstName, cit
 PostalCode(address, city, province, postalCode)
 ```
 
-  Now all non-trivial FD are superkey
+Now all non-trivial FD are superkey
 
 ---
 
-  `Infection(_dateInfection_, _passportNumOrSSN_, type)`
+`Infection(_dateInfection_, _passportNumOrSSN_, type)`
 
-  List of major FD:
-  `date`, `passportNumOrSSN` -> `type`
+List of major FD:
+`date`, `passportNumOrSSN` -> `type`
 
-  This relation is BCNF
-
----
-
-  `Vaccination(_passportNumOrSSN_, _doseNumber_, date)`
-
-  List of major FD:
-  `passportNumOrSSN`, `doseNumber` -> `date`
-
-  This relation is BCNF
+This relation is BCNF
 
 ---
 
-  `DrugHistory(_name_, _date_, status)`
+`Vaccination(_passportNumOrSSN_, _doseNumber_, date)`
 
-  List of major FD:
-  `name`, `date` -> `status`
+List of major FD:
+`passportNumOrSSN`, `doseNumber` -> `date`
 
-  This relation is BCNF
+This relation is BCNF
 
 ---
 
-  `VaccinationDoneWith(_passportNumOrSSN_, _doseNumber_, _name_);`
+`DrugHistory(_name_, _date_, status)`
 
-  List of major FD:
-  `passportNumOrSSN`, `doseNumber` -> `name` 
+List of major FD:
+`name`, `date` -> `status`
 
-  This relation if BCNF
+This relation is BCNF
 
-  `VaccinationDoneBy` and `VaccinationDoneAt` are pretty similar and are both in\
-  BCNF
+---
+
+`VaccinationDoneWith(_passportNumOrSSN_, _doseNumber_, _name_);`
+
+List of major FD:
+`passportNumOrSSN`, `doseNumber` -> `name`
+
+This relation if BCNF
+
+`VaccinationDoneBy` and `VaccinationDoneAt` are pretty similar and are both in\
+ BCNF
 
 ---
 
@@ -124,24 +123,22 @@ HealthFacility(_name_, _address_,telephone, webAddress, type, city, province, po
 Employee(_EID_, SSN)
 ```
 
- 
+Those two relations are similar to `Person`, the badly behaving FD is the one
+with the postal code, this means that both of them needs their postal code
+removed.
 
-  Those two relations are similar to `Person`, the badly behaving FD is the one
-  with the postal code, this means that both of them needs their postal code
-  removed.
-
-  `HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);`
- `Employee(_EID_, SSN)`
+`HealthFacility(_name_, _address_,telephone, webAddress, type, city, province);`
+`Employee(_EID_, SSN)`
 
 ---
 
-  All those:
+All those:
 
 ```
 Manages(_EID_, _name_, _address_)
- 
+
 JobHistory(_EID_, _name_, _address_, _startDate_, endDate)
- 
+
 VaccineStored(_nameHSO_, _address_, _nameDrug_, count)
 
 VaccineShipment(_nameHSO_, _address_, _nameDrug_, _date_, count)
@@ -149,12 +146,12 @@ VaccineShipment(_nameHSO_, _address_, _nameDrug_, _date_, count)
 VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_, _date_, count)
 ```
 
-  Are similar to previous tables that are mostly made up of key and all FD
-  have superkey on their right side thus they are all in BCNF.
+Are similar to previous tables that are mostly made up of key and all FD
+have superkey on their right side thus they are all in BCNF.
 
 ---
 
-  The final set of relation is thus: 
+The final set of relation is thus:
 
 ```
   Person(_passportNumOrSSN_, medicare, telephone, address, LastName, firstName,
@@ -183,8 +180,8 @@ VaccineTransfer(_nameHSOFrom_, _nameHSOTo_, _addressFrom_, _addressTo_, _date_, 
 
 ---
 
-  Foreign Keys and referential constraints shown in the scripts that create
-  the SQL table for the design
+Foreign Keys and referential constraints shown in the scripts that create
+the SQL table for the design
 
 ## 4 - Is the DB in BCNF
 
@@ -207,8 +204,8 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 
 -- If the query does no return anything, then insert the postal code
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
-  
--- Also add the various infections  
+
+-- Also add the various infections
 INSERT INTO Infection VALUES (dateInfection, passportNumOrSSN, variantID);
 ```
 
@@ -226,21 +223,21 @@ DELETE FROM Infection WHERE passportNumOrSSN = "x";
 UPDATE Person
 SET column_name = value
 WHERE passportNumOrSSN = "x";
-  
+
 -- To edit a postalCode, if there is a change in address
 UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 
 -- To edit an infection
 UPDATE Infection
-SET column_name = value       
+SET column_name = value
 WHERE passportNumOrSSN = "x" AND date = "d";
 ```
 
 #### Display a person
 
 ```sql
-SELECT Person.*, PostalCode.postalCode 
-FROM Person, PostalCode 
+SELECT Person.*, PostalCode.postalCode
+FROM Person, PostalCode
 WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
     Person.city = PostalCode.city AND Person.province = PostalCode.province;
 ```
@@ -251,7 +248,7 @@ WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
 
 ```sql
 INSERT INTO Employee VALUES ("2314904771","4030141599"); ##########  SSN should exist in Person
-  
+
 -- Check if the postal code tuple exist with
 SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" AND postalCode = "a";
 
@@ -283,22 +280,23 @@ Query
 
 ```sql
 ####   recheck the output table on report###################
-SELECT person.*, employee.EID, province.name, PostalCode.postalCode  
+SELECT person.*, employee.EID, province.name, PostalCode.postalCode
 FROM person, Employee, PostalCode, province
-WHERE EID = "0426670356" 
+WHERE EID = "0426670356"
 AND employee.SSN = person.passportNumOrSSN
 AND person.provinceID = province.provinceID
 AND person.address = PostalCode.address
-AND person.city = PostalCode.city 
+AND person.city = PostalCode.city
 AND person.provinceID = PostalCode.provinceID;
 ```
 
 Results
-| EID       | SSN        | medicare   | firstName | lastName | postalCode | dateOfBirth | telephone     | address          | city                | provinceID | citizenship | email            |
+| EID | SSN | medicare | firstName | lastName | postalCode | dateOfBirth | telephone | address | city | provinceID | citizenship | email |
 | --------- | ---------- | ---------- | --------- | -------- | ---------- | ----------- | ------------- | ---------------- | ------------------- | ---------- | ----------- | ---------------- |
-| 426670356 | 6901680262 | 1457287 34 | Ronald    | Smith    | H1A 1Z1    | 1995-06-14  | (514)642-6526 | 16226 Rue Bureau | Pointe-Aux-Trembles | QC         | 1           | ronSmi@gmail.com |
+| 426670356 | 6901680262 | 1457287 34 | Ronald | Smith | H1A 1Z1 | 1995-06-14 | (514)642-6526 | 16226 Rue Bureau | Pointe-Aux-Trembles | QC | 1 | ronSmi@gmail.com |
 
 ### Query 3
+
 #### Create a Health Facility
 
 ```SQL
@@ -334,7 +332,7 @@ UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND
 #### Display a Health Facility
 
 ```sql
-SELECT *, PostalCode.postalCode 
+SELECT *, PostalCode.postalCode
 FROM HealthFacility as HF, PostalCode as PC
 WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.province = PC.province; ;
 ```
@@ -354,11 +352,11 @@ DELETE FROM VaccinationDrug
 WHERE name = 'VACCINE';
 ```
 
-#### Edit a  Vaccination Type
+#### Edit a Vaccination Type
 
 ```SQL
 UPDATE VaccinationDrug
-SET name = 'EDITVACCINE' 
+SET name = 'EDITVACCINE'
 WHERE name = 'VACCINE';
 ```
 
@@ -434,7 +432,7 @@ SELECT * FROM AgeGroup WHERE ageGroupID = "1";
 Results
 | ageGroupID | ageRange |
 | ---------- | -------- |
-| 2          | 70-79    |
+| 2 | 70-79 |
 
 ### Query 7
 
@@ -485,7 +483,10 @@ First check if there is such vaccine at the hospital
 ```sql
 SELECT *
 FROM VaccineStored
-WHERE nameDrug = "name";
+WHERE nameDrug = "name"
+AND nameHSO = "nameHSO"
+AND address = "address"
+AND date = "date";
 ```
 
 If the query is empty, do this
@@ -497,7 +498,7 @@ INSERT INTO VaccineStored VALUES ("nameHSO", "address", "nameDrug", count);
 Else increase the old value
 
 ```sql
-UPDATE VaccineStored SET count = count + shipmentCount WHERE nameDrug = "nameDrug";
+UPDATE VaccineStored SET count = count + shipmentCount WHERE nameDrug = "nameDrug" AND nameHSO = "nameHSO" and address = "address";
 ```
 
 ### Query 10
@@ -543,7 +544,7 @@ INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hna
 #### Get details of all the people who got vaccinated only one dose and are of group ages 1 to 3
 
 ```SQL
-SELECT Person.firstName, Person.lastName, Person.dateOfBirth, Person.email, 
+SELECT Person.firstName, Person.lastName, Person.dateOfBirth, Person.email,
 Person.telephone, Person.city,Vaccination.date,Vaccination.name,
 CASE WHEN EXISTS(
 		SELECT  *
@@ -555,7 +556,7 @@ LEFT JOIN Infection ON Person.passportNumOrSSN=Infection.passportNumOrSSN
 WHERE ageGroupID BETWEEN 1 AND 3
 AND Person.passportNumOrSSN in (
 	SELECT passportNumOrSSN
-	FROM Vaccination 
+	FROM Vaccination
 	GROUP BY Vaccination.passportNumOrSSN
 	HAVING COUNT(Vaccination.passportNumOrSSN)=1
 );
@@ -574,12 +575,12 @@ SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.dat
 	) THEN 'Yes' ELSE 'No' END as WasInfected
 FROM Person,
 		(
-			SELECT Person.passportNumOrSSN as p, COUNT(DISTINCT(Vaccination.name)) as c 
+			SELECT Person.passportNumOrSSN as p, COUNT(DISTINCT(Vaccination.name)) as c
 			FROM Vaccination, Person
 			WHERE Person.passportNumOrSSN = Vaccination.passportNumOrSSN
 			GROUP BY Person.passportNumOrSSN
 		) as DV, Vaccination
-WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 AND 
+WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 AND
 	Vaccination.passportNumOrSSN = Person.passportNumOrSSN;
 ```
 
@@ -588,7 +589,7 @@ WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 A
 Query
 
 ```sql
-SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, vaccination.name,  count(Person.passportNumOrSSN) AS 'Number of times infected' 
+SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, vaccination.name,  count(Person.passportNumOrSSN) AS 'Number of times infected'
 FROM Person,
 		(
 			SELECT passportNumOrSSN as p, COUNT(DISTINCT infection.variantTypeID) as c
@@ -596,21 +597,23 @@ FROM Person,
 			GROUP BY passportNumOrSSN
 		) as CI, Vaccination
 WHERE Person.passportNumOrSSN = CI.p
-AND CI.c >= 2 
+AND CI.c >= 2
 AND Person.passportNumOrSSN = Vaccination.passportNumOrSSN;
 ```
 
 Results
-| passportNumOrSSN | firstName | lastName | dateOfBirth | email                    | telephone     | city     | vaccinations                               | numberVariantInfections | variants     |
+| passportNumOrSSN | firstName | lastName | dateOfBirth | email | telephone | city | vaccinations | numberVariantInfections | variants |
 | ---------------- | --------- | -------- | ----------- | ------------------------ | ------------- | -------- | ------------------------------------------ | ----------------------- | ------------ |
-| 5418600012       | Annabel   | Dodson   | 1996-08-06  | annabel.dodson@gmail.com | (514)482-4299 | Montreal | 2021-01-16: AstraZeneca,2021-05-16: Pfizer | 2                       | ALPHA,LAMBDA |
+| 5418600012 | Annabel | Dodson | 1996-08-06 | annabel.dodson@gmail.com | (514)482-4299 | Montreal | 2021-01-16: AstraZeneca,2021-05-16: Pfizer | 2 | ALPHA,LAMBDA |
 
 ### Query 15
 
 #### Give a report of the inventory of vaccines in each province. The report should include for each province and for each type of vaccine, the total number of
+
 vaccines available in the province. The report should be displayed in ascending
 order by province then by descending order of number of vaccines in the
 inventory
+
 ```SQL
 SELECT Province.name,VaccineStored.nameDrug,SUM(VaccineStored.count) AS total
 FROM Province,HealthFacility,VaccineStored
@@ -624,15 +627,16 @@ order by Province.name asc, total desc;
 ### Query 16
 
 #### Give a report of the population’s vaccination by province between January 1 st 2021 and July 22 nd 2021
+
 ```SQL
-SELECT Province.name, Vaccination.name, 
+SELECT Province.name, Vaccination.name,
 COUNT(DISTINCT(Vaccination.passportNumOrSSN))
 
 FROM Vaccination, HealthFacility, Province
 
-WHERE Vaccination.Hname = HealthFacility.name 
-AND Vaccination.address = HealthFacility.address 
-AND	HealthFacility.provinceID = Province.provinceID 
+WHERE Vaccination.Hname = HealthFacility.name
+AND Vaccination.address = HealthFacility.address
+AND	HealthFacility.provinceID = Province.provinceID
 AND date >= "2021-01-01" AND date <= "2021-07-22"
 
 GROUP BY Province.name, Vaccination.name;
@@ -646,7 +650,7 @@ GROUP BY Province.name, Vaccination.name;
 
 ```SQL
 SELECT hf.city, SUM(vs.count) AS 'Count Recived'
-FROM HealthFacility hf, VaccineShipment vs , province 
+FROM HealthFacility hf, VaccineShipment vs , province
 WHERE hf.name = vs.nameHSO AND hf.address  = vs.address
 AND hf.provinceID = province.provinceID
 AND province.name = 'QC'
@@ -737,13 +741,13 @@ GROUP BY h.name , h.address;
 ```
 
 Results
-| name                           | address                                  | type     | telephone     | employeeCount | totalShipments | totalDosesShipped | totalTransfersFrom | totalDosesFrom | totalTransfersTo | totalDosesTo | totalVaccinesByType        | totalPeopleVaccinated | totalDosesGiven |
+| name | address | type | telephone | employeeCount | totalShipments | totalDosesShipped | totalTransfersFrom | totalDosesFrom | totalTransfersTo | totalDosesTo | totalVaccinesByType | totalPeopleVaccinated | totalDosesGiven |
 | ------------------------------ | ---------------------------------------- | -------- | ------------- | ------------- | -------------- | ----------------- | ------------------ | -------------- | ---------------- | ------------ | -------------------------- | --------------------- | --------------- |
-| H√¥pital Fleury                | 2180, rue Fleury Est                     | HOSPITAL | (514)384-2000 | 1             | 0              | 0                 | 0                  | 0              | 0                | 0            | Pfizer: 2000               | 1                     | 1               |
-| H√¥pital Richardson            | 5425, Avenue Bessborough                 | HOSPITAL | (514)484-7878 | 2             | 3              | 600               | 1                  | 100            | 1                | 100          | Pfizer: 2000               | 2                     | 2               |
-| H√¥pital Rivi√®re-des-Prairies | 7070, boulevard Perras                   | HOSPITAL | (514)323-7260 | 1             | 1              | 100               | 0                  | 0              | 1                | 100          | Pfizer: 2000               | 0                     | 0               |
-| Jewish General Hospital        | 3755 Chemin de la C√¥te-Sainte-Catherine | HOSPITAL | www.gjw.com   | 1             | 0              | 0                 | 0                  | 0              | 0                | 0            | Pfizer: 2000               | 3                     | 3               |
-| Olympic Stadium                | 4545 Avenue Pierre-De Coubertin          | SPECIAL  | (514)252-4141 | 1             | 0              | 0                 | 4                  | 400            | 1                | 350          | Moderna: 1500,Pfizer: 2000 | 3                     | 3               |
+| H√¥pital Fleury | 2180, rue Fleury Est | HOSPITAL | (514)384-2000 | 1 | 0 | 0 | 0 | 0 | 0 | 0 | Pfizer: 2000 | 1 | 1 |
+| H√¥pital Richardson | 5425, Avenue Bessborough | HOSPITAL | (514)484-7878 | 2 | 3 | 600 | 1 | 100 | 1 | 100 | Pfizer: 2000 | 2 | 2 |
+| H√¥pital Rivi√®re-des-Prairies | 7070, boulevard Perras | HOSPITAL | (514)323-7260 | 1 | 1 | 100 | 0 | 0 | 1 | 100 | Pfizer: 2000 | 0 | 0 |
+| Jewish General Hospital | 3755 Chemin de la C√¥te-Sainte-Catherine | HOSPITAL | www.gjw.com | 1 | 0 | 0 | 0 | 0 | 0 | 0 | Pfizer: 2000 | 3 | 3 |
+| Olympic Stadium | 4545 Avenue Pierre-De Coubertin | SPECIAL | (514)252-4141 | 1 | 0 | 0 | 4 | 400 | 1 | 350 | Moderna: 1500,Pfizer: 2000 | 3 | 3 |
 
 ### Query 19
 
@@ -752,16 +756,16 @@ Results
 ```SQL
 SELECT HealthFacility.name, person.*, Employee.EID , PostalCode.postalCode
 FROM HealthFacility,Employee,JobHistory,PostalCode, person
-WHERE 
+WHERE
 	employee.SSN = person.passportNumOrSSN
-	AND person.address = PostalCode.address  
-	AND person.city= PostalCode.city  
-	AND person.provinceID = PostalCode.provinceID 
-    AND HealthFacility.name = JobHistory.name 
-    AND HealthFacility.address = JobHistory.address  
+	AND person.address = PostalCode.address
+	AND person.city= PostalCode.city
+	AND person.provinceID = PostalCode.provinceID
+    AND HealthFacility.name = JobHistory.name
+    AND HealthFacility.address = JobHistory.address
     AND JobHistory.EID = Employee.EID
   ORDER BY healthfacility.name
-  
+
 ```
 
 ### Query 20
@@ -769,7 +773,7 @@ WHERE
 #### Give a list of all public health workers in Québec who never been vaccinated or who have been vaccinated only one dose for Covid-19
 
 ```SQL
-SELECT e.EID, person.firstName, person.lastName, person.dateOfBirth, person.telephone, person.city , person.email, JobHistory.name 
+SELECT e.EID, person.firstName, person.lastName, person.dateOfBirth, person.telephone, person.city , person.email, JobHistory.name
 FROM person,province, Employee e,
  (
  	SELECT DISTINCT(EV.ssn) as ssn
@@ -781,7 +785,7 @@ FROM person,province, Employee e,
 		) AS EV
 	WHERE EV.c > 1
  ) as FV, JobHistory
-WHERE e.SSN NOT IN (FV.ssn) 
+WHERE e.SSN NOT IN (FV.ssn)
 AND e.EID = JobHistory.EID
 AND person.passportNumOrSSN= e.SSN
 AND province.name = 'QC'
