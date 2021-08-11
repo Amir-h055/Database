@@ -63,8 +63,8 @@
                 <li>
                     <a href="#pageSubmenuOp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operations</a>
                     <ul class="collapse list-unstyled" id="pageSubmenuOp">
-                        <li>
-                            <a href="#">Receive a Shipment</a>
+                        <li class="<?php echo $currentPage == 'Receive Shipment' ? 'active': ''?>">
+                            <a href="receiveShipment.php">Receive a Shipment</a>
                         </li>
                         <li>
                             <a href="#">Transfer Vaccines</a>
