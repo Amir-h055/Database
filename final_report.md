@@ -651,9 +651,10 @@ FROM Vaccination, HealthFacility, Province
 WHERE Vaccination.Hname = HealthFacility.name 
 AND Vaccination.address = HealthFacility.address 
 AND	HealthFacility.provinceID = Province.provinceID 
-AND date > "2021-01-01" AND date < "2021-07-22"
+AND date >= "2021-01-01" AND date <= "2021-07-22"
 
 GROUP BY Province.name, Vaccination.name;
+
 
 ```
 
