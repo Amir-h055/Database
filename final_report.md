@@ -195,6 +195,480 @@ yes! Explanation at 3
 
 ## 5 - Not necessary (DB is in BCNF)
 
+
+
+## SQL Table Declarations
+
+```SQL
+CREATE DATABASE PROJECT;
+use PROJECT;
+
+
+CREATE TABLE PROJECT.AgeGroup (
+  ageGroupID INT,
+  ageRange VARCHAR(20),
+  PRIMARY KEY (ageGroupID)
+);
+
+CREATE TABLE PROJECT.VaccinationDrug (
+  name VARCHAR(20),
+  PRIMARY KEY (name)
+);
+
+CREATE TABLE PROJECT.Province (
+  provinceID INT,
+  name VARCHAR(100),
+  currentAgeGroupID INT,
+  PRIMARY KEY (provinceID), 
+  FOREIGN KEY (currentAgeGroupID) REFERENCES AgeGroup(ageGroupID)
+);
+
+CREATE TABLE PROJECT.VariantType (
+  variantTypeID INT,
+  name VARCHAR(100),
+  PRIMARY KEY (variantTypeID)
+);
+
+CREATE TABLE PROJECT.Person (
+  passportNumOrSSN VARCHAR(10),
+  medicaidNum  VARCHAR(10),
+  telephone VARCHAR(13),
+  firstName VARCHAR(100),
+  lastName VARCHAR(100),
+  address VARCHAR(255),
+  city VARCHAR(255),
+  ageGroupID INT,
+  provinceID INT,
+  citizenship BOOLEAN,
+  email VARCHAR(255),
+  dateOfBirth DATE,
+  PRIMARY KEY(passportNumOrSSN),
+  FOREIGN KEY (ageGroupID) REFERENCES AgeGroup(ageGroupID),
+  FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
+);
+
+CREATE TABLE PROJECT.Infection (
+  dateInfection DATE,
+  passportNumOrSSN VARCHAR(10),
+  variantTypeID INT,
+  PRIMARY KEY(passportNumOrSSN, dateInfection),
+  FOREIGN KEY (variantTypeID) REFERENCES VariantType(variantTypeID),
+  FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
+);
+
+
+CREATE TABLE PROJECT.HealthFacility (
+  name VARCHAR(50),
+  address VARCHAR(100),
+  city VARCHAR(255),
+  provinceID int,
+  telephone VARCHAR(13),
+  webAddress VARCHAR(100),
+  type VARCHAR(8),
+  PRIMARY KEY (name, address),
+  FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
+);
+
+
+
+CREATE TABLE PROJECT.DrugHistory (
+  Dname VARCHAR(20),
+  date DATE,
+  status VARCHAR(100),
+  PRIMARY KEY (Dname, date),
+  FOREIGN KEY (Dname) REFERENCES VaccinationDrug(name)
+);
+
+
+CREATE TABLE PROJECT.Employee (
+  EID VARCHAR(10),
+  SSN VARCHAR(10),
+  PRIMARY KEY (EID),
+  FOREIGN KEY (SSN) REFERENCES Person(passportNumOrSSN)
+);
+
+
+CREATE TABLE PROJECT.Vaccination (
+  passportNumOrSSN VARCHAR(10),
+  doseNumber INT,
+  date DATE,
+  EID VARCHAR(10),
+  name VARCHAR(20),
+  Hname VARCHAR(50),
+  address VARCHAR(100),
+  PRIMARY KEY (passportNumOrSSN, doseNumber),
+  FOREIGN KEY (name) REFERENCES VaccinationDrug(name),
+  FOREIGN KEY (EID) REFERENCES Employee(EID),
+  FOREIGN KEY (Hname,address) REFERENCES HealthFacility(name,address),
+  FOREIGN KEY (passportNumOrSSN) REFERENCES Person(passportNumOrSSN)
+);
+
+CREATE TABLE PROJECT.Managers (
+  EID VARCHAR(10),
+  name VARCHAR(50),
+  address VARCHAR(100),
+  startDate DATE,
+  endDate DATE,
+  PRIMARY KEY (EID),
+  FOREIGN KEY (EID) REFERENCES Employee(EID),
+  FOREIGN KEY (name, address) REFERENCES HealthFacility(name, address)
+);
+
+CREATE TABLE PROJECT.JobHistory (
+  EID VARCHAR(10), 
+  name VARCHAR(50),
+  address VARCHAR(100), 
+  startDate DATE,
+  endDate DATE,
+  PRIMARY KEY (EID, name, address, startDate),
+  FOREIGN KEY (EID) REFERENCES Employee(EID),
+  FOREIGN KEY (name, address) REFERENCES HealthFacility(name, address)
+);
+
+CREATE TABLE PROJECT.VaccineStored (
+  nameHSO VARCHAR(50), 
+  address VARCHAR(100), 
+  nameDrug VARCHAR(20), 
+  count INT,
+  PRIMARY KEY (nameHSO, address, nameDrug),
+  FOREIGN KEY (nameHSO, address) REFERENCES HealthFacility(name, address),
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
+);
+
+CREATE TABLE PROJECT.VaccineShipment (
+  nameHSO VARCHAR(50), 
+  address VARCHAR(100), 
+  nameDrug VARCHAR(20),
+  date DATE,
+  count INT,
+  PRIMARY KEY (nameHSO, address, nameDrug, date),
+  FOREIGN KEY (nameHSO, address) REFERENCES HealthFacility(name, address),
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
+);
+
+CREATE TABLE PROJECT.VaccineTransfer (
+  nameHSOFrom VARCHAR(50), 
+  nameHSOTo VARCHAR(50), 
+  addressFrom VARCHAR(100), 
+  addressTo VARCHAR(100), 
+  nameDrug VARCHAR(20),
+  date DATE,
+  count INT,
+  PRIMARY KEY (nameHSOFrom,nameHSOTo, addressFrom, addressTo, nameDrug, date),
+  FOREIGN KEY (nameHSOFrom, addressFrom) REFERENCES HealthFacility(name, address),
+  FOREIGN KEY (nameHSOTo, addressTo) REFERENCES HealthFacility(name, address),
+  FOREIGN KEY (nameDrug) REFERENCES VaccinationDrug(name)
+);
+
+CREATE TABLE PROJECT.PostalCode (
+  address VARCHAR(100), 
+  city VARCHAR(100),
+  provinceID int,
+  postalCode VARCHAR(6),
+  PRIMARY KEY (address, city, provinceID),
+  FOREIGN KEY (provinceID) REFERENCES Province(provinceID)
+);
+```
+
+## SQL Code to Populate Relations
+
+```SQL
+use PROJECT;
+
+INSERT  INTO AgeGroup VALUES (0, "0-0");
+INSERT  INTO AgeGroup VALUES (1, "80+");
+INSERT  INTO AgeGroup VALUES (2, "70-79");
+INSERT  INTO AgeGroup VALUES (3, "60-69");
+INSERT  INTO AgeGroup VALUES (4, "50-59");
+INSERT  INTO AgeGroup VALUES (5, "40-49");
+INSERT  INTO AgeGroup VALUES (6, "30-39");
+INSERT  INTO AgeGroup VALUES (7, "18-29");
+INSERT  INTO AgeGroup VALUES (8, "12-17");
+INSERT  INTO AgeGroup VALUES (9, "5-11");
+INSERT  INTO AgeGroup VALUES (10, "0-4");
+
+INSERT INTO VaccinationDrug VALUES ("Pfizer");
+INSERT INTO VaccinationDrug VALUES ("Moderna");
+INSERT INTO VaccinationDrug VALUES ("AstraZeneca");
+INSERT INTO VaccinationDrug VALUES ("Johnson & Johnson");
+INSERT INTO VaccinationDrug VALUES ("RBD-Dimer");
+INSERT INTO VaccinationDrug VALUES ("Covaxin");
+INSERT INTO VaccinationDrug VALUES ("Ad5-nCoV");
+INSERT INTO VaccinationDrug VALUES ("CIGB-66");
+INSERT INTO VaccinationDrug VALUES ("KoviVac");
+INSERT INTO VaccinationDrug VALUES ("EpiVacCorona");
+
+INSERT  INTO Province VALUES ('1', "NL", '4');
+INSERT  INTO Province VALUES ('2', "PE", '5');
+INSERT  INTO Province VALUES ('3', "NS", '6');
+INSERT  INTO Province VALUES ('4', "NB", '3');
+INSERT  INTO Province VALUES ('5', "QC", '8');
+INSERT  INTO Province VALUES ('6', "ON", '1');
+INSERT  INTO Province VALUES ('7', "MB", '2');
+INSERT  INTO Province VALUES ('8', "SK", '9');
+INSERT  INTO Province VALUES ('9', "AB", '4');
+INSERT  INTO Province VALUES ('10', "BC", '6');
+INSERT  INTO Province VALUES ('11', "YT", '7');
+INSERT  INTO Province VALUES ('12', "NT", '8');
+INSERT  INTO Province VALUES ('13', "NU", '4');
+
+INSERT INTO VariantType VALUES(1, "ALPHA");
+INSERT INTO VariantType VALUES(2, "LAMBDA");
+INSERT INTO VariantType VALUES(3, "DELTA");
+INSERT INTO VariantType VALUES(0, "UMKNOWN");
+
+INSERT INTO Person VALUES ("5418600012", "1936638 14", "(514)482-4299", "Annabel", "Dodson",
+  "6860 Fielding", "Montreal", 7, 5, TRUE,
+  "annabel.dodson@gmail.com", "1996-08-06");
+INSERT INTO Person VALUES ("7198638080", "1362899 55","(514)366-4286", "Zachary", "Rutledge",
+  "902 Tittley", "Montreal", 6, 5, TRUE,
+  "Zachary.Rutledge@gmail.com", "1986-08-12");
+INSERT INTO Person VALUES ("5867167004", "0243401 87", "(514)767-5030", "Alister", "Wiggins",
+  "6818 Lamont", "Montreal", 6, 5, TRUE, "Alister.Wiggins@gmail.com",
+  "1987-08-27"); 
+INSERT INTO Person VALUES ("9415548075", "2054252 15", "(514)525-4731", "Osman", "Vaughn", 
+  "1720 Bourbonniere", "Montreal", 8, 5, TRUE,
+  "Osman.Vaughn@gmail.com", "2007-09-08"); 
+INSERT INTO Person VALUES ("9052864070", "1643994 57", "(514)768-9102", "Bear", "Melton",
+  "5962 Jogues", "Montreal", 5, 5, TRUE, "Bear.Melton@gmail.com",
+  "1976-09-13"); 
+INSERT INTO Person VALUES ("9826293018", "4105748 51", "(613)733-8502", "Lulu", "Fisher",
+  "927 Rand", "Gatineau", 5, 5, TRUE, "Lulu.Fisher@gmail.com",
+  "1976-09-27"); 
+INSERT INTO Person VALUES ("2055054040", "4990628 77", "(819)503-3196", "Collette", "Zavala",
+  "60 Du Blizzard", "Gatineau", 3, 5, TRUE,
+  "Collette.Zavala@gmail.com", "1956-09-29"); 
+INSERT INTO Person VALUES ("7247613020", "3234394 08", "(819)408-0531", "Angela", "Dodson",
+  "1175 De L'Esplanade", "Sherbrooke", 3, 5, TRUE,
+  "Angela.Dodson@gmail.com", "1956-10-15"); 
+INSERT INTO Person VALUES ("7976980046", "9109123 89", "(819)566-0668", "Annabel", "Crouch",
+  "1812 Dunant", "Sherbrooke", 1, 5, TRUE,
+  "Annabel.Crouch@gmail.com", "1936-10-18"); 
+INSERT INTO Person VALUES ("6623218089", "0451174 26", "(418)547-8256", "Nyle", "Sparrow",
+  "3937 Soucy", "Jonquière", 1, 5, TRUE, "Nyle.Sparrow@gmail.com",
+  "1936-12-08"); 
+
+ 
+INSERT INTO Person VALUES ("4030141599", "6202715 46","(418)640-9486", "Elizabeth",
+  "Jernigan", "4884 Boulevard Cremazie",  
+  "Quebec",7, 5, TRUE, "eliJer@gmail.com", "1996-04-18");
+INSERT INTO Person VALUES ("3559893762", "8331149 83", "(418)299-4800", "William",  
+"Blackman", "3619 avenue de Port-Royal",  
+"Bonaventure",6, 5, TRUE, "wilBlack@gmail.com", "1991-07-01");
+INSERT INTO Person VALUES ("8133950202", "2597807 10", "(514)481-2566", "Carol",  
+"Williams", "6767 ch de la Côte-Saint-Luc",  
+"Côte Saint-Luc",6, 5, TRUE, "carWill@gmail.com", "1984-03-01");
+INSERT INTO Person VALUES ("5594746088", "2967560 35", "(514)484-4049", "Gary",  
+"Smith", "3472 Av Westmore", 
+"Montreal",4, 5,  TRUE, "garySmi@gmail.com", "1967-06-12");
+INSERT INTO Person VALUES ("3050347011", "7495078 77", "(514)485-1864", "Ted",  
+"Johnson", "621 Côte Murray", 
+"Westmount",7,  5, TRUE, "tedJohn@gmail.com","1998-09-23");
+INSERT INTO Person VALUES ("6901680262", "1457287 34", "(514)642-6526", "Ronald",  
+"Smith", "16226 Rue Bureau",  
+"Pointe-Aux-Trembles",7, 5, TRUE, "ronSmi@gmail.com","1995-06-14");
+INSERT INTO Person VALUES ("2826175309", "0568018 19", "(514)483-4346", "Adam",  
+"Smith", "4840 Bonavista", 
+"Montreal",7, 5,  TRUE, "adaSmi@gmail.com", "1995-08-12");
+INSERT INTO Person VALUES ("0883386538", "5489390 84", "(514)486-4899", "Wayne",  
+"Johnson", "999 Old Orchard", 
+"Montreal",6, 5,  TRUE, "wayJon@gmail.com","1984-07-16");
+INSERT INTO Person VALUES ("3909862653", "5433470 85", "(514)767-3102", "Sylvain",  
+"Williams", "1477 Rue Fayolle", 
+"Verdun",5, 5,  TRUE, "sylWill@gmail.com","1978-11-14");
+INSERT INTO Person VALUES ("5025223450", "6335938 64", "(514)597-0058", "Michel",  
+"Johnson", "850 Av Lachine", 
+"Montreal",7, 5,  TRUE, "micJohn@gmail.com","1996-09-13");
+
+
+INSERT INTO Infection VALUES ("2021-03-16","5418600012", 1);
+INSERT INTO Infection VALUES ("2021-04-18","5418600012", 2); 
+INSERT INTO Infection VALUES ("2021-03-25","7198638080", 3); 
+INSERT INTO Infection VALUES ("2021-04-02","5867167004", 1); 
+INSERT INTO Infection VALUES ("2021-04-07","9415548075", 3); 
+INSERT INTO Infection VALUES ("2021-04-30","9052864070", 1); 
+INSERT INTO Infection VALUES ("2021-05-05","9826293018", 1); 
+INSERT INTO Infection VALUES ("2021-05-20","2055054040", 3); 
+INSERT INTO Infection VALUES ("2021-05-21","7247613020", 3); 
+INSERT INTO Infection VALUES ("2021-06-18","7976980046", 1); 
+INSERT INTO Infection VALUES ("2021-07-22","6623218089", 0); 
+
+
+INSERT INTO HealthFacility VALUES ("Olympic Stadium",
+  "4545 Avenue Pierre-De Coubertin", "Montreal", 5, "(514)252-4141",
+  "www.so.com", "SPECIAL"); 
+INSERT INTO HealthFacility VALUES ("Jewish General Hospital",
+  "3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,  "(514)340-8222",
+   "www.gjw.com", "HOSPITAL"); 
+INSERT INTO HealthFacility VALUES ("Hopital de Gatineau",
+  "909 Boulevard la Vérendrye O", "Gatineau", 5, "(819)966-6100",
+  "www.hg.com", "HOSPITAL"); 
+INSERT INTO HealthFacility VALUES ("CHUS", "300 Rue King E", "Sherbrooke", 5, 
+  "www.chus.com", "(819)346-1110", "HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
+  "Montreal", 5, "(514)384-2000", "www.hopitalFleury.com","HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital Richardson", "5425, Avenue Bessborough",
+  "Montreal", 5,"(514)484-7878", "www.hopitalRichardson.com","HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital Rivière-des-Prairies",
+  "7070, boulevard Perras", "Montreal", 5, "(514)323-7260",
+  "www.hopitalRP.com","HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+  "LaSalle", 5, "(514)362-8000", "www.hopitalLasalle.com","HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+  "Verdun", 5, "(514)362-1100", "www.hopitalVerdun.com","HOSPITAL");
+INSERT INTO HealthFacility VALUES ("Hôpital de Sainte-Anne",
+  "305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,
+  "(514)457-3440", "www.hopitalSaintAnne.com","HOSPITAL");
+
+INSERT INTO DrugHistory VALUES ("Pfizer", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("Moderna", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("AstraZeneca", "2020-06-21", "SAFE");
+INSERT INTO DrugHistory VALUES ("Johnson & Johnson", "2021-06-21", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("RBD-Dimer", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("Covaxin", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("Ad5-nCoV", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("CIGB-66", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("KoviVac", "2021-01-01", "SUSPENDED");
+INSERT INTO DrugHistory VALUES ("EpiVacCorona", "2021-01-01", "SUSPENDED");
+
+INSERT INTO Employee VALUES ("2314904771","4030141599");
+INSERT INTO Employee VALUES ("4091939153","3559893762");
+INSERT INTO Employee VALUES ("6296074483","8133950202");
+INSERT INTO Employee VALUES ("1988238722","5594746088");
+INSERT INTO Employee VALUES ("9654156685","3050347011");
+INSERT INTO Employee VALUES ("0426670356","6901680262");
+INSERT INTO Employee VALUES ("2589272564","2826175309");
+INSERT INTO Employee VALUES ("4278243142","0883386538");
+INSERT INTO Employee VALUES ("2221453161","3909862653");
+INSERT INTO Employee VALUES ("7034521288","5025223450");
+
+INSERT INTO Vaccination VALUES ("5418600012", 1, "2021-01-16", "6296074483", "AstraZeneca", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("5418600012", 2, "2021-05-16", "2589272564", "Pfizer", "Hôpital Fleury", "2180, rue Fleury Est"); 
+INSERT INTO Vaccination VALUES ("7198638080", 1, "2021-04-25", "4278243142", "Pfizer", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("5867167004", 1, "2021-05-02", "2221453161", "AstraZeneca", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("9415548075", 1, "2021-05-07", "7034521288", "Pfizer", "Hôpital Richardson", "5425, Avenue Bessborough"); 
+INSERT INTO Vaccination VALUES ("9052864070", 1, "2021-01-30", "7034521288", "KoviVac", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine"); 
+INSERT INTO Vaccination VALUES ("9826293018", 1, "2021-06-05", "6296074483", "KoviVac", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("2055054040", 1, "2021-06-20", "6296074483", "Moderna", "Hôpital Richardson", "5425, Avenue Bessborough"); 
+INSERT INTO Vaccination VALUES ("7247613020", 1, "2021-06-21", "6296074483", "AstraZeneca", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants"); 
+INSERT INTO Vaccination VALUES ("7976980046", 1, "2021-07-18", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+
+INSERT INTO Vaccination VALUES ("4030141599", 1, "2021-07-17", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("3559893762", 1, "2021-07-19", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+INSERT INTO Vaccination VALUES ("3559893762", 2, "2021-07-20", "2314904771", "Moderna", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin"); 
+
+
+INSERT INTO Managers VALUES ("2314904771", "Olympic Stadium", "4545 Avenue Pierre-De Coubertin", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("4091939153", "Jewish General Hospital", "3755 Chemin de la Côte-Sainte-Catherine", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("6296074483", "Hopital de Gatineau", "909 Boulevard la Vérendrye O", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("1988238722", "CHUS", "300 Rue King E", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("0426670356", "Hôpital Richardson", "5425, Avenue Bessborough", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("2589272564", "Hôpital Rivière-des-Prairies", "7070, boulevard Perras", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("4278243142", "Hôpital de Lasalle", "8585, Terrasse Champlain", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("2221453161", "Hôpital de Verdun", "4000, boul. Lasalle", "2018-04-16", NULL);
+INSERT INTO Managers VALUES ("7034521288", "Hôpital de Sainte-Anne", "305, boulevard des Anciens-Combattants", "2018-04-16", NULL);
+
+INSERT INTO JobHistory VALUES ("2314904771", "Olympic Stadium",
+  "4545 Avenue Pierre-De Coubertin", "2019-01-01", NULL); 
+INSERT INTO JobHistory VALUES ("4091939153", "Jewish General Hospital",
+  "3755 Chemin de la Côte-Sainte-Catherine", "2019-01-01", NULL); 
+INSERT INTO JobHistory VALUES ("6296074483", "Hopital de Gatineau",
+  "909 Boulevard la Vérendrye O", "2019-01-01", NULL); 
+INSERT INTO JobHistory VALUES ("1988238722", "CHUS", "300 Rue King E", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("9654156685", "Hôpital Fleury", "2180, rue Fleury Est",
+  "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("0426670356", "Hôpital Richardson",
+  "5425, Avenue Bessborough", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("2589272564", "Hôpital Rivière-des-Prairies", 
+  "7070, boulevard Perras", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("4278243142", "Hôpital de Lasalle",
+  "8585, Terrasse Champlain", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("2221453161", "Hôpital de Verdun", 
+  "4000, boul. Lasalle", "2019-01-01", NULL);
+INSERT INTO JobHistory VALUES ("7034521288", "Hôpital de Sainte-Anne",
+  "305, boulevard des Anciens-Combattants", "2019-01-01", NULL);
+
+INSERT INTO VaccineStored VALUES ("Olympic Stadium",
+  "4545 Avenue Pierre-De Coubertin", "Pfizer", 2000); 
+INSERT INTO VaccineStored VALUES ("Jewish General Hospital",
+  "3755 Chemin de la Côte-Sainte-Catherine", "Pfizer", 2000); 
+INSERT INTO VaccineStored VALUES ("Hopital de Gatineau",
+  "909 Boulevard la Vérendrye O", "Pfizer", 2000); 
+INSERT INTO VaccineStored VALUES ("CHUS", "300 Rue King E", "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital Fleury", "2180, rue Fleury Est",
+  "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital Richardson",
+  "5425, Avenue Bessborough", "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital Rivière-des-Prairies", 
+  "7070, boulevard Perras", "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+  "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+  "Pfizer", 2000);
+INSERT INTO VaccineStored VALUES ("Hôpital de Sainte-Anne",
+  "305, boulevard des Anciens-Combattants", "Pfizer", 2000);
+
+INSERT INTO VaccineShipment VALUES ("Hôpital Richardson",
+  "5425, Avenue Bessborough", "Pfizer", "2021-01-23", 100);
+INSERT INTO VaccineShipment VALUES ("Hôpital Rivière-des-Prairies", 
+  "7070, boulevard Perras", "Pfizer", "2021-01-23", 100);
+INSERT INTO VaccineShipment VALUES ("Hôpital de Lasalle", "8585, Terrasse Champlain",
+  "Pfizer", "2021-01-23", 100);
+INSERT INTO VaccineShipment VALUES ("Hôpital de Verdun", "4000, boul. Lasalle",
+  "Pfizer", "2021-01-23", 100);
+INSERT INTO VaccineShipment VALUES ("Hôpital de Sainte-Anne",
+  "305, boulevard des Anciens-Combattants", "Pfizer", "2021-01-23", 100);
+
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital Richardson", 
+  "4545 Avenue Pierre-De Coubertin", "5425, Avenue Bessborough", "Pfizer",
+  "2021-01-20", 100);
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital Rivière-des-Prairies", 
+  "4545 Avenue Pierre-De Coubertin", "7070, boulevard Perras", "Pfizer",
+  "2021-01-20", 100);
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Lasalle",
+  "4545 Avenue Pierre-De Coubertin", "8585, Terrasse Champlain", "Pfizer",
+  "2021-01-20", 100);
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Verdun",
+  "4545 Avenue Pierre-De Coubertin", "4000, boul. Lasalle", "Pfizer",
+  "2021-01-20", 100);
+INSERT INTO VaccineTransfer VALUES ("Olympic Stadium", "Hôpital de Sainte-Anne",
+  "4545 Avenue Pierre-De Coubertin", "305, boulevard des Anciens-Combattants",
+  "Pfizer", "2021-01-20", 100);
+
+
+INSERT INTO PostalCode VALUES ("6860 Fielding", "Montreal", 5, "H4V1P2");
+INSERT INTO PostalCode VALUES ("902 Tittley", "Montreal",5,"H8R3X3");
+INSERT INTO PostalCode VALUES ("6818 Lamont", "Montreal",5,"H7L4X8");
+INSERT INTO PostalCode VALUES ("1720 Bourbonniere", "Montreal",5,"H1W3N1");
+INSERT INTO PostalCode VALUES ("5962 Jogues", "Montreal",5,"J8Y4E3");
+INSERT INTO PostalCode VALUES ("927 Rand", "Gatineau",5,"K1V6X4");
+INSERT INTO PostalCode VALUES ("60 Du Blizzard", "Gatineau",5,"J9A0C8");
+INSERT INTO PostalCode VALUES ("1175 De L'Esplanade", "Sherbrooke",5,"J1H1S9");
+INSERT INTO PostalCode VALUES ("1812 Dunant", "Sherbrooke",5,"J1H1Y9");
+INSERT INTO PostalCode VALUES ("3937 Soucy", "Jonquière",5,"G7X8T1");
+INSERT INTO PostalCode VALUES ("4884 Boulevard Cremazie","Quebec", 5,"H2M0B0");
+INSERT INTO PostalCode VALUES ("3619 avenue de Port-Royal","Bonaventure", 5,"J9J1C8");
+INSERT INTO PostalCode VALUES ("6767 ch de la Côte-Saint-Luc","Côte Saint-Luc", 5,"H4V2Z6");
+INSERT INTO PostalCode VALUES ("3472 Av Westmore", "Montreal",5,"H4V4Z6");
+INSERT INTO PostalCode VALUES ("621 Côte Murray","Westmount",5,"H4V2Y6");
+INSERT INTO PostalCode VALUES ("16226 Rue Bureau","Pointe-Aux-Trembles", 5,"H1A1Z1");
+INSERT INTO PostalCode VALUES ("4840 Bonavista", "Montreal", 5,"G0C1E0");
+INSERT INTO PostalCode VALUES ("999 Old Orchard", "Montreal", 5,"G0C1E8");
+INSERT INTO PostalCode VALUES ("1477 Rue Fayolle", "Verdun", 5,"G3F1E0");
+INSERT INTO PostalCode VALUES ("850 Av Lachine", "Montreal", 5,"G6C1Y0");
+INSERT INTO PostalCode VALUES ("4545 Avenue Pierre-De Coubertin", "Montreal", 5,"G7Q2V0");
+INSERT INTO PostalCode VALUES ("3755 Chemin de la Côte-Sainte-Catherine", "Montreal", 5,"G0S5R0");
+INSERT INTO PostalCode VALUES ("909 Boulevard la Vérendrye O", "Gatineau", 5,"G5S2V0");
+INSERT INTO PostalCode VALUES ("300 Rue King E", "Sherbrooke", 5,"G0S2V4");
+INSERT INTO PostalCode VALUES ("2180, rue Fleury Est","Montreal", 5,"G0S2V0");
+INSERT INTO PostalCode VALUES ("5425, Avenue Bessborough","Montreal", 5,"M4G3H9");
+INSERT INTO PostalCode VALUES ("7070, boulevard Perras", "Montreal", 5,"H1E1A4");
+INSERT INTO PostalCode VALUES ("8585, Terrasse Champlain","LaSalle", 5,"H3N2L1");
+INSERT INTO PostalCode VALUES ("4000, boul. Lasalle","Verdun", 5,"H4G1J8");
+INSERT INTO PostalCode VALUES ("305, boulevard des Anciens-Combattants", "Sainte-Anne-de-Bellevue", 5,"H9X1Y9");
+```
+
 ## SQL DDL and DML required commands
 
 ### Query 1
@@ -215,6 +689,8 @@ INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 INSERT INTO Infection VALUES (dateInfection, passportNumOrSSN, variantID);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Person
 
 ```SQL
@@ -222,6 +698,8 @@ DELETE FROM Person WHERE passportNumOrSSN = "x";
 DELETE FROM Infection WHERE passportNumOrSSN = "x";
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Person
 
@@ -239,6 +717,8 @@ SET column_name = value
 WHERE passportNumOrSSN = "x" AND date = "d";
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Display a person
 
 ```sql
@@ -247,6 +727,16 @@ FROM Person, PostalCode
 WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
     Person.city = PostalCode.city AND Person.province = PostalCode.province;
 ```
+
+**Sample output (of displaying multiple persons)**
+
+| passportNumOrSSN | medicaidNum | telephone | firstName | lastName | address | city | ageGroupID | provinceID | citizenship | email | dateOfBirth |
+| ---------------- | ----------- | --------- | --------- | -------- | ------- | ---- | ---------- | ---------- | ----------- | ----- | ----------- |
+|0883386538|5489390 84|(514)486-4899|Wayne|Johnson|999 Old Orchard|Montreal|5|5|1|wayJon@gmail.com|1984-07-16|
+|2055054040|4990628 77|(819)503-3196|Collette|Zavala|60 Du Blizzard|Gatineau|3|5|1|Collette.Zavala@gmail.com|1956-09-29|
+|2826175309|0568018 19|(514)483-4346|Adam|Smith|4840 Bonavista|Montreal|7|5|1|adaSmi@gmail.com|1995-08-12|
+|3050347011|7495078 77|(514)485-1864|Ted|Johnson|621 Côte Murray|Westmount|7|5|1|tedJohn@gmail.com|1998-09-23|
+|3559893762|8331149 83|(418)299-4800|William|Blackman|3619 avenue de Port-Royal|Bonaventure|6|5|  1|wilBlack@gmail.com| 1991-07-01|
 
 ### Query 2
 
@@ -262,12 +752,16 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 ```
 
+Showing the output of this query is deemed not necessary
+
 ##### Delete a Public Health Worker
 
 ```sql
 DELETE FROM Employee WHERE EID = '5418600012';
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Edit a Public Health Worker
 
@@ -279,6 +773,8 @@ WHERE EID = "2314904771";
 -- To edit a postalCode, if there is a change in address
 UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Display a Public Health Worker
 
@@ -316,6 +812,8 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Health Facility
 
 ```SQL
@@ -323,6 +821,8 @@ DELETE FROM HealthFacility
 WHERE name ='Hname' AND address ='HAddress';
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Health Facility
 
@@ -335,13 +835,25 @@ WHERE name ='Hname' AND address ='HAddress';
 UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Display a Health Facility
 
 ```sql
-SELECT *, PostalCode.postalCode
+SELECT HF.*, PC.postalCode
 FROM HealthFacility as HF, PostalCode as PC
-WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.province = PC.province; ;
+WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.provinceID = PC.provinceID; ;
 ```
+
+**Sample output (of displaying multiple health facilities)**
+
+| name | address | city | provinceID | telephone | webAddress | type | postalCode |
+| ---- | ------- | ---- | ---------- | --------- | ---------- | ---- | ---------- |
+|CHUS                        |300 Rue King E                         |Sherbrooke             |         5|(819)346-1110|www.chus.com             |HOSPITAL|G0S2V4    |
+|Hopital de Gatineau         |909 Boulevard la Vérendrye O           |Gatineau               |         5|(819)966-6100|www.hg.com               |HOSPITAL|G5S2V0    |
+|Hôpital de Lasalle          |8585, Terrasse Champlain               |LaSalle                |         5|(514)362-8000|www.hopitalLasalle.com   |HOSPITAL|H3N2L1    |
+|Hôpital de Sainte-Anne      |305, boulevard des Anciens-Combattants |Sainte-Anne-de-Bellevue|         5|(514)457-3440|www.hopitalSaintAnne.com |HOSPITAL|H9X1Y9    |
+|Hôpital de Verdun           |4000, boul. Lasalle                    |Verdun                 |         5|(514)362-1100|www.hopitalVerdun.com    |HOSPITAL|H4G1J8    |
 
 ### Query 4
 
@@ -351,12 +863,16 @@ WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.c
 INSERT INTO VaccinationDrug VALUES ('VACCINE');
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Vaccination Type
 
 ```SQL
 DELETE FROM VaccinationDrug
 WHERE name = 'VACCINE';
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Vaccination Type
 
@@ -366,12 +882,24 @@ SET name = 'EDITVACCINE'
 WHERE name = 'VACCINE';
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Display a Vaccination Type
 
 ```SQl
 SELECT * FROM VaccinationDrug
 WHERE name = 'name';
 ```
+
+**Sample output (of displaying multiple vaccination type)**
+
+| name         |
+| ------------ |
+| Ad5-nCoV     |
+| AstraZeneca  |
+| CIGB-66      |
+| Covaxin      |
+| EpiVacCorona |
 
 ### Query 5
 
@@ -381,11 +909,15 @@ WHERE name = 'name';
 INSERT INTO VariantType VALUES (id, "name");
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a variant type
 
 ```sql
 DELETE FROM VariantType WHERE variantTypeID = x;
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a variant type
 
@@ -395,6 +927,8 @@ SET column_name = value
 WHERE variantTypeID = x;
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Display a variant type
 
 ```sql
@@ -402,6 +936,15 @@ SELECT *
 FROM VariantType
 WHERE variantTypeID = x;
 ```
+
+**Sample output (of displaying multiple variant type)**
+
+| variantTypeID | name    |
+| ------------- | ------- |
+| 0             | UMKNOWN |
+| 1             | ALPHA   |
+| 2             | LAMBDA  |
+| 3             | DELTA   |
 
 ### Query 6
 
@@ -411,6 +954,8 @@ WHERE variantTypeID = x;
 INSERT AgeGroup VALUES (2, "70-79");
 ```
 
+Showing the output of this query is deemed not necessary
+
 ##### Delete a Group Age
 
 ```sql
@@ -419,6 +964,8 @@ DELETE FROM AgeGroup WHERE ageGroupID = 2;
 
 **Note:** This query may result in an MySQL error because relations Person and ProvinceCurrentAgeGroup have a foreign key that references AgeGroup.
 
+Showing the output of this query is deemed not necessary
+
 ##### Edit a Group Age
 
 ```sql
@@ -426,6 +973,8 @@ UPDATE AgeGroup
 SET ageRange = "80-90"
 WHERE ageGroupID = "1";
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Display a Group Age
 
@@ -436,9 +985,9 @@ SELECT * FROM AgeGroup WHERE ageGroupID = "1";
 ```
 
 Results
-| ageGroupID | ageRange |
-| ---------- | -------- |
 | 2 | 70-79 |
+| ---------- | -------- |
+| ageGroupID | ageRange |
 
 ### Query 7
 
@@ -448,11 +997,15 @@ Results
 INSERT INTO Province VALUES(id, "name", ageGroupID);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a province
 
 ```SQL
 DELETE FROM Province WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a province
 
@@ -461,6 +1014,8 @@ UPDATE Province
 SET attribute = value
 WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 8
 
@@ -471,6 +1026,8 @@ UPDATE Province
 SET currentAgeGroupID = ageID
 WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 9
 
@@ -507,6 +1064,8 @@ Else increase the old value
 UPDATE VaccineStored SET count = count + shipmentCount WHERE nameDrug = "nameDrug" AND nameHSO = "nameHSO" and address = "address";
 ```
 
+Showing the output of this query is deemed not necessary
+
 ### Query 10
 
 Transfer vaccines from one location to another location.
@@ -537,6 +1096,8 @@ The query above will only decrement the number of doses if adequate amount is av
   "2021-01-20", 500);
 ```
 
+Showing the output of this query is deemed not necessary
+
 ### Query 11
 
 #### Perform a vaccine to a person
@@ -566,6 +1127,8 @@ Create Vaccination record
 ```SQL
 INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 12
 
