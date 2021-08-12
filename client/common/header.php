@@ -60,6 +60,9 @@
                 <li class="<?php echo $currentPage == 'Public Health Facilities' ? 'active': ''?>">
                     <a href="publicHealthFacility.php">Public Health Facilities</a>
                 </li>
+                <li class="<?php echo $currentPage == 'Managers' ? 'active': ''?>">
+                    <a href="managers.php">Managers</a>
+                </li>
                 <li>
                     <a href="#pageSubmenuOp" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Operations</a>
                     <ul class="collapse list-unstyled" id="pageSubmenuOp">
