@@ -1153,6 +1153,12 @@ AND Person.passportNumOrSSN in (
 );
 ```
 
+**Results**
+
+|firstName|lastName|dateOfBirth|email                  |telephone    |city      |date      |name       |WasInfected|
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|Angela   |Dodson  | 1956-10-15|Angela.Dodson@gmail.com|(819)408-0531|Sherbrooke|2021-06-21|AstraZeneca|Yes        |
+
 ### Query 13
 
 #### Get details of all the people who live in the city of Montréal and who got vaccinated at least two doses of different types of vaccines.
@@ -1175,15 +1181,22 @@ WHERE Person.city = "Montreal" AND DV.p = Person.passportNumOrSSN AND DV.c > 1 A
 	Vaccination.passportNumOrSSN = Person.passportNumOrSSN;
 ```
 
+**Results**
+
+|firstName|lastName|dateOfBirth|email                   |telephone    |city    |date      |name       |WasInfected|
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|Annabel  |Dodson  | 1996-08-06|annabel.dodson@gmail.com|(514)482-4299|Montreal|2021-01-16|AstraZeneca|Yes        |
+|Annabel  |Dodson  | 1996-08-06|annabel.dodson@gmail.com|(514)482-4299|Montreal|2021-05-16|Pfizer     |Yes        |
+
 ### Query 14
 
 Query
 
 ```sql
-SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, vaccination.name,  count(Person.passportNumOrSSN) AS 'Number of times infected'
+SELECT firstName, lastName, dateOfBirth, email, telephone, city, Vaccination.date, Vaccination.name,  count(Person.passportNumOrSSN) AS 'Number of times infected'
 FROM Person,
 		(
-			SELECT passportNumOrSSN as p, COUNT(DISTINCT infection.variantTypeID) as c
+			SELECT passportNumOrSSN as p, COUNT(DISTINCT Infection.variantTypeID) as c
 			FROM Infection
 			GROUP BY passportNumOrSSN
 		) as CI, Vaccination
@@ -1192,16 +1205,15 @@ AND CI.c >= 2
 AND Person.passportNumOrSSN = Vaccination.passportNumOrSSN;
 ```
 
-Results
-| passportNumOrSSN | firstName | lastName | dateOfBirth | email | telephone | city | vaccinations | numberVariantInfections | variants |
-| ---------------- | --------- | -------- | ----------- | ------------------------ | ------------- | -------- | ------------------------------------------ | ----------------------- | ------------ |
-| 5418600012 | Annabel | Dodson | 1996-08-06 | annabel.dodson@gmail.com | (514)482-4299 | Montreal | 2021-01-16: AstraZeneca,2021-05-16: Pfizer | 2 | ALPHA,LAMBDA |
+**Results**
+
+|firstName|lastName|dateOfBirth|email                   |telephone    |city    |date      |name       |Number of times infected|
+| ---------------- | --------- | -------- | ----------- | ------------------------ | ------------- | -------- | ------------------------------------------ | ----------------------- |
+|Annabel  |Dodson  | 1996-08-06|annabel.dodson@gmail.com|(514)482-4299|Montreal|2021-01-16|AstraZeneca|                       2|
 
 ### Query 15
 
-#### Give a report of the inventory of vaccines in each province. The report should include for each province and for each type of vaccine, the total number of
-
-vaccines available in the province. The report should be displayed in ascending
+#### Give a report of the inventory of vaccines in each province. The report should include for each province and for each type of vaccine, the total number of vaccines available in the province. The report should be displayed in ascending
 order by province then by descending order of number of vaccines in the
 inventory
 
@@ -1215,13 +1227,24 @@ group by Province.name, VaccineStored.nameDrug
 order by Province.name asc, total desc;
 ```
 
+**Results**
+
+|name|nameDrug   |total|
+| ---- | ---- | ---- |
+|QC  |Pfizer     |19700|
+|QC  |Ad5-nCoV   |  300|
+|QC  |CIGB-66    |  300|
+|QC  |KoviVac    |  150|
+|QC  |AstraZeneca|  146|
+
+
 ### Query 16
 
 #### Give a report of the population’s vaccination by province between January 1 st 2021 and July 22 nd 2021
 
 ```SQL
 SELECT Province.name, Vaccination.name,
-COUNT(DISTINCT(Vaccination.passportNumOrSSN))
+COUNT(DISTINCT(Vaccination.passportNumOrSSN)) 
 
 FROM Vaccination, HealthFacility, Province
 
@@ -1231,9 +1254,18 @@ AND	HealthFacility.provinceID = Province.provinceID
 AND date >= "2021-01-01" AND date <= "2021-07-22"
 
 GROUP BY Province.name, Vaccination.name;
-
-
 ```
+
+**Results**
+
+|name|name       |vaccination|
+| ---- | ---- | ---- |
+|QC  |AstraZeneca|                                            3|
+|QC  |KoviVac    |                                            2|
+|QC  |Moderna    |                                            4|
+|QC  |Pfizer     |                                            3|
+
+
 
 ### Query 17
 
@@ -1249,6 +1281,15 @@ AND vs.date BETWEEN '2021-01-01' AND '2021-07-22'
 GROUP BY hf.city;
 
 ```
+
+**Results**
+
+|city                   |Count Recived|
+| ---- | ---- |
+|LaSalle                |          100|
+|Sainte-Anne-de-Bellevue|          100|
+|Verdun                 |          100|
+|Montreal               |          200|
 
 ### Query 18
 
@@ -1358,6 +1399,10 @@ WHERE
   ORDER BY HealthFacility.name;
 
 ```
+
+** Results**
+
+
 
 ### Query 20
 
