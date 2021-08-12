@@ -1,5 +1,11 @@
 # Report - COVID 19 - Final Project
 
+## PHP Web Application
+
+Our UI can be used by visiting the following link:
+
+http://353-env.eba-29hvyfsw.us-east-1.elasticbeanstalk.com/client/
+
 ## 1 - Concept ER Diagram
 
 ![ER diagram](/home/nathan/school/COMP_353/projects/COMP_351_Warmup/ERdiagram.svg)
