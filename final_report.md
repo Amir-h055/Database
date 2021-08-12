@@ -1397,11 +1397,13 @@ WHERE
     AND HealthFacility.address = JobHistory.address
     AND JobHistory.EID = Employee.EID
   ORDER BY HealthFacility.name;
-
 ```
 
-** Results**
+**Results (Employee at the CHUS)**
 
+|name                        |passportNumOrSSN|medicaidNum|telephone    |firstName|lastName|address                     |city               |ageGroupID|provinceID|citizenship|email             |dateOfBirth|EID       |postalCode|startDate |endDate|
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|CHUS                        |5594746088      |2967560 35 |(514)484-4049|Gary     |Smith   |3472 Av Westmore            |Montreal           |         4|         5|          1|garySmi@gmail.com | 1967-06-12|1988238722|H4V4Z6    |2019-01-01|       |
 
 
 ### Query 20
@@ -1427,3 +1429,13 @@ AND Person.passportNumOrSSN= e.SSN
 AND Province.name = 'QC'
 AND Province.provinceID=Person.provinceID;
 ```
+
+**Results**
+
+|EID       |firstName|lastName|dateOfBirth|telephone    |city               |email             |name                        |
+| ---- | ---- | ---- | ---- | ---- | ---- | ---- | ---- |
+|4278243142|Wayne    |Johnson | 1984-07-16|(514)486-4899|Montreal           |wayJon@gmail.com  |Hôpital de Lasalle          |
+|2589272564|Adam     |Smith   | 1995-08-12|(514)483-4346|Montreal           |adaSmi@gmail.com  |Hôpital Rivière-des-Prairies|
+|9654156685|Ted      |Johnson | 1998-09-23|(514)485-1864|Westmount          |tedJohn@gmail.com |Hôpital Fleury              |
+|2221453161|Sylvain  |Williams| 1978-11-14|(514)767-3102|Verdun             |sylWill@gmail.com |Hôpital de Verdun           |
+|2314904771|Elizabeth|Jernigan| 1996-04-18|(418)640-9486|Quebec             |eliJer@gmail.com  |Olympic Stadium             |
