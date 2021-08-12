@@ -280,14 +280,14 @@ Query
 
 ```sql
 ####   recheck the output table on report###################
-SELECT person.*, employee.EID, province.name, PostalCode.postalCode
-FROM person, Employee, PostalCode, province
+SELECT Person.*, Employee.EID, Province.name, PostalCode.postalCode
+FROM Person, Employee, PostalCode, Province
 WHERE EID = "0426670356"
-AND employee.SSN = person.passportNumOrSSN
-AND person.provinceID = province.provinceID
-AND person.address = PostalCode.address
-AND person.city = PostalCode.city
-AND person.provinceID = PostalCode.provinceID;
+AND Employee.SSN = Person.passportNumOrSSN
+AND Person.provinceID = Province.provinceID
+AND Person.address = PostalCode.address
+AND Person.city = PostalCode.city
+AND Person.provinceID = PostalCode.provinceID;
 ```
 
 Results
@@ -650,12 +650,12 @@ GROUP BY Province.name, Vaccination.name;
 
 ```SQL
 SELECT hf.city, SUM(vs.count) AS 'Count Recived'
-FROM HealthFacility hf, VaccineShipment vs , province
+FROM HealthFacility hf, VaccineShipment vs , Province
 WHERE hf.name = vs.nameHSO AND hf.address  = vs.address
-AND hf.provinceID = province.provinceID
-AND province.name = 'QC'
+AND hf.provinceID = Province.provinceID
+AND Province.name = 'QC'
 AND vs.date BETWEEN '2021-01-01' AND '2021-07-22'
-GROUP BY hf.city
+GROUP BY hf.city;
 
 ```
 
@@ -754,17 +754,17 @@ Results
 #### Give a list of all public health workers in a specific facility
 
 ```SQL
-SELECT HealthFacility.name, person.*, Employee.EID , PostalCode.postalCode
-FROM HealthFacility,Employee,JobHistory,PostalCode, person
+SELECT HealthFacility.name, Person.*, Employee.EID , PostalCode.postalCode
+FROM HealthFacility,Employee,JobHistory,PostalCode, Person
 WHERE
-	employee.SSN = person.passportNumOrSSN
-	AND person.address = PostalCode.address
-	AND person.city= PostalCode.city
-	AND person.provinceID = PostalCode.provinceID
+	Employee.SSN = Person.passportNumOrSSN
+	AND Person.address = PostalCode.address
+	AND Person.city= PostalCode.city
+	AND Person.provinceID = PostalCode.provinceID
     AND HealthFacility.name = JobHistory.name
     AND HealthFacility.address = JobHistory.address
     AND JobHistory.EID = Employee.EID
-  ORDER BY healthfacility.name
+  ORDER BY HealthFacility.name;
 
 ```
 
@@ -773,8 +773,8 @@ WHERE
 #### Give a list of all public health workers in Québec who never been vaccinated or who have been vaccinated only one dose for Covid-19
 
 ```SQL
-SELECT e.EID, person.firstName, person.lastName, person.dateOfBirth, person.telephone, person.city , person.email, JobHistory.name
-FROM person,province, Employee e,
+SELECT e.EID, Person.firstName, Person.lastName, Person.dateOfBirth, Person.telephone, Person.city , Person.email, JobHistory.name
+FROM Person, Province, Employee e,
  (
  	SELECT DISTINCT(EV.ssn) as ssn
 	FROM (
@@ -787,7 +787,7 @@ FROM person,province, Employee e,
  ) as FV, JobHistory
 WHERE e.SSN NOT IN (FV.ssn)
 AND e.EID = JobHistory.EID
-AND person.passportNumOrSSN= e.SSN
-AND province.name = 'QC'
-AND province.provinceID=person.provinceID;
+AND Person.passportNumOrSSN= e.SSN
+AND Province.name = 'QC'
+AND Province.provinceID=Person.provinceID;
 ```
