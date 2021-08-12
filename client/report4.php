@@ -92,9 +92,9 @@ WHERE
 GROUP BY h.name , h.address;
 ") or die($mysqli->error);
             ?>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center table-row">
                 <h2>Facilities in Montreal</h2>
-                <table class="table table-sm">
+                <table class="table table-sm table-fit">
                     <thead>
                         <tr>
                             <th>Name Facilities</th>

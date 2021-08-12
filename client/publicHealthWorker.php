@@ -52,7 +52,7 @@
             $result = $mysqli->query("SELECT e.EID, e.SSN, p.medicaidNum, p.firstName, p.lastName, p.dateOfBirth, p.address, p.city, p.provinceID, pr.name as provinceName, p.citizenship, p.email, p.telephone, pc.postalCode FROM PROJECT.Employee e LEFT JOIN Person p ON e.SSN = p.passportNumOrSSN LEFT JOIN Province pr ON p.provinceID = pr.provinceID LEFT JOIN PostalCode pc ON p.address = pc.address AND p.city = pc.city AND p.provinceID = pc.provinceID;") or die($mysqli->error);
             ?>
             <div class="row justify-content-center table-row">
-                <table class="table  table-sm table-fit">
+                <table class="table table-sm table-fit">
                     <thead>
                         <tr>
                             <th>INFO</th>

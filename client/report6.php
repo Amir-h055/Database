@@ -50,9 +50,9 @@ WHERE
         AND Province.provinceID = Person.provinceID;
 ") or die($mysqli->error);
             ?>
-            <div class="row justify-content-center">
+            <div class="row justify-content-center table-row">
                 <h2>Health Worker QC (&lt; 2 doses)</h2>
-                <table class="table table-sm">
+                <table class="table table-sm table-fit">
                     <thead>
                         <tr>
                             <th>Employee ID</th>
