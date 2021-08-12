@@ -68,13 +68,14 @@ if (isset($_GET['edit'])) {
 }
 
 if (isset($_POST['update'])) {
-   $address = $_POST['address'];
+    $address = $_POST['address'];
     $city = $_POST['city'];
     $name = $_POST['name'];
     $provinceID = $_POST['provinceID'];
     $telephone = $_POST['telephone'];
     $type = $_POST['type'];
     $webAddress = $_POST['webAddress'];
+    $postalCode = $_POST['postalCode'];
     $result = $mysqli->query("SELECT * FROM PostalCode WHERE address = '$address' AND city = '$city' AND provinceID = $provinceID AND postalCode = '$postalCode';")or
         die($mysqli->error);
     $row = $result->fetch_assoc();

@@ -16,16 +16,17 @@
             <?php
             $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
             $result = $mysqli->query("
-SELECT HealthFacility.name, Employee.* , PostalCode.postalCode
-FROM HealthFacility,Employee,JobHistory,PostalCode
-WHERE 
-	Employee.address = PostalCode.address AND 
-	Employee.city= PostalCode.city AND 
-	Employee.provinceID = PostalCode.provinceID AND
-    HealthFacility.name = JobHistory.name AND
-    HealthFacility.address = JobHistory.address AND 
-    JobHistory.EID = Employee.EID
-  ORDER BY name
+SELECT HealthFacility.name, Person.*, Employee.EID , PostalCode.postalCode
+FROM HealthFacility,Employee,JobHistory,PostalCode, Person
+WHERE
+	Employee.SSN = Person.passportNumOrSSN
+	AND Person.address = PostalCode.address
+	AND Person.city= PostalCode.city
+	AND Person.provinceID = PostalCode.provinceID
+    AND HealthFacility.name = JobHistory.name
+    AND HealthFacility.address = JobHistory.address
+    AND JobHistory.EID = Employee.EID
+  ORDER BY HealthFacility.name;
 ") or die($mysqli->error);
             ?>
             <div class="row justify-content-center">

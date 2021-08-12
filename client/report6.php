@@ -16,19 +16,38 @@
             <?php
             $mysqli = new mysqli('c353.c9ohujn2mpyl.us-east-1.rds.amazonaws.com', 'admin', 'hello123', 'PROJECT') or die(mysqli_error($mysqli));
             $result = $mysqli->query("
-SELECT e.EID, firstName,lastName, dateOfBirth, e.telephone, e.city , e.email, JobHistory.name 
-FROM Employee e,
- (
- 	SELECT DISTINCT(EV.ssn) as ssn
-	FROM (
-		SELECT e.SSN as ssn, COUNT(e.SSN) as c
-		FROM Employee e, Vaccination v
-		WHERE e.SSN  = v.passportNumOrSSN
-		GROUP BY(e.SSN)
-	) AS EV
-	WHERE EV.c > 1
- ) as FV, JobHistory
-WHERE e.SSN NOT IN (FV.ssn) AND e.EID = JobHistory.EID;
+SELECT 
+    e.EID,
+    Person.firstName,
+    Person.lastName,
+    Person.dateOfBirth,
+    Person.telephone,
+    Person.city,
+    Person.email,
+    JobHistory.name
+FROM
+    Person,
+    Province,
+    Employee e,
+    (SELECT DISTINCT
+        (EV.ssn) AS ssn
+    FROM
+        (SELECT 
+        e.SSN AS ssn, COUNT(e.SSN) AS c
+    FROM
+        Employee e, Vaccination v
+    WHERE
+        e.SSN = v.passportNumOrSSN
+    GROUP BY (e.SSN)) AS EV
+    WHERE
+        EV.c > 1) AS FV,
+    JobHistory
+WHERE
+    e.SSN NOT IN (FV.ssn)
+        AND e.EID = JobHistory.EID
+        AND Person.passportNumOrSSN = e.SSN
+        AND Province.name = 'QC'
+        AND Province.provinceID = Person.provinceID;
 ") or die($mysqli->error);
             ?>
             <div class="row justify-content-center">
