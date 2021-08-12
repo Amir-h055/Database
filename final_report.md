@@ -541,6 +541,28 @@ The query above will only decrement the number of doses if adequate amount is av
 
 #### Perform a vaccine to a person
 
+Verify if person has already received 2 doses
+
+```SQL
+SELECT * FROM Vaccination WHERE passportNumOrSSN = '?' and doseNumber = 2;
+```
+
+Verify that Employee actually works at health facility
+
+```SQL
+SELECT * FROM JobHistory WHERE EID = '?' AND name = '?' AND address = '?';
+```
+
+Verify that the vaccine being administered is available at the Health Facility
+
+```SQL
+UPDATE VaccineStored SET count = count - 1 WHERE nameHSO = '?' AND address = '?' AND nameDrug = '?' and count >= 1;
+```
+
+If affected rows of previous query >= 1, the vaccine was available and quantity was removed.
+
+Create Vaccination record
+
 ```SQL
 INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
 ```

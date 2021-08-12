@@ -34,6 +34,15 @@ if (isset($_POST['save'])) {
             $doseCount = 1;
         }
     }
+    $result = $mysqli->query("SELECT * FROM JobHistory WHERE EID = '$EID' AND name = '$facilityName' AND address = '$facilityAddress';");
+    $row = $result->fetch_assoc();
+    if (!$row) {
+        $_SESSION['message'] = "ERROR: Employee $EID does not work at facility $facilityName.";
+        $_SESSION['msg_type'] = "danger";
+        header("location: performVaccination.php");
+        return;
+    }
+
     $mysqli->query("UPDATE VaccineStored SET count = count - 1 WHERE nameHSO = '$facilityName' AND address = '$facilityAddress' AND nameDrug = '$vaccineType' and count >= 1;")  or
         die($mysqli->error);
     echo $mysqli->affected_rows;
