@@ -689,6 +689,8 @@ INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 INSERT INTO Infection VALUES (dateInfection, passportNumOrSSN, variantID);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Person
 
 ```SQL
@@ -696,6 +698,8 @@ DELETE FROM Person WHERE passportNumOrSSN = "x";
 DELETE FROM Infection WHERE passportNumOrSSN = "x";
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Person
 
@@ -713,6 +717,8 @@ SET column_name = value
 WHERE passportNumOrSSN = "x" AND date = "d";
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Display a person
 
 ```sql
@@ -721,6 +727,16 @@ FROM Person, PostalCode
 WHERE Person.passportNumOrSSN = "x" AND Person.address = PostalCode.address AND
     Person.city = PostalCode.city AND Person.province = PostalCode.province;
 ```
+
+**Sample output (of displaying multiple persons)**
+
+| passportNumOrSSN | medicaidNum | telephone | firstName | lastName | address | city | ageGroupID | provinceID | citizenship | email | dateOfBirth |
+| ---------------- | ----------- | --------- | --------- | -------- | ------- | ---- | ---------- | ---------- | ----------- | ----- | ----------- |
+|0883386538|5489390 84|(514)486-4899|Wayne|Johnson|999 Old Orchard|Montreal|5|5|1|wayJon@gmail.com|1984-07-16|
+|2055054040|4990628 77|(819)503-3196|Collette|Zavala|60 Du Blizzard|Gatineau|3|5|1|Collette.Zavala@gmail.com|1956-09-29|
+|2826175309|0568018 19|(514)483-4346|Adam|Smith|4840 Bonavista|Montreal|7|5|1|adaSmi@gmail.com|1995-08-12|
+|3050347011|7495078 77|(514)485-1864|Ted|Johnson|621 Côte Murray|Westmount|7|5|1|tedJohn@gmail.com|1998-09-23|
+|3559893762|8331149 83|(418)299-4800|William|Blackman|3619 avenue de Port-Royal|Bonaventure|6|5|  1|wilBlack@gmail.com| 1991-07-01|
 
 ### Query 2
 
@@ -736,12 +752,16 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 ```
 
+Showing the output of this query is deemed not necessary
+
 ##### Delete a Public Health Worker
 
 ```sql
 DELETE FROM Employee WHERE EID = '5418600012';
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Edit a Public Health Worker
 
@@ -753,6 +773,8 @@ WHERE EID = "2314904771";
 -- To edit a postalCode, if there is a change in address
 UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Display a Public Health Worker
 
@@ -775,6 +797,10 @@ Results
 | --------- | ---------- | ---------- | --------- | -------- | ---------- | ----------- | ------------- | ---------------- | ------------------- | ---------- | ----------- | ---------------- |
 | 426670356 | 6901680262 | 1457287 34 | Ronald | Smith | H1A 1Z1 | 1995-06-14 | (514)642-6526 | 16226 Rue Bureau | Pointe-Aux-Trembles | QC | 1 | ronSmi@gmail.com |
 
+**Sample output (of displaying multiple public health worker)**
+
+
+
 ### Query 3
 
 #### Create a Health Facility
@@ -790,6 +816,8 @@ SELECT * FROM PostalCode WHERE address = "x" AND city = "y" AND province = "z" A
 INSERT INTO PostalCode VALUES (address, city, province, postalCode);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Health Facility
 
 ```SQL
@@ -797,6 +825,8 @@ DELETE FROM HealthFacility
 WHERE name ='Hname' AND address ='HAddress';
 -- No need to delete any postal code
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Health Facility
 
@@ -808,6 +838,8 @@ WHERE name ='Hname' AND address ='HAddress';
 -- To edit a postalCode, if there is a change in address
 UPDATE PostalCode SET column_name = value WHERE address = "x" AND city = "y" AND province = "z";
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Display a Health Facility
 
@@ -825,12 +857,16 @@ WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.c
 INSERT INTO VaccinationDrug VALUES ('VACCINE');
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a Vaccination Type
 
 ```SQL
 DELETE FROM VaccinationDrug
 WHERE name = 'VACCINE';
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a Vaccination Type
 
@@ -839,6 +875,8 @@ UPDATE VaccinationDrug
 SET name = 'EDITVACCINE'
 WHERE name = 'VACCINE';
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Display a Vaccination Type
 
@@ -855,11 +893,15 @@ WHERE name = 'name';
 INSERT INTO VariantType VALUES (id, "name");
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a variant type
 
 ```sql
 DELETE FROM VariantType WHERE variantTypeID = x;
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a variant type
 
@@ -868,6 +910,8 @@ UPDATE VariantType
 SET column_name = value
 WHERE variantTypeID = x;
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Display a variant type
 
@@ -885,6 +929,8 @@ WHERE variantTypeID = x;
 INSERT AgeGroup VALUES (2, "70-79");
 ```
 
+Showing the output of this query is deemed not necessary
+
 ##### Delete a Group Age
 
 ```sql
@@ -893,6 +939,8 @@ DELETE FROM AgeGroup WHERE ageGroupID = 2;
 
 **Note:** This query may result in an MySQL error because relations Person and ProvinceCurrentAgeGroup have a foreign key that references AgeGroup.
 
+Showing the output of this query is deemed not necessary
+
 ##### Edit a Group Age
 
 ```sql
@@ -900,6 +948,8 @@ UPDATE AgeGroup
 SET ageRange = "80-90"
 WHERE ageGroupID = "1";
 ```
+
+Showing the output of this query is deemed not necessary
 
 ##### Display a Group Age
 
@@ -910,9 +960,9 @@ SELECT * FROM AgeGroup WHERE ageGroupID = "1";
 ```
 
 Results
-| ageGroupID | ageRange |
-| ---------- | -------- |
 | 2 | 70-79 |
+| ---------- | -------- |
+| ageGroupID | ageRange |
 
 ### Query 7
 
@@ -922,11 +972,15 @@ Results
 INSERT INTO Province VALUES(id, "name", ageGroupID);
 ```
 
+Showing the output of this query is deemed not necessary
+
 #### Delete a province
 
 ```SQL
 DELETE FROM Province WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 #### Edit a province
 
@@ -935,6 +989,8 @@ UPDATE Province
 SET attribute = value
 WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 8
 
@@ -945,6 +1001,8 @@ UPDATE Province
 SET currentAgeGroupID = ageID
 WHERE provinceID = id;
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 9
 
@@ -981,6 +1039,8 @@ Else increase the old value
 UPDATE VaccineStored SET count = count + shipmentCount WHERE nameDrug = "nameDrug" AND nameHSO = "nameHSO" and address = "address";
 ```
 
+Showing the output of this query is deemed not necessary
+
 ### Query 10
 
 Transfer vaccines from one location to another location.
@@ -1011,6 +1071,8 @@ The query above will only decrement the number of doses if adequate amount is av
   "2021-01-20", 500);
 ```
 
+Showing the output of this query is deemed not necessary
+
 ### Query 11
 
 #### Perform a vaccine to a person
@@ -1040,6 +1102,8 @@ Create Vaccination record
 ```SQL
 INSERT INTO Vaccination VALUES ('p1', '1', '2021-07-07', 'E1EID', 'Pfizer', 'Hname', 'HAddress');
 ```
+
+Showing the output of this query is deemed not necessary
 
 ### Query 12
 
