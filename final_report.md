@@ -797,10 +797,6 @@ Results
 | --------- | ---------- | ---------- | --------- | -------- | ---------- | ----------- | ------------- | ---------------- | ------------------- | ---------- | ----------- | ---------------- |
 | 426670356 | 6901680262 | 1457287 34 | Ronald | Smith | H1A 1Z1 | 1995-06-14 | (514)642-6526 | 16226 Rue Bureau | Pointe-Aux-Trembles | QC | 1 | ronSmi@gmail.com |
 
-**Sample output (of displaying multiple public health worker)**
-
-
-
 ### Query 3
 
 #### Create a Health Facility
@@ -844,10 +840,20 @@ Showing the output of this query is deemed not necessary
 #### Display a Health Facility
 
 ```sql
-SELECT *, PostalCode.postalCode
+SELECT HF.*, PC.postalCode
 FROM HealthFacility as HF, PostalCode as PC
-WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.province = PC.province; ;
+WHERE HF.name = 'Hname' AND HF = 'HAddress' AND HF.address = PC.address AND HF.city = PC.city AND HF.provinceID = PC.provinceID; ;
 ```
+
+**Sample output (of displaying multiple health facilities)**
+
+| name | address | city | provinceID | telephone | webAddress | type | postalCode |
+| ---- | ------- | ---- | ---------- | --------- | ---------- | ---- | ---------- |
+|CHUS                        |300 Rue King E                         |Sherbrooke             |         5|(819)346-1110|www.chus.com             |HOSPITAL|G0S2V4    |
+|Hopital de Gatineau         |909 Boulevard la Vérendrye O           |Gatineau               |         5|(819)966-6100|www.hg.com               |HOSPITAL|G5S2V0    |
+|Hôpital de Lasalle          |8585, Terrasse Champlain               |LaSalle                |         5|(514)362-8000|www.hopitalLasalle.com   |HOSPITAL|H3N2L1    |
+|Hôpital de Sainte-Anne      |305, boulevard des Anciens-Combattants |Sainte-Anne-de-Bellevue|         5|(514)457-3440|www.hopitalSaintAnne.com |HOSPITAL|H9X1Y9    |
+|Hôpital de Verdun           |4000, boul. Lasalle                    |Verdun                 |         5|(514)362-1100|www.hopitalVerdun.com    |HOSPITAL|H4G1J8    |
 
 ### Query 4
 
@@ -885,6 +891,16 @@ SELECT * FROM VaccinationDrug
 WHERE name = 'name';
 ```
 
+**Sample output (of displaying multiple vaccination type)**
+
+| name         |
+| ------------ |
+| Ad5-nCoV     |
+| AstraZeneca  |
+| CIGB-66      |
+| Covaxin      |
+| EpiVacCorona |
+
 ### Query 5
 
 #### Create a variant type
@@ -920,6 +936,15 @@ SELECT *
 FROM VariantType
 WHERE variantTypeID = x;
 ```
+
+**Sample output (of displaying multiple variant type)**
+
+| variantTypeID | name    |
+| ------------- | ------- |
+| 0             | UMKNOWN |
+| 1             | ALPHA   |
+| 2             | LAMBDA  |
+| 3             | DELTA   |
 
 ### Query 6
 
